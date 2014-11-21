@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>API Reference | NewsWhip</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["shell","php"]);
         });
       </script>
   </head>
@@ -29,8 +29,7 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="php">php</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -39,88 +38,70 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='#getting-api-access'>Sign Up for a Developer Key</a></li>
+            <li><p>© 2014 NewsWhip Media Ltd.</p></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='overview'>Overview</h1>
+<p>Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorized and ranked.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>The NewsWhip API is language agnostic. Any HTTP client or library can be used with this API.</p>
 
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>This documentation is open source. If you&rsquo;ve found any errors, typos or would like to improve this document, feel free to send us a pull request: <a href="http://github.com/NewsWhip/slate">GitHub</a>.</p>
 <h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>All NewsWhip API endpoints require an API key. Your API key should be passed with each <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request as a Query String.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
+<p><code class="prettyprint">GET /v1/region/U.S./Politics/24?key=YOUR_API_KEY</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</pre>
-<pre class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
+<p><code class="prettyprint">POST /v1/articles?key=YOUR_API_KEY</code></p>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p><aside class="warning">Your API key should be treated as a password. It should be kept secret at all times.</aside></p>
+<h2 id='getting-api-access'>Getting API Access</h2>
+<p>Our API is made available to NewsWhip clients and developers who wish to work with streams of trending content in any niche. Right now, it&rsquo;s powering widgets on major news sites, internal dashboards, and mobile apps in Europe and North America.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>For details on getting access, email: <a href="mailto:api@newswhip.com">api@newswhip.com</a>.</p>
+<h1 id='rate-limits'>Rate Limits</h1>
+<p>Each API key is limited by default to 100 API requests per 5 minutes. Once you exceed this limit, calls will return: </p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+</tbody></table>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p><aside class="notice">Contact us at api@newswhip.com if your application requires higher limits.</aside></p>
+<h1 id='api-endpoints'>API Endpoints</h1>
+<p>NewsWhip provides 2 different endpoints designed for different use cases, each available at varying commercial rates.</p>
 
-<p><aside class="notice">
-You must replace <code class="prettyprint">meowmeowmeow</code> with your personal API key.
-</aside></p>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h1><pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<ul>
+<li><code class="prettyprint">GET</code> requests: best suited for finding real-time trending articles in any niche and social network, with or without video and published in any country up to a week ago.</li>
+<li><code class="prettyprint">POST</code> requests: best suited for very precise article filtering, real-time analytics, aggregations and reporting. These APIs slice and dice our data in any form you want.</li>
+</ul>
+<h3 id='https-endpoint'>HTTPS Endpoint</h3>
+<p><code class="prettyprint">https://api.newswhip.com/</code></p>
+<h1 id='get-requests'>GET Requests</h1>
+<p>The real-time GET API endpoints are designed to mirror Spike&rsquo;s functionality. You can get all trending content in any Niche or Region, ordered by any social metric.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
+<p>There are 4 different endpoints:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</pre>
-<pre class="highlight shell">curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
+<ul>
+<li><code class="prettyprint">GET /v1/region/{region}/{category}/{time_period}</code></li>
+<li><code class="prettyprint">GET /v1/publisher/{publisher}/{time_period}</code></li>
+<li><code class="prettyprint">GET /v1/local/{city}/All/{time_period}</code></li>
+<li><code class="prettyprint">GET /v1/search?q={search_term}</code></li>
+</ul>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></pre>
-
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h1>
-<p><code class="prettyprint">GET http://example.com/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h1>
+<p>All 4 GET endpoints accept the following Query Parameters:</p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -129,52 +110,103 @@ You must replace <code class="prettyprint">meowmeowmeow</code> with your persona
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
+<td>video_only</td>
 <td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>If set to true, the result will ONLY include content with embedded video.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>sort_by</td>
+<td>default</td>
+<td>Defines how the articles are ranked. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_total</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td></td>
+<td>Number of articles to be returned (including related articles).</td>
 </tr>
 </tbody></table>
 
-<p><aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside></p>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h1><pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-<pre class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
-
+<p>To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:</p>
+<h3 id='available-regions-and-categories'>Available Regions and Categories</h3>
+<p><code class="prettyprint">GET /v1/region</code></p>
+<h3 id='sample-of-publishers-we-support'>Sample of publishers we support</h3>
+<p><code class="prettyprint">GET /v1/publisher</code></p>
+<h3 id='available-cities-and-local-regions'>Available cities and local regions</h3>
+<p><code class="prettyprint">GET /v1/local</code></p>
+<h2 id='get-v1region'>GET /v1/region</h2>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Get the top trending English content published in the last 24 hours</p>
 </blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.wired.com/2014/11/time-dilation/"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time Travel is Real. Here Are The People and Spacecraft Who Have Done It | WIRED"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carl De Torres To get ahead in life, spend some time on the International Space Station. Why? Well, according to the theory of relativity, astronauts on the ISS age more slowly due to the spacecraft’s high orbital speed. It’s called time dilation, and it means that when they return they’re a bit younger than they…"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wired.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wired.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S."</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">378.6359090122582</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">378.6359090122582</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"comment_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"like_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"share_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">118</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wired"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1065a790-70b0-11e4-8e64-22000b210c3e"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1416486221961</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.wired.com/wp-content/uploads/2014/11/through-time-ft.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tech"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Science"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></pre>
+</span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p><code class="prettyprint">GET /v1/region/{region}/{category}/{time_period}</code></p>
 
-<p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
-<h3 id='http-request'>HTTP Request</h1>
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h1>
+<p>This endpoint retrieves all articles published in <code class="prettyprint">{region}</code> and <code class="prettyprint">{category}</code> within the <code class="prettyprint">{time_period}</code>.</p>
+<h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -182,15 +214,581 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the cat to retrieve</td>
+<td>region</td>
+<td>Filters articles published in <code class="prettyprint">{region}</code>. See above for available countries. i.e. <code class="prettyprint">U.S.</code>, <code class="prettyprint">France</code>, <code class="prettyprint">Ireland</code></td>
+</tr>
+<tr>
+<td>category</td>
+<td>Filters articles by <code class="prettyprint">{category}</code>. See above for available categories. i.e. <code class="prettyprint">All</code>, <code class="prettyprint">News</code>, <code class="prettyprint">Pre-Viral</code></td>
+</tr>
+<tr>
+<td>time_period</td>
+<td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
+</tr>
+</tbody></table>
+<h2 id='get-v1publisher'>GET /v1/publisher</h2>
+<blockquote>
+<p>Get the top trending content published in the last 24 hours by the New York Times.</p>
+</blockquote>
+<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+
+<p><code class="prettyprint">GET /v1/publisher/{publisher}/{time_period}</code></p>
+
+<p>This endpoint retrieves all articles published by <code class="prettyprint">{publisher}</code> within the <code class="prettyprint">{time_period}</code>.</p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>publisher</td>
+<td>Any domain or subdomain. i.e. <code class="prettyprint">nytimes.com</code>, <code class="prettyprint">blog.newswhip.com</code>.</td>
+</tr>
+<tr>
+<td>time_period</td>
+<td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
+</tr>
+</tbody></table>
+<h2 id='get-v1local'>GET /v1/local</h2>
+<blockquote>
+<p>Get the top trending content published in Seattle, in the last 12 hours.</p>
+</blockquote>
+<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+
+<p><code class="prettyprint">GET /v1/local/{city}/All/{time_period}</code></p>
+
+<p>This endpoint retrieves all articles published in <code class="prettyprint">{city}</code> within the <code class="prettyprint">{time_period}</code>.</p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>Any city or local region. See above for available local regions. i.e. <code class="prettyprint">New York, NY</code>, <code class="prettyprint">London</code>, <code class="prettyprint">Toronto</code>, <code class="prettyprint">Hamburg-Schleswig-Holstein</code>.</td>
+</tr>
+<tr>
+<td>time_period</td>
+<td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
+</tr>
+</tbody></table>
+<h2 id='get-v1search'>GET /v1/search</h2>
+<blockquote>
+<p>Get the top trending content published talking about <code class="prettyprint">Tom Cruise</code>, in the last 24 hours.</p>
+</blockquote>
+<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/search?q=Tom%20Cruise?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/search?q=Tom%20Cruise?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+
+<p><code class="prettyprint">GET /v1/search?q={search_term}</code></p>
+
+<p>This endpoint retrieves all articles talking about <code class="prettyprint">{search_term}</code> in the last 24 hours.</p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search_term</td>
+<td>Matches all stories containing <code class="prettyprint">{search_term}</code>.</td>
+</tr>
+</tbody></table>
+<h1 id='post-requests'>POST Requests</h1>
+<p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
+
+<p>There are 2 different endpoints:</p>
+
+<ul>
+<li><code class="prettyprint">POST /v1/articles</code> - provides content by matching it against a set of filters</li>
+<li><code class="prettyprint">POST /v1/stats</code> - provides stats on the content matching the filters provided</li>
+</ul>
+<h2 id='post-v1articles'>POST /v1/articles</h2>
+<blockquote>
+<p>Get the top trending content published by the NYTimes.com that talk about Barack Obama since a week ago</p>
+</blockquote>
+<pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": [
+        "nytimes.com AND \"Barack Obama\""
+    ]
+}'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/articles?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "nytimes.com AND \"Barack Obama\""
+        ]
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.nytimes.com/politics/first-draft/2014/11/18/today-in-politics-40/"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Today in Politics"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In the Senate, an overhaul of domestic spying operations is on the line."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nytimes.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://nytimes.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S."</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">778.9965224360006</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"comment_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"like_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"share_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1170</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">410</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1170</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1170</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a7a12d0-6f1b-11e4-a9b8-22000b210c3e"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1416312265853</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://graphics8.nytimes.com/images/2014/11/18/us/politics/18firstdraft-snowden/18firstdraft-snowden-videoSixteenByNine600.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Politics"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"News"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/articles</code></p>
+
+<p>This endpoint retrieves all articles matching the filters provided.</p>
+<h3 id='parameters'>Parameters</h3>
+<ul>
+<li>Stories are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters. </li>
+<li>Required fields are denoted *. </li>
+<li>Filtering by category or country requires ids which can be found at the end of this document: // TODO</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>List of Lucene QueryString filters to be applied to the articles. See available fields for filtering below.</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code>.</td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code>.</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>default</td>
+<td>String</td>
+<td>One of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_total</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>.</td>
+</tr>
+<tr>
+<td>video_only</td>
+<td>false</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>default_field</td>
+<td>Relevant fields</td>
+<td>String</td>
+<td>Field to be used when filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String.</td>
+</tr>
+<tr>
+<td>size</td>
+<td></td>
+<td>Integer</td>
+<td>Max number of articles to be returned.</td>
+</tr>
+<tr>
+<td>find_related</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Related stories will be collapsed when set.</td>
+</tr>
+</tbody></table>
+<h3 id='available-fields-for-filtering'>Available fields for filtering</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>headline</td>
+<td></td>
+</tr>
+<tr>
+<td>summary</td>
+<td></td>
+</tr>
+<tr>
+<td>authors</td>
+<td></td>
+</tr>
+<tr>
+<td>country</td>
+<td>Number</td>
+</tr>
+<tr>
+<td>language</td>
+<td>Two letter ISO 639-1 language code</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>Number</td>
+</tr>
+<tr>
+<td>publisher</td>
+<td></td>
+</tr>
+<tr>
+<td>href</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><aside class="notice">Due to historical reasons, the queryable fields <code class="prettyprint">headline</code> and <code class="prettyprint">summary</code> differ in naming from their <code class="prettyprint">Article</code> counterparts <code class="prettyprint">link</code> and <code class="prettyprint">excerpt</code>.</aside></p>
+<h2 id='post-v1stats'>POST /v1/stats</h2>
+<blockquote>
+<p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
+</blockquote>
+<pre><code class="highlight plaintext">curl -H "Content-Type: application/json" -X POST -d '{
+    "filters": [
+        "3d printing"
+    ],
+    "language" : "en",
+    "sort_by" : "fb_total.sum",
+    "aggregate_by" : "domain"
+}' "https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/stats?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "3d printing"
+        ],
+        "language" : "en",
+        "sort_by" : "fb_total.sum",
+        "aggregate_by" : "domain"
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"news.discovery.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"fb_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">19625.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">6558.333333333333</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">19675.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.85141925</span><span class="err">E</span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.536890555555557</span><span class="err">E</span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">9239.529509426093</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"twitter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">17.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">128.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">207.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">20517.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2078.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.58508528016593</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"linkedin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.333333333333333</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">22.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">242.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">26.888888888888886</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.185449728701348</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"fb_shares"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">1416.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">482.6666666666667</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">1448.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">2005570.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">435556.2222222222</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">659.9668341835234</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"fb_comments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">1164.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">388.6666666666667</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">1166.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">1354900.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">300571.55555555556</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">548.2440656820241</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"fb_likes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">17045.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">5687.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">17061.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.90532203</span><span class="err">E</span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.4502098666666664</span><span class="err">E</span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">8031.319858321337</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"pinterest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6666666666666666</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.22222222222222224</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4714045207910317</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">19904.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/stats</code></p>
+
+<p>This endpoint retrieves stats for articles matching your filters.</p>
+<h3 id='parameters'>Parameters</h3>
+<p>Stories are filtered and sorted using the following JSON encoded parameters. 
+Required fields are denoted *. Filtering by category or country requires ids which can be found at the end of this document: // TODO</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>List of Lucene QueryString filters to be applied to the articles. See available fields for filtering above.</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after {from}.</td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before {to}.</td>
+</tr>
+<tr>
+<td>sort_by*</td>
+<td></td>
+<td>String.{aggregation_name}.{stat_value}</td>
+<td><code class="prettyprint">{aggregation_name}</code> is one of <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_total</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">pinterest</code> and <code class="prettyprint">{stat_value}</code> is one of <code class="prettyprint">count</code>, <code class="prettyprint">min</code>, <code class="prettyprint">max</code>, <code class="prettyprint">avg</code>, <code class="prettyprint">sum</code>, <code class="prettyprint">sum_of_squares</code>, <code class="prettyprint">variance</code>, <code class="prettyprint">std_dev</code>.</td>
+</tr>
+<tr>
+<td>aggregate_by*</td>
+<td></td>
+<td>String</td>
+<td>Groups all matched stories by any of the following: <code class="prettyprint">publisher</code>, <code class="prettyprint">domains</code>, <code class="prettyprint">domain</code>, <code class="prettyprint">language</code>, <code class="prettyprint">authors</code>, <code class="prettyprint">country</code>, <code class="prettyprint">categories</code></td>
+</tr>
+<tr>
+<td>video_only</td>
+<td>false</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>default_field</td>
+<td>Relevant fields</td>
+<td>String</td>
+<td>Field to be used when filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String.</td>
+</tr>
+<tr>
+<td>size</td>
+<td></td>
+<td>Integer</td>
+<td>Max number of aggregations to be returned.</td>
+</tr>
+</tbody></table>
+<h1 id='entities'>Entities</h1><h2 id='article'>Article</h2>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>link</td>
+<td></td>
+</tr>
+<tr>
+<td>headline</td>
+<td></td>
+</tr>
+<tr>
+<td>excerpt</td>
+<td>summary for the story</td>
+</tr>
+<tr>
+<td>source.publisher</td>
+<td>domain of source publication</td>
+</tr>
+<tr>
+<td>source.link</td>
+<td>website of source publication</td>
+</tr>
+<tr>
+<td>source.country</td>
+<td>country of source publication</td>
+</tr>
+<tr>
+<td>nw_score</td>
+<td>NewsWhip&rsquo;s current social speed for the story</td>
+</tr>
+<tr>
+<td>fb_data</td>
+<td>An object describing total and recent Facebook interactions</td>
+</tr>
+<tr>
+<td>tw_data</td>
+<td>An object describing total and recent Twitter interactions</td>
+</tr>
+<tr>
+<td>li_data</td>
+<td>An object describing total and recent LinkedIn interactions</td>
+</tr>
+<tr>
+<td>tw_creator</td>
+<td>Nullable. Where available, the creator&rsquo;s Twitter handle as supplied through Twitter Cards</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>NewsWhip&rsquo;s unique story identifier</td>
+</tr>
+<tr>
+<td>publication_timestamp</td>
+<td>Timestamp representing when the article was published</td>
+</tr>
+<tr>
+<td>image_link</td>
+<td>Where available, link to the source&rsquo;s featured image</td>
+</tr>
+<tr>
+<td>relatedStories</td>
+<td>List of <code class="prettyprint">Article</code> related to this story</td>
+</tr>
+<tr>
+<td>topics</td>
+<td>List of <code class="prettyprint">Topic</code></td>
+</tr>
+</tbody></table>
+<h2 id='topic'>Topic</h2>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>NewsWhip&rsquo;s unique id for this Topic</td>
+</tr>
+<tr>
+<td>name</td>
+<td>English name for this topic</td>
 </tr>
 </tbody></table>
 
           <h1 id='errors'>Errors</h1>
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The NewsWhip API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -200,56 +798,43 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Bad Request &ndash; Your request could not be parsed</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>Forbidden &ndash; Your API key is not allowed to access this resource. Your API key is expired or invalid.</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
+<td>Too Many Requests &ndash; Enhance your calm! or contact us for higher limits!</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Please try again later.</td>
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
+<h1 id='more-information'>More Information</h1><h2 id='server-side-caching'>Server-side Caching</h2>
+<ul>
+<li><code class="prettyprint">GET</code> queries are cached (per API Key) for a small amount of time. Usually about 3 minutes. Check the HTTP headers sent by our servers for an exact value.</li>
+<li><code class="prettyprint">POST</code> queries are never cached.</li>
+</ul>
+<h2 id='cross-origin-resource-sharing'>Cross-Origin Resource Sharing</h2>
+<ul>
+<li><code class="prettyprint">GET</code> endpoints support 1 <code class="prettyprint">Cross-origin resource sharing</code> per API key. Contact api@newswhip.com to set this up.</li>
+<li><code class="prettyprint">POST</code> endpoints are server-side only.</li>
+</ul>
+<h2 id='jsonp'>JSONP</h2>
+<p>We don&rsquo;t currently support JSONP.</p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
