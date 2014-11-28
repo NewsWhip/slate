@@ -421,7 +421,7 @@
 <ul>
 <li>Stories are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters. </li>
 <li>Required fields are denoted *. </li>
-<li>Filtering by category or country requires ids which can be found at the end of this document: // TODO</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="http://www.newswhip.com/api#regions-covered">NewsWhip API</a></li>
 </ul>
 
 <table><thead>
@@ -436,7 +436,7 @@
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>List of Lucene QueryString filters to be applied to the articles. See available fields for filtering below.</td>
+<td>List of <a href="https://lucene.apache.org/core/4_10_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the articles. See available fields for filtering below.</td>
 </tr>
 <tr>
 <td>from</td>
@@ -449,6 +449,12 @@
 <td>Now</td>
 <td>Unix timestamp in milliseconds</td>
 <td>Filters articles published before <code class="prettyprint">{to}</code>.</td>
+</tr>
+<tr>
+<td>language</td>
+<td>Any</td>
+<td>Two letter ISO 639-1 language code</td>
+<td></td>
 </tr>
 <tr>
 <td>sort_by</td>
@@ -639,7 +645,7 @@
 <p>This endpoint retrieves stats for articles matching your filters.</p>
 <h3 id='parameters'>Parameters</h3>
 <p>Stories are filtered and sorted using the following JSON encoded parameters. 
-Required fields are denoted *. Filtering by category or country requires ids which can be found at the end of this document: // TODO</p>
+Required fields are denoted *. Filtering by category or country requires ids which can be found here: <a href="http://www.newswhip.com/api#regions-covered">NewsWhip API</a></p>
 
 <table><thead>
 <tr>
@@ -666,6 +672,12 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <td>Now</td>
 <td>Unix timestamp in milliseconds</td>
 <td>Filters articles published before {to}.</td>
+</tr>
+<tr>
+<td>language</td>
+<td>Any</td>
+<td>Two letter ISO 639-1 language code</td>
+<td></td>
 </tr>
 <tr>
 <td>sort_by*</td>
