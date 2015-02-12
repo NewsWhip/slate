@@ -39,31 +39,38 @@
       </div>
         <ul class="toc-footer">
             <li><a href='#getting-api-access'>Sign Up for a Developer Key</a></li>
-            <li><p>© 2014 NewsWhip Media Ltd.</p></li>
+            <li><p>© 2015 NewsWhip Media Ltd.</p></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='overview'>Overview</h1>
+        <h1 id="overview">Overview</h1>
+
 <p>Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorized and ranked.</p>
 
 <p>The NewsWhip API is language agnostic. Any HTTP client or library can be used with this API.</p>
 
 <p>This documentation is open source. If you&rsquo;ve found any errors, typos or would like to improve this document, feel free to send us a pull request: <a href="http://github.com/NewsWhip/slate">GitHub</a>.</p>
-<h1 id='authentication'>Authentication</h1>
+
+<h1 id="authentication">Authentication</h1>
+
 <p>All NewsWhip API endpoints require an API key. Your API key should be passed with each <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request as a Query String.</p>
 
 <p><code class="prettyprint">GET /v1/region/U.S./Politics/24?key=YOUR_API_KEY</code></p>
 
 <p><code class="prettyprint">POST /v1/articles?key=YOUR_API_KEY</code></p>
 
-<p><aside class="warning">Your API key should be treated as a password. It should be kept secret at all times.</aside></p>
-<h2 id='getting-api-access'>Getting API Access</h2>
+<aside class="warning">Your API key should be treated as a password. It should be kept secret at all times.</aside>
+
+<h2 id="getting-api-access">Getting API Access</h2>
+
 <p>Our API is made available to NewsWhip clients and developers who wish to work with streams of trending content in any niche. Right now, it&rsquo;s powering widgets on major news sites, internal dashboards, and mobile apps in Europe and North America.</p>
 
 <p>For details on getting access, email: <a href="mailto:api@newswhip.com">api@newswhip.com</a>.</p>
-<h1 id='rate-limits'>Rate Limits</h1>
+
+<h1 id="rate-limits">Rate Limits</h1>
+
 <p>Each API key is limited by default to 100 API requests per 5 minutes. Once you exceed this limit, calls will return: </p>
 
 <table><thead>
@@ -78,17 +85,23 @@
 </tr>
 </tbody></table>
 
-<p><aside class="notice">Contact us at api@newswhip.com if your application requires higher limits.</aside></p>
-<h1 id='api-endpoints'>API Endpoints</h1>
+<aside class="notice">Contact us at api@newswhip.com if your application requires higher limits.</aside>
+
+<h1 id="api-endpoints">API Endpoints</h1>
+
 <p>NewsWhip provides 2 different endpoints designed for different use cases, each available at varying commercial rates.</p>
 
 <ul>
 <li><code class="prettyprint">GET</code> requests: best suited for finding real-time trending articles in any niche and social network, with or without video and published in any country up to a week ago.</li>
 <li><code class="prettyprint">POST</code> requests: best suited for very precise article filtering, real-time analytics, aggregations and reporting. These APIs slice and dice our data in any form you want.</li>
 </ul>
-<h3 id='https-endpoint'>HTTPS Endpoint</h3>
+
+<h3 id="https-endpoint">HTTPS Endpoint</h3>
+
 <p><code class="prettyprint">https://api.newswhip.com/</code></p>
-<h1 id='get-requests'>GET Requests</h1>
+
+<h1 id="get-requests">GET Requests</h1>
+
 <p>The real-time GET API endpoints are designed to mirror Spike&rsquo;s functionality. You can get all trending content in any Niche or Region, ordered by any social metric.</p>
 
 <p>There are 4 different endpoints:</p>
@@ -101,7 +114,9 @@
 </ul>
 
 <p>All 4 GET endpoints accept the following Query Parameters:</p>
-<h3 id='query-parameters'>Query Parameters</h3>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -127,13 +142,21 @@
 </tbody></table>
 
 <p>To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:</p>
-<h3 id='available-regions-and-categories'>Available Regions and Categories</h3>
+
+<h3 id="available-regions-and-categories">Available Regions and Categories</h3>
+
 <p><code class="prettyprint">GET /v1/region</code></p>
-<h3 id='sample-of-publishers-we-support'>Sample of publishers we support</h3>
+
+<h3 id="sample-of-publishers-we-support">Sample of publishers we support</h3>
+
 <p><code class="prettyprint">GET /v1/publisher</code></p>
-<h3 id='available-cities-and-local-regions'>Available cities and local regions</h3>
+
+<h3 id="available-cities-and-local-regions">Available cities and local regions</h3>
+
 <p><code class="prettyprint">GET /v1/local</code></p>
-<h2 id='get-v1region'>GET /v1/region</h2>
+
+<h2 id="get-/v1/region">GET /v1/region</h2>
+
 <blockquote>
 <p>Get the top trending English content published in the last 24 hours</p>
 </blockquote>
@@ -157,7 +180,7 @@
             </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wired.com"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wired.com"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S."</span><span class="w">
+                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">378.6359090122582</span><span class="p">,</span><span class="w">
             </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">378.6359090122582</span><span class="p">,</span><span class="w">
@@ -206,7 +229,9 @@
 <p><code class="prettyprint">GET /v1/region/{region}/{category}/{time_period}</code></p>
 
 <p>This endpoint retrieves all articles published in <code class="prettyprint">{region}</code> and <code class="prettyprint">{category}</code> within the <code class="prettyprint">{time_period}</code>.</p>
-<h3 id='parameters'>Parameters</h3>
+
+<h3 id="parameters">Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -226,7 +251,9 @@
 <td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
 </tr>
 </tbody></table>
-<h2 id='get-v1publisher'>GET /v1/publisher</h2>
+
+<h2 id="get-/v1/publisher">GET /v1/publisher</h2>
+
 <blockquote>
 <p>Get the top trending content published in the last 24 hours by the New York Times.</p>
 </blockquote>
@@ -245,7 +272,9 @@
 <p><code class="prettyprint">GET /v1/publisher/{publisher}/{time_period}</code></p>
 
 <p>This endpoint retrieves all articles published by <code class="prettyprint">{publisher}</code> within the <code class="prettyprint">{time_period}</code>.</p>
-<h3 id='parameters'>Parameters</h3>
+
+<h3 id="parameters">Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -261,7 +290,9 @@
 <td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
 </tr>
 </tbody></table>
-<h2 id='get-v1local'>GET /v1/local</h2>
+
+<h2 id="get-/v1/local">GET /v1/local</h2>
+
 <blockquote>
 <p>Get the top trending content published in Seattle, in the last 12 hours.</p>
 </blockquote>
@@ -280,7 +311,9 @@
 <p><code class="prettyprint">GET /v1/local/{city}/All/{time_period}</code></p>
 
 <p>This endpoint retrieves all articles published in <code class="prettyprint">{city}</code> within the <code class="prettyprint">{time_period}</code>.</p>
-<h3 id='parameters'>Parameters</h3>
+
+<h3 id="parameters">Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -296,7 +329,9 @@
 <td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
 </tr>
 </tbody></table>
-<h2 id='get-v1search'>GET /v1/search</h2>
+
+<h2 id="get-/v1/search">GET /v1/search</h2>
+
 <blockquote>
 <p>Get the top trending content published talking about <code class="prettyprint">Tom Cruise</code>, in the last 24 hours.</p>
 </blockquote>
@@ -315,7 +350,9 @@
 <p><code class="prettyprint">GET /v1/search?q={search_term}</code></p>
 
 <p>This endpoint retrieves all articles talking about <code class="prettyprint">{search_term}</code> in the last 24 hours.</p>
-<h3 id='parameters'>Parameters</h3>
+
+<h3 id="parameters">Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -327,7 +364,9 @@
 <td>Matches all stories containing <code class="prettyprint">{search_term}</code>.</td>
 </tr>
 </tbody></table>
-<h1 id='post-requests'>POST Requests</h1>
+
+<h1 id="post-requests">POST Requests</h1>
+
 <p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
 
 <p>There are 2 different endpoints:</p>
@@ -336,7 +375,9 @@
 <li><code class="prettyprint">POST /v1/articles</code> - provides content by matching it against a set of filters</li>
 <li><code class="prettyprint">POST /v1/stats</code> - provides stats on the content matching the filters provided</li>
 </ul>
-<h2 id='post-v1articles'>POST /v1/articles</h2>
+
+<h2 id="post-/v1/articles">POST /v1/articles</h2>
+
 <blockquote>
 <p>Get the top trending content published by the NYTimes.com that talk about Barack Obama since a week ago</p>
 </blockquote>
@@ -370,7 +411,7 @@
             </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nytimes.com"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://nytimes.com"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S."</span><span class="w">
+                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">778.9965224360006</span><span class="p">,</span><span class="w">
@@ -417,7 +458,9 @@
 <p><code class="prettyprint">POST /v1/articles</code></p>
 
 <p>This endpoint retrieves all articles matching the filters provided.</p>
-<h3 id='parameters'>Parameters</h3>
+
+<h3 id="parameters">Parameters</h3>
+
 <ul>
 <li>Stories are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters. </li>
 <li>Required fields are denoted *. </li>
@@ -460,7 +503,7 @@
 <td>sort_by</td>
 <td>default</td>
 <td>String</td>
-<td>One of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_total</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>.</td>
+<td>One of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_total</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>.</td>
 </tr>
 <tr>
 <td>video_only</td>
@@ -487,7 +530,9 @@
 <td>Related stories will be collapsed when set.</td>
 </tr>
 </tbody></table>
-<h3 id='available-fields-for-filtering'>Available fields for filtering</h3>
+
+<h3 id="available-fields-for-filtering">Available fields for filtering</h3>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -507,8 +552,12 @@
 <td></td>
 </tr>
 <tr>
-<td>country</td>
-<td>Number</td>
+<td><del>country</del></td>
+<td>Number. Deprecated: use country_code instead</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>Two letter ISO 3166 country code</td>
 </tr>
 <tr>
 <td>language</td>
@@ -528,8 +577,10 @@
 </tr>
 </tbody></table>
 
-<p><aside class="notice">Due to historical reasons, the queryable fields <code class="prettyprint">headline</code> and <code class="prettyprint">summary</code> differ in naming from their <code class="prettyprint">Article</code> counterparts <code class="prettyprint">link</code> and <code class="prettyprint">excerpt</code>.</aside></p>
-<h2 id='post-v1stats'>POST /v1/stats</h2>
+<aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
+
+<h2 id="post-/v1/stats">POST /v1/stats</h2>
+
 <blockquote>
 <p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
 </blockquote>
@@ -643,7 +694,9 @@
 <p><code class="prettyprint">POST /v1/stats</code></p>
 
 <p>This endpoint retrieves stats for articles matching your filters.</p>
-<h3 id='parameters'>Parameters</h3>
+
+<h3 id="parameters">Parameters</h3>
+
 <p>Stories are filtered and sorted using the following JSON encoded parameters. 
 Required fields are denoted *. Filtering by category or country requires ids which can be found here: <a href="http://www.newswhip.com/api#regions-covered">NewsWhip API</a></p>
 
@@ -710,7 +763,11 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <td>Max number of aggregations to be returned.</td>
 </tr>
 </tbody></table>
-<h1 id='entities'>Entities</h1><h2 id='article'>Article</h2>
+
+<h1 id="entities">Entities</h1>
+
+<h2 id="article">Article</h2>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -738,7 +795,11 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <td>website of source publication</td>
 </tr>
 <tr>
-<td>source.country</td>
+<td><del>source.country</del></td>
+<td>deprecated</td>
+</tr>
+<tr>
+<td>source.country_code</td>
 <td>country of source publication</td>
 </tr>
 <tr>
@@ -782,7 +843,9 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <td>List of <code class="prettyprint">Topic</code></td>
 </tr>
 </tbody></table>
-<h2 id='topic'>Topic</h2>
+
+<h2 id="topic">Topic</h2>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -799,7 +862,8 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 </tr>
 </tbody></table>
 
-          <h1 id='errors'>Errors</h1>
+          <h1 id="errors">Errors</h1>
+
 <p>The NewsWhip API uses the following error codes:</p>
 
 <table><thead>
@@ -829,18 +893,42 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
-<h1 id='more-information'>More Information</h1><h2 id='server-side-caching'>Server-side Caching</h2>
+
+<h1 id="more-information">More Information</h1>
+
+<h2 id="server-side-caching">Server-side Caching</h2>
+
 <ul>
 <li><code class="prettyprint">GET</code> queries are cached (per API Key) for a small amount of time. Usually about 3 minutes. Check the HTTP headers sent by our servers for an exact value.</li>
 <li><code class="prettyprint">POST</code> queries are never cached.</li>
 </ul>
-<h2 id='cross-origin-resource-sharing'>Cross-Origin Resource Sharing</h2>
+
+<h2 id="cross-origin-resource-sharing">Cross-Origin Resource Sharing</h2>
+
 <ul>
 <li><code class="prettyprint">GET</code> endpoints support 1 <code class="prettyprint">Cross-origin resource sharing</code> per API key. Contact api@newswhip.com to set this up.</li>
 <li><code class="prettyprint">POST</code> endpoints are server-side only.</li>
 </ul>
-<h2 id='jsonp'>JSONP</h2>
+
+<h2 id="jsonp">JSONP</h2>
+
 <p>We don&rsquo;t currently support JSONP.</p>
+
+<h1 id="changelog">Changelog</h1>
+
+<h3 id="version-1.0.1-(2015-02-11)">Version 1.0.1 (2015-02-11)</h3>
+
+<ul>
+<li>Added a new <code class="prettyprint">sort_by</code> method: <code class="prettyprint">created_at</code> to sort by most recent</li>
+<li>The filtering field <code class="prettyprint">country</code> is deprecated, use <code class="prettyprint">country_code</code> instead</li>
+<li>In Entities, Article. The field <code class="prettyprint">country_code</code> replaces <code class="prettyprint">country</code>. The contents of <code class="prettyprint">country</code> will be set to &lsquo;World&rsquo;</li>
+</ul>
+
+<h3 id="version-1.0.0-(2014-11-21)">Version 1.0.0 (2014-11-21)</h3>
+
+<ul>
+<li>First public version</li>
+</ul>
 
       </div>
       <div class="dark-box">
