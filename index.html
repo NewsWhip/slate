@@ -584,14 +584,14 @@
 <blockquote>
 <p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
 </blockquote>
-<pre><code class="highlight plaintext">curl -H "Content-Type: application/json" -X POST -d '{
+<pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
     "filters": [
         "3d printing"
     ],
     "language" : "en",
     "sort_by" : "fb_total.sum",
     "aggregate_by" : "domain"
-}' "https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"
+}'</span> <span class="s2">"https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"</span>
 </code></pre>
 <pre><code class="highlight php"><span class="cp">&lt;?php</span> 
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
@@ -766,8 +766,7 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 
 <h1 id="entities">Entities</h1>
 
-<h2 id="article">Article</h2>
-
+Article
 <table><thead>
 <tr>
 <th>Field</th>
