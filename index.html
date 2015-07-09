@@ -521,13 +521,7 @@
 <td>size</td>
 <td></td>
 <td>Integer</td>
-<td>Max number of articles to be returned.</td>
-</tr>
-<tr>
-<td>size</td>
-<td></td>
-<td>Integer</td>
-<td>Max number of articles to be returned.</td>
+<td>Max number of articles to be returned (includes relatedStories.)</td>
 </tr>
 <tr>
 <td>find_related</td>
@@ -593,7 +587,7 @@
 
 <aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
-<h2 id="post-/v1/stats">POST /v1/stats</h2>
+POST /v1/stats</h2>
 
 <blockquote>
 <p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
@@ -778,9 +772,9 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 </tr>
 </tbody></table>
 
-<h1 id="entities">Entities</h1>
+Entities</h1>
 
-Article</h2>
+<h2 id="article">Article</h2>
 
 <table><thead>
 <tr>
