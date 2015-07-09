@@ -524,6 +524,12 @@
 <td>Max number of articles to be returned.</td>
 </tr>
 <tr>
+<td>size</td>
+<td></td>
+<td>Integer</td>
+<td>Max number of articles to be returned.</td>
+</tr>
+<tr>
 <td>find_related</td>
 <td>true</td>
 <td>Boolean</td>
@@ -531,7 +537,7 @@
 </tr>
 </tbody></table>
 
-Available fields for filtering</h3>
+<h3 id="available-fields-for-filtering">Available fields for filtering</h3>
 
 <table><thead>
 <tr>
@@ -557,7 +563,11 @@ Available fields for filtering</h3>
 </tr>
 <tr>
 <td>country_code</td>
-<td>Two letter ISO 3166 country code</td>
+<td>Two letter (lower case) ISO 3166 country code</td>
+</tr>
+<tr>
+<td>region_code</td>
+<td>Available regions (lower case): <code class="prettyprint">na</code>, <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>, <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
 </tr>
 <tr>
 <td>language</td>
@@ -569,7 +579,11 @@ Available fields for filtering</h3>
 </tr>
 <tr>
 <td>publisher</td>
-<td></td>
+<td>TLD such as <code class="prettyprint">newswhip.com</code></td>
+</tr>
+<tr>
+<td>domain</td>
+<td>Exact domain where the article was published. i.e. <code class="prettyprint">blog.newswhip.com</code></td>
 </tr>
 <tr>
 <td>href</td>
@@ -579,7 +593,7 @@ Available fields for filtering</h3>
 
 <aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
-POST /v1/stats</h2>
+<h2 id="post-/v1/stats">POST /v1/stats</h2>
 
 <blockquote>
 <p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
@@ -764,7 +778,8 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 </tr>
 </tbody></table>
 
-Entities
+<h1 id="entities">Entities</h1>
+
 Article</h2>
 
 <table><thead>
@@ -847,7 +862,8 @@ Article</h2>
 </tr>
 </tbody></table>
 
-<h2 id="topic">Topic
+<h2 id="topic">Topic</h2>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -917,6 +933,13 @@ Article</h2>
 <p>We don&rsquo;t currently support JSONP.</p>
 
 <h1 id="changelog">Changelog</h1>
+
+<h3 id="version-1.0.3-(2015-07-09)">Version 1.0.3 (2015-07-09)</h3>
+
+<ul>
+<li>Added <code class="prettyprint">region_code</code> and <code class="prettyprint">domain</code> to available fields for filtering</li>
+<li>Added <code class="prettyprint">keywords</code> field to Article entity</li>
+</ul>
 
 <h3 id="version-1.0.2-(2015-03-03)">Version 1.0.2 (2015-03-03)</h3>
 
