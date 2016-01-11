@@ -561,7 +561,7 @@
 </tr>
 <tr>
 <td>region_code</td>
-<td>Available regions (lower case): <code class="prettyprint">na</code>, <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>, <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
+<td>Available regions, North America, Europe, Oceania, South East Asia, South America, Asia, Middle East, Africa (case sensitive) <code class="prettyprint">na</code>,  <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>,  <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
 </tr>
 <tr>
 <td>language</td>
@@ -774,7 +774,8 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 
 <h1 id="entities">Entities</h1>
 
-Article
+<h2 id="article">Article</h2>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -930,6 +931,12 @@ Article
 <p>We don&rsquo;t currently support JSONP.</p>
 
 <h1 id="changelog">Changelog</h1>
+
+<h3 id="version-1.0.5-(2016-01-11)">Version 1.0.5 (2016-01-11)</h3>
+
+<ul>
+<li>Explicitly mention which <code class="prettyprint">region_code</code>s are supported in the POST API</li>
+</ul>
 
 <h3 id="version-1.0.4-(2015-12-03)">Version 1.0.4 (2015-12-03)</h3>
 
