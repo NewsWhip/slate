@@ -39,7 +39,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href='#getting-api-access'>Sign Up for a Developer Key</a></li>
-            <li><p>© 2015 NewsWhip Media Ltd.</p></li>
+            <li><p>© 2016 NewsWhip Media Ltd.</p></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -379,12 +379,15 @@
 <h2 id="post-/v1/articles">POST /v1/articles</h2>
 
 <blockquote>
-<p>Get the top trending content published by the NYTimes.com that talk about Barack Obama since a week ago</p>
+<p>Get the top trending stories published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago</p>
 </blockquote>
 <pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
-    "filters": [
-        "nytimes.com AND \"Barack Obama\""
-    ]
+    "filters": ["country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"],
+    "language": "en",
+    "video_only":false,
+    "sort_by": "nw_max_score",
+    "find_related": false,
+    "size": 1
 }'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
 </code></pre>
 <pre><code class="highlight php"><span class="cp">&lt;?php</span> 
@@ -396,8 +399,13 @@
     <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
     <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
         "filters": [
-            "nytimes.com AND \"Barack Obama\""
-        ]
+            "country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"
+        ],
+        "language": "en",
+        "video_only":false,
+        "sort_by": "nw_max_score",
+        "find_related": false,
+        "size": 1
     }'</span><span class="p">]);</span>
 <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
 <span class="cp">?&gt;</span> 
@@ -405,51 +413,167 @@
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.nytimes.com/politics/first-draft/2014/11/18/today-in-politics-40/"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Today in Politics"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In the Senate, an overhaul of domestic spying operations is on the line."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nytimes.com"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://nytimes.com"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
+            </span><span class="s2">"link"</span><span class="p">:</span><span class="s2">"http://www.tmz.com/2016/06/10/rihanna-beating-chris-brown/"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"headline"</span><span class="p">:</span><span class="s2">"Rihanna -- Chris Brown Callback ... 'He's Not Beating Me' (VIDEO)"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="s2">"Rihanna made a comment that was at the same time lighthearted and downright eerie, telling her bodyguard to cut a photog a break because \"He's not…"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"keywords"</span><span class="p">:</span><span class="s2">"Rihanna, Paparazzi Video, Paparazzi"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source"</span><span class="p">:{</span><span class="w">
+                </span><span class="s2">"publisher"</span><span class="p">:</span><span class="s2">"tmz.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"link"</span><span class="p">:</span><span class="s2">"http://tmz.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="s2">"us"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">778.9965224360006</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"comment_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"like_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"share_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1170</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="mf">16.645060486839977</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="mf">675.0008858850385</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fb_data"</span><span class="p">:{</span><span class="w">
+                </span><span class="s2">"comment_count"</span><span class="p">:</span><span class="mi">156</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"like_count"</span><span class="p">:</span><span class="mi">1129</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"share_count"</span><span class="p">:</span><span class="mi">77</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="mi">232</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="s2">"m"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">410</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1170</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="s2">"tw_data"</span><span class="p">:{</span><span class="w">
+                </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="mi">420</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="mi">232</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="s2">"m"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1170</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+            </span><span class="s2">"li_data"</span><span class="p">:{</span><span class="w">
+                </span><span class="s2">"li_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="mi">232</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="s2">"m"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a7a12d0-6f1b-11e4-a9b8-22000b210c3e"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1416312265853</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://graphics8.nytimes.com/images/2014/11/18/us/politics/18firstdraft-snowden/18firstdraft-snowden-videoSixteenByNine600.jpg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-            </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"delta_time"</span><span class="p">:</span><span class="mi">232</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"recent_fb_counts"</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"recent_tw_counts"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"uuid"</span><span class="p">:</span><span class="s2">"5b204900-2f15-11e6-9d57-8b1fd34d6bab"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="mi">1465567904000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"image_link"</span><span class="p">:</span><span class="s2">"http://ll-media.tmz.com/2016/06/10/061016-rihanna-akm-primary-1200x630.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"relatedStories"</span><span class="p">:[],</span><span class="w">
+            </span><span class="s2">"topics"</span><span class="p">:[</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Politics"</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Entertainment"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"News"</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">699</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Celebrity"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"News"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"has_video"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Get the top trending Facebook posts published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago</p>
+</blockquote>
+<pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": ["country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"],
+    "language": "en",
+    "video_only":false,
+    "sort_by": "nw_max_score",
+    "find_related": false,
+    "size": 1,
+    "content_type": "fb_posts"
+}'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> 
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/articles?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"
+        ],
+        "language": "en",
+        "video_only":false,
+        "sort_by": "nw_max_score",
+        "find_related": false,
+        "size": 1,
+        "content_type": "fb_posts"
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span> 
+</code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+            </span><span class="s2">"link"</span><span class="p">:</span><span class="s2">"https://www.facebook.com/11592717710/posts/10153750450817711"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"headline"</span><span class="p">:</span><span class="s2">"Tupac Is ALIVE And Hanging Out With Rihanna In Cuba"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="s2">"They crazy, those pictures are just...."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"keywords"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source"</span><span class="p">:{</span><span class="w">  
+                </span><span class="s2">"publisher"</span><span class="p">:</span><span class="s2">"historyin.pictures"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"link"</span><span class="p">:</span><span class="s2">"http://historyin.pictures"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="s2">"us"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="mf">2949.087744686274</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="mf">2949.087744686274</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fb_data"</span><span class="p">:{</span><span class="w">  
+                </span><span class="s2">"comment_count"</span><span class="p">:</span><span class="mi">82</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"like_count"</span><span class="p">:</span><span class="mi">666</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"share_count"</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="mi">672</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"reactions"</span><span class="p">:{</span><span class="w">  
+                    </span><span class="s2">"loves"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"wows"</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"hahas"</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"sads"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"angrys"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"fb_post"</span><span class="p">:{</span><span class="w">  
+                </span><span class="s2">"post_type"</span><span class="p">:</span><span class="s2">"Link"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"page_name"</span><span class="p">:</span><span class="s2">"Tyga"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"category"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"external_link"</span><span class="p">:</span><span class="s2">"http://historyin.pictures/scp2/index.php?d=111&amp;v=1465242659DGDragon"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tw_data"</span><span class="p">:{</span><span class="w">  
+                </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"li_data"</span><span class="p">:{</span><span class="w">  
+                </span><span class="s2">"li_count"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="s2">"m"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"delta_time"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"recent_fb_counts"</span><span class="p">:</span><span class="mi">672</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"recent_tw_counts"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"uuid"</span><span class="p">:</span><span class="s2">"e936d801-2c20-11e6-a17e-a9e9806b7a62"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="mi">1465243011000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"image_link"</span><span class="p">:</span><span class="s2">"https://external.xx.fbcdn.net/safe_image.php?d=AQCGd51pYt96HDLT&amp;url=http%3A%2F%2Fhistoryin.pictures%2Fscp2%2F111%2F1465242659DGDragon%2Fthumbnail_kWb4kEi1465242659DG.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"relatedStories"</span><span class="p">:[],</span><span class="w">
+            </span><span class="s2">"topics"</span><span class="p">:[</span><span class="w">  
+                </span><span class="p">{</span><span class="w">  
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Culture"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">  
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Music"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"has_video"</span><span class="p">:</span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -529,6 +653,12 @@
 <td>Boolean</td>
 <td>Related stories will be collapsed when set.</td>
 </tr>
+<tr>
+<td>content_type</td>
+<td>stories</td>
+<td>String</td>
+<td>Filters by one of the following types: <code class="prettyprint">stories</code>, <code class="prettyprint">fb_posts</code>.</td>
+</tr>
 </tbody></table>
 
 <h3 id="available-fields-for-filtering">Available fields for filtering</h3>
@@ -561,7 +691,7 @@
 </tr>
 <tr>
 <td>region_code</td>
-<td>Available regions, North America, Europe, Oceania, South East Asia, South America, Asia, Middle East, Africa (case sensitive) <code class="prettyprint">na</code>,  <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>,  <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
+<td>Available regions (lower case): <code class="prettyprint">na</code>, <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>, <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
 </tr>
 <tr>
 <td>language</td>
@@ -932,10 +1062,11 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 
 <h1 id="changelog">Changelog</h1>
 
-<h3 id="version-1.0.5-(2016-01-11)">Version 1.0.5 (2016-01-11)</h3>
+<h3 id="version-1.0.5-(2016-20-06)">Version 1.0.5 (2016-20-06)</h3>
 
 <ul>
-<li>Explicitly mention which <code class="prettyprint">region_code</code>s are supported in the POST API</li>
+<li>Added <code class="prettyprint">content_type</code> field in POST /v1/articles</li>
+<li>Updated examples of POST /v1/articles</li>
 </ul>
 
 <h3 id="version-1.0.4-(2015-12-03)">Version 1.0.4 (2015-12-03)</h3>
