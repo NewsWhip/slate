@@ -28,6 +28,11 @@ We don't currently support JSONP.
 
 # Changelog
 
+### Version 1.0.7 (2016-04-08)
+
+- Added option to sort by `fb_total_interaction` in POST /v1/articles
+- Restricted option to sort by `fb_likes`, `fb_shares` and `fb_comments` only for `content_type` `fb_posts`  in POST /v1/articles
+
 ### Version 1.0.6 (2016-26-07)
 
 - Added new 'youtube' content type
