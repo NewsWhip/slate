@@ -30,6 +30,7 @@ We don't currently support JSONP.
 
 ### Version 1.0.6 (2016-26-07)
 
+- Added new 'youtube' content type
 - Updated examples of POST /v1/articles
 
 ### Version 1.0.5 (2016-20-06)
