@@ -77,7 +77,7 @@ All 4 GET endpoints accept the following Query Parameters:
 Parameter | Default | Description
 --------- | ------- | -----------
 video_only | false | If set to true, the result will ONLY include content with embedded video.
-sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_total`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`
+sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`
 size |  | Number of articles to be returned (including related articles).
 
 To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:
@@ -113,57 +113,102 @@ echo $response->getBody();
 
 ```json
 {
-    "articles": [
+  "articles": [
+    {
+      "link": "https://www.fcbarcelona.com/football/first-team/news/2016-2017/fc-barcelona-v-leicester-city-victory-in-the-battle-of-champions-4-2-",
+      "headline": "FC Barcelona v Leicester City: Victory in the battle of champions (4-2) | FC Barcelona",
+      "excerpt": "Goals from Munir (2) and Luis Suárez put Barça in early command, and a late strike from Mújica puts paid to Premiership champions’ bid to make a comeback",
+      "keywords": "",
+      "source": {
+        "publisher": "fcbarcelona.com",
+        "link": "https://fcbarcelona.com",
+        "country": "",
+        "country_code": ""
+      },
+      "nw_score": 637.4492809499226,
+      "max_nw_score": 3814.5714659846194,
+      "fb_data": {
+        "total_engagement_count": 62988,
+        "total_count_delta": 9820,
+        "delta_period": 208,
+        "delta_period_unit": "m"
+      },
+      "tw_data": {
+        "tw_count": 480,
+        "total_count_delta": 40,
+        "delta_period": 208,
+        "delta_period_unit": "m"
+      },
+      "li_data": {
+        "li_count": 1,
+        "total_count_delta": 0,
+        "delta_period": 208,
+        "delta_period_unit": "m"
+      },
+      "tw_creator": null,
+      "delta_time": 208,
+      "recent_fb_counts": 9820,
+      "recent_tw_counts": 40,
+      "uuid": "9cb602c0-59b7-11e6-aec9-8557dc1ae32f",
+      "publication_timestamp": 1470255517000,
+      "image_link": "https://pro-cdn-public-fcb.everincloud.com/20157/0/document_thumbnail/20197/163/163/14590883/1.0-1/14590883.png?t=1453214443000",
+      "relatedStories": [
         {
-            "link": "http://www.wired.com/2014/11/time-dilation/",
-            "headline": "Time Travel is Real. Here Are The People and Spacecraft Who Have Done It | WIRED",
-            "excerpt": "Carl De Torres To get ahead in life, spend some time on the International Space Station. Why? Well, according to the theory of relativity, astronauts on the ISS age more slowly due to the spacecraft’s high orbital speed. It’s called time dilation, and it means that when they return they’re a bit younger than they…",
-            "source": {
-                "publisher": "wired.com",
-                "link": "http://wired.com",
-				"country_code": "us"
+          "link": "http://www.goal.com/en/match/barcelona-vs-leicester-city/2223206/report",
+          "headline": "Barcelona 4 - 2 Leicester City Match report - 8/3/16 International Champions Cup - Goal.com",
+          "excerpt": "Read the full Barcelona v Leicester City match report, including goals, incidents, and much more. Have your say on the game in our comments feature.",
+          "keywords": "",
+          "source": {
+            "publisher": "goal.com",
+            "link": "http://goal.com",
+            "country": "",
+            "country_code": ""
+          },
+          "nw_score": 514.8946690316512,
+          "max_nw_score": 1740.3519248567559,
+          "fb_data": {
+            "total_engagement_count": 44464,
+            "total_count_delta": 8736,
+            "delta_period": 254,
+            "delta_period_unit": "m"
+          },
+          "tw_data": {
+            "tw_count": 90,
+            "total_count_delta": 0,
+            "delta_period": 254,
+            "delta_period_unit": "m"
+          },
+          "li_data": {
+            "li_count": 0,
+            "total_count_delta": 0,
+            "delta_period": 254,
+            "delta_period_unit": "m"
+          },
+          "tw_creator": null,
+          "delta_time": 254,
+          "recent_fb_counts": 8736,
+          "recent_tw_counts": 0,
+          "uuid": "a39d81a0-59b5-11e6-8992-ffce69f79e2d",
+          "publication_timestamp": 1470254187000,
+          "image_link": "",
+          "relatedStories": [],
+          "topics": [
+            {
+              "id": 32,
+              "name": "Sports"
             },
-            "nw_score": 378.6359090122582,
-            "max_nw_score": 378.6359090122582,
-            "fb_data": {
-                "comment_count": 0,
-                "like_count": 0,
-                "share_count": 25,
-                "total_count_delta": 25,
-                "delta_period": 30,
-                "delta_period_unit": "m"
-            },
-            "tw_data": {
-                "tw_count": 118,
-                "total_count_delta": 117,
-                "delta_period": 30,
-                "delta_period_unit": "m"
-            },
-            "li_data": {
-                "li_count": 1,
-                "total_count_delta": 0,
-                "delta_period": 30,
-                "delta_period_unit": "m"
-            },
-            "tw_creator": "wired",
-            "uuid": "1065a790-70b0-11e4-8e64-22000b210c3e",
-            "publication_timestamp": 1416486221961,
-            "image_link": "http://www.wired.com/wp-content/uploads/2014/11/through-time-ft.jpg",
-            "relatedStories": [
-
-            ],
-            "topics": [
-                {
-                    "id": 25,
-                    "name": "Tech"
-                },
-                {
-                    "id": 26,
-                    "name": "Science"
-                }
-            ]
+            {
+              "id": 33,
+              "name": "Soccer"
+            }
+          ],
+          "has_video": false
         }
-	]
+      ],
+      "topics": [],
+      "has_video": false
+    }
+  ]
 }
 ```
 
@@ -597,7 +642,7 @@ filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
-sort_by | default | String | One of the following: `default`, `fb_total_interaction`, `fb_total`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`. When searching by the content_type `fb_posts` it's possible sort by `fb_likes`, `fb_shares`, `fb_comments`.
+sort_by | default | String | One of the following: `default`, `fb_total_interaction`, `fb_total`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`. When searching by the content_type `fb_posts` it's possible sort by `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.
 video_only | false | Boolean |
 default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
@@ -659,82 +704,52 @@ echo $response->getBody();
 
 ```json
 [
-    {
-        "key": "news.discovery.com",
-        "stats": {
-            "fb_total": {
-                "count": 3,
-                "min": 20.0,
-                "max": 19625.0,
-                "avg": 6558.333333333333,
-                "sum": 19675.0,
-                "sum_of_squares": 3.85141925E8,
-                "variance": 8.536890555555557E7,
-                "std_deviation": 9239.529509426093
-            },
-            "twitter": {
-                "count": 3,
-                "min": 17.0,
-                "max": 128.0,
-                "avg": 69.0,
-                "sum": 207.0,
-                "sum_of_squares": 20517.0,
-                "variance": 2078.0,
-                "std_deviation": 45.58508528016593
-            },
-            "linkedin": {
-                "count": 3,
-                "min": 0.0,
-                "max": 11.0,
-                "avg": 7.333333333333333,
-                "sum": 22.0,
-                "sum_of_squares": 242.0,
-                "variance": 26.888888888888886,
-                "std_deviation": 5.185449728701348
-            },
-            "fb_shares": {
-                "count": 3,
-                "min": 15.0,
-                "max": 1416.0,
-                "avg": 482.6666666666667,
-                "sum": 1448.0,
-                "sum_of_squares": 2005570.0,
-                "variance": 435556.2222222222,
-                "std_deviation": 659.9668341835234
-            },
-            "fb_comments": {
-                "count": 3,
-                "min": 0.0,
-                "max": 1164.0,
-                "avg": 388.6666666666667,
-                "sum": 1166.0,
-                "sum_of_squares": 1354900.0,
-                "variance": 300571.55555555556,
-                "std_deviation": 548.2440656820241
-            },
-            "fb_likes": {
-                "count": 3,
-                "min": 3.0,
-                "max": 17045.0,
-                "avg": 5687.0,
-                "sum": 17061.0,
-                "sum_of_squares": 2.90532203E8,
-                "variance": 6.4502098666666664E7,
-                "std_deviation": 8031.319858321337
-            },
-            "pinterest": {
-                "count": 3,
-                "min": 0.0,
-                "max": 1.0,
-                "avg": 0.6666666666666666,
-                "sum": 2.0,
-                "sum_of_squares": 2.0,
-                "variance": 0.22222222222222224,
-                "std_deviation": 0.4714045207910317
-            }
-        },
-        "total": 19904.0
-    }
+  {
+    "key": "geek.com",
+    "stats": {
+      "fb_total": {
+        "count": 3,
+        "min": 56,
+        "max": 3839,
+        "avg": 1609.3333333333333,
+        "sum": 4828,
+        "sum_of_squares": 15611546,
+        "variance": 2613894.888888889,
+        "std_deviation": 1616.7544306074715
+      },
+      "twitter": {
+        "count": 3,
+        "min": 90,
+        "max": 200,
+        "avg": 133.33333333333334,
+        "sum": 400,
+        "sum_of_squares": 60200,
+        "variance": 2288.8888888888882,
+        "std_deviation": 47.84233364802441
+      },
+      "pinterest": {
+        "count": 3,
+        "min": 0,
+        "max": 3,
+        "avg": 1,
+        "sum": 3,
+        "sum_of_squares": 9,
+        "variance": 2,
+        "std_deviation": 1.4142135623730951
+      },
+      "linkedin": {
+        "count": 3,
+        "min": 0,
+        "max": 7,
+        "avg": 3,
+        "sum": 9,
+        "sum_of_squares": 53,
+        "variance": 8.666666666666666,
+        "std_deviation": 2.943920288775949
+      }
+    },
+    "total": 5237
+  }
 ]
 ```
 
@@ -753,7 +768,7 @@ filters* |  | Array[String] | List of Lucene QueryString filters to be applied t
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
 to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
 language | Any | Two letter ISO 639-1 language code |
-sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_likes`, `fb_shares`, `fb_comments`, `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
+sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
 aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country`, `categories`
 video_only | false |
 default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.

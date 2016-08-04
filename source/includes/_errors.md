@@ -31,7 +31,8 @@ We don't currently support JSONP.
 ### Version 1.0.7 (2016-04-08)
 
 - Added option to sort by `fb_total_interaction` in POST /v1/articles
-- Restricted option to sort by `fb_likes`, `fb_shares` and `fb_comments` only for `content_type` `fb_posts`  in POST /v1/articles
+- Restricted option to sort by `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys` only for `content_type` `fb_posts`  in POST /v1/articles
+- Removed `fb_likes`, `fb_shares`, `fb_comments` from `sort_by` in POST /v1/stats
 
 ### Version 1.0.6 (2016-26-07)
 
