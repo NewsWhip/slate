@@ -41,7 +41,7 @@ For details on getting access, email: [api@newswhip.com](mailto:api@newswhip.com
 
 # Rate Limits
 
-Each API key is limited by default to 100 API requests per 5 minutes. Once you exceed this limit, calls will return: 
+Each API key is limited by default to 100 API requests per 5 minutes. Once you exceed this limit, calls will return:
 
 Error Code | Meaning
 ---------- | -------
@@ -77,7 +77,7 @@ All 4 GET endpoints accept the following Query Parameters:
 Parameter | Default | Description
 --------- | ------- | -----------
 video_only | false | If set to true, the result will ONLY include content with embedded video.
-sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_total`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`
+sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`
 size |  | Number of articles to be returned (including related articles).
 
 To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:
@@ -101,69 +101,114 @@ curl "https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY"
 ```
 
 ``` php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->get('https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY', []);
 echo $response->getBody();
-?> 
+?>
 ```
 
 ```json
 {
-    "articles": [
+  "articles": [
+    {
+      "link": "https://www.fcbarcelona.com/football/first-team/news/2016-2017/fc-barcelona-v-leicester-city-victory-in-the-battle-of-champions-4-2-",
+      "headline": "FC Barcelona v Leicester City: Victory in the battle of champions (4-2) | FC Barcelona",
+      "excerpt": "Goals from Munir (2) and Luis Suárez put Barça in early command, and a late strike from Mújica puts paid to Premiership champions’ bid to make a comeback",
+      "keywords": "",
+      "source": {
+        "publisher": "fcbarcelona.com",
+        "link": "https://fcbarcelona.com",
+        "country": "",
+        "country_code": ""
+      },
+      "nw_score": 637.4492809499226,
+      "max_nw_score": 3814.5714659846194,
+      "fb_data": {
+        "total_engagement_count": 62988,
+        "total_count_delta": 9820,
+        "delta_period": 208,
+        "delta_period_unit": "m"
+      },
+      "tw_data": {
+        "tw_count": 480,
+        "total_count_delta": 40,
+        "delta_period": 208,
+        "delta_period_unit": "m"
+      },
+      "li_data": {
+        "li_count": 1,
+        "total_count_delta": 0,
+        "delta_period": 208,
+        "delta_period_unit": "m"
+      },
+      "tw_creator": null,
+      "delta_time": 208,
+      "recent_fb_counts": 9820,
+      "recent_tw_counts": 40,
+      "uuid": "9cb602c0-59b7-11e6-aec9-8557dc1ae32f",
+      "publication_timestamp": 1470255517000,
+      "image_link": "https://pro-cdn-public-fcb.everincloud.com/20157/0/document_thumbnail/20197/163/163/14590883/1.0-1/14590883.png?t=1453214443000",
+      "relatedStories": [
         {
-            "link": "http://www.wired.com/2014/11/time-dilation/",
-            "headline": "Time Travel is Real. Here Are The People and Spacecraft Who Have Done It | WIRED",
-            "excerpt": "Carl De Torres To get ahead in life, spend some time on the International Space Station. Why? Well, according to the theory of relativity, astronauts on the ISS age more slowly due to the spacecraft’s high orbital speed. It’s called time dilation, and it means that when they return they’re a bit younger than they…",
-            "source": {
-                "publisher": "wired.com",
-                "link": "http://wired.com",
-				"country_code": "us"
+          "link": "http://www.goal.com/en/match/barcelona-vs-leicester-city/2223206/report",
+          "headline": "Barcelona 4 - 2 Leicester City Match report - 8/3/16 International Champions Cup - Goal.com",
+          "excerpt": "Read the full Barcelona v Leicester City match report, including goals, incidents, and much more. Have your say on the game in our comments feature.",
+          "keywords": "",
+          "source": {
+            "publisher": "goal.com",
+            "link": "http://goal.com",
+            "country": "",
+            "country_code": ""
+          },
+          "nw_score": 514.8946690316512,
+          "max_nw_score": 1740.3519248567559,
+          "fb_data": {
+            "total_engagement_count": 44464,
+            "total_count_delta": 8736,
+            "delta_period": 254,
+            "delta_period_unit": "m"
+          },
+          "tw_data": {
+            "tw_count": 90,
+            "total_count_delta": 0,
+            "delta_period": 254,
+            "delta_period_unit": "m"
+          },
+          "li_data": {
+            "li_count": 0,
+            "total_count_delta": 0,
+            "delta_period": 254,
+            "delta_period_unit": "m"
+          },
+          "tw_creator": null,
+          "delta_time": 254,
+          "recent_fb_counts": 8736,
+          "recent_tw_counts": 0,
+          "uuid": "a39d81a0-59b5-11e6-8992-ffce69f79e2d",
+          "publication_timestamp": 1470254187000,
+          "image_link": "",
+          "relatedStories": [],
+          "topics": [
+            {
+              "id": 32,
+              "name": "Sports"
             },
-            "nw_score": 378.6359090122582,
-            "max_nw_score": 378.6359090122582,
-            "fb_data": {
-                "comment_count": 0,
-                "like_count": 0,
-                "share_count": 25,
-                "total_count_delta": 25,
-                "delta_period": 30,
-                "delta_period_unit": "m"
-            },
-            "tw_data": {
-                "tw_count": 118,
-                "total_count_delta": 117,
-                "delta_period": 30,
-                "delta_period_unit": "m"
-            },
-            "li_data": {
-                "li_count": 1,
-                "total_count_delta": 0,
-                "delta_period": 30,
-                "delta_period_unit": "m"
-            },
-            "tw_creator": "wired",
-            "uuid": "1065a790-70b0-11e4-8e64-22000b210c3e",
-            "publication_timestamp": 1416486221961,
-            "image_link": "http://www.wired.com/wp-content/uploads/2014/11/through-time-ft.jpg",
-            "relatedStories": [
-                
-            ],
-            "topics": [
-                {
-                    "id": 25,
-                    "name": "Tech"
-                },
-                {
-                    "id": 26,
-                    "name": "Science"
-                }
-            ]
+            {
+              "id": 33,
+              "name": "Soccer"
+            }
+          ],
+          "has_video": false
         }
-	]
+      ],
+      "topics": [],
+      "has_video": false
+    }
+  ]
 }
 ```
 
@@ -188,14 +233,14 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 ```
 
 ``` php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->get('https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY', []);
 echo $response->getBody();
-?> 
+?>
 ```
 
 `GET /v1/publisher/{publisher}/{time_period}`
@@ -218,14 +263,14 @@ curl "https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY"
 ```
 
 ``` php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->get('https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY', []);
 echo $response->getBody();
-?> 
+?>
 ```
 
 `GET /v1/local/{city}/All/{time_period}`
@@ -248,14 +293,14 @@ curl "https://api.newswhip.com/v1/search?q=Tom%20Cruise&key=YOUR_API_KEY"
 ```
 
 ``` php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->get('https://api.newswhip.com/v1/search?q=Tom%20Cruise&key=YOUR_API_KEY', []);
 echo $response->getBody();
-?> 
+?>
 ```
 
 `GET /v1/search?q={search_term}`
@@ -293,7 +338,7 @@ curl -H "Content-Type: application/json" -X POST -d '{
 ```
 
 ```php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
@@ -311,70 +356,64 @@ $response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY
     	"size": 1
 	}']);
 echo $response->getBody();
-?> 
+?>
 ```
 
 ```json
 {
-	"articles": [
-		{
-			"link":"http://www.tmz.com/2016/06/10/rihanna-beating-chris-brown/",
-			"headline":"Rihanna -- Chris Brown Callback ... 'He's Not Beating Me' (VIDEO)",
-			"excerpt":"Rihanna made a comment that was at the same time lighthearted and downright eerie, telling her bodyguard to cut a photog a break because \"He's not…",
-			"keywords":"Rihanna, Paparazzi Video, Paparazzi",
-			"source":{
-				"publisher":"tmz.com",
-				"link":"http://tmz.com",
-				"country":"United States",
-				"country_code":"us"
-			},
-			"nw_score":16.645060486839977,
-			"max_nw_score":675.0008858850385,
-			"fb_data":{
-				"comment_count":156,
-				"like_count":1129,
-				"share_count":77,
-				"total_count_delta":110,
-				"delta_period":232,
-				"delta_period_unit":"m"
-			},
-			"tw_data":{
-				"tw_count":420,
-				"total_count_delta":0,
-				"delta_period":232,
-				"delta_period_unit":"m"
-			},
-			"li_data":{
-				"li_count":1,
-				"total_count_delta":0,
-				"delta_period":232,
-				"delta_period_unit":"m"
-			},
-			"tw_creator":null,
-			"delta_time":232,
-			"recent_fb_counts":110,
-			"recent_tw_counts":0,
-			"uuid":"5b204900-2f15-11e6-9d57-8b1fd34d6bab",
-			"publication_timestamp":1465567904000,
-			"image_link":"http://ll-media.tmz.com/2016/06/10/061016-rihanna-akm-primary-1200x630.jpg",
-			"relatedStories":[],
-			"topics":[
-				{
-					"id":3,
-					"name":"Entertainment"
-				},
-				{
-					"id":699,
-					"name":"Celebrity"
-				},
-				{
-					"id":2,
-					"name":"News"
-				}
-			],
-			"has_video":true
-		}
-    ]
+  "articles": [
+    {
+      "link": "http://www.etonline.com/news/193862_celine_dion_slays_impressions_of_cher_sia_and_rihanna_on_tonight_show/",
+      "headline": "Celine Dion Slays Impressions of Cher, Sia, and Rihanna on ‘Tonight Show’",
+      "excerpt": "The singer even twerked to Rihanna!",
+      "keywords": "celine dion,jimmy fallon,tonight show,Wheel of Impressions",
+      "source": {
+        "publisher": "etonline.com",
+        "link": "http://etonline.com",
+        "country": "United States",
+        "country_code": "us"
+      },
+      "nw_score": 2.8004523617691546,
+      "max_nw_score": 1206.030546972232,
+      "fb_data": {
+        "total_engagement_count": 28527,
+        "total_count_delta": 78,
+        "delta_period": 839,
+        "delta_period_unit": "m"
+      },
+      "tw_data": {
+        "tw_count": 110,
+        "total_count_delta": 0,
+        "delta_period": 839,
+        "delta_period_unit": "m"
+      },
+      "li_data": {
+        "li_count": 1,
+        "total_count_delta": 0,
+        "delta_period": 839,
+        "delta_period_unit": "m"
+      },
+      "tw_creator": "Rachel McRady",
+      "delta_time": 839,
+      "recent_fb_counts": 78,
+      "recent_tw_counts": 0,
+      "uuid": "ecc1ca00-4fef-11e6-9e85-8b1fd34d6bab",
+      "publication_timestamp": 1469179492000,
+      "image_link": "http://www.etonline.com/media/video/2016/07/24256059/et_celinedion_072116_hulu.jpg",
+      "relatedStories": [],
+      "topics": [
+        {
+          "id": 3,
+          "name": "Entertainment"
+        },
+        {
+          "id": 699,
+          "name": "Celebrity"
+        }
+      ],
+      "has_video": true
+    }
+  ]
 }
 ```
 
@@ -393,7 +432,7 @@ curl -H "Content-Type: application/json" -X POST -d '{
 ```
 
 ```php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
@@ -412,79 +451,76 @@ $response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY
     	"content_type": "fb_posts"
 	}']);
 echo $response->getBody();
-?> 
+?>
 ```
 
 ```json
 {
-	"articles": [
-		{  
-			"link":"https://www.facebook.com/11592717710/posts/10153750450817711",
-			"headline":"Tupac Is ALIVE And Hanging Out With Rihanna In Cuba",
-			"excerpt":"They crazy, those pictures are just....",
-			"keywords":"",
-			"source":{  
-				"publisher":"historyin.pictures",
-				"link":"http://historyin.pictures",
-				"country":"United States",
-				"country_code":"us"
-			},
-			"nw_score":2949.087744686274,
-			"max_nw_score":2949.087744686274,
-			"fb_data":{  
-				"comment_count":82,
-				"like_count":666,
-				"share_count":40,
-				"total_count_delta":672,
-				"delta_period":7,
-				"delta_period_unit":"m",
-				"reactions":{  
-					"loves":4,
-					"wows":13,
-					"hahas":23,
-					"sads":0,
-					"angrys":1
-				}
-			},
-			"fb_post":{  
-				"post_type":"Link",
-				"page_name":"Tyga",
-				"category":"",
-				"external_link":"http://historyin.pictures/scp2/index.php?d=111&v=1465242659DGDragon"
-			},
-			"tw_data":{  
-				"tw_count":0,
-				"total_count_delta":0,
-				"delta_period":7,
-				"delta_period_unit":"m"
-			},
-			"li_data":{  
-				"li_count":0,
-				"total_count_delta":0,
-				"delta_period":7,
-				"delta_period_unit":"m"
-			},
-			"tw_creator":"",
-			"delta_time":7,
-			"recent_fb_counts":672,
-			"recent_tw_counts":0,
-			"uuid":"e936d801-2c20-11e6-a17e-a9e9806b7a62",
-			"publication_timestamp":1465243011000,
-			"image_link":"https://external.xx.fbcdn.net/safe_image.php?d=AQCGd51pYt96HDLT&url=http%3A%2F%2Fhistoryin.pictures%2Fscp2%2F111%2F1465242659DGDragon%2Fthumbnail_kWb4kEi1465242659DG.jpg",
-			"relatedStories":[],
-			"topics":[  
-				{  
-					"id":4,
-					"name":"Culture"
-				},
-				{  
-					"id":9,
-					"name":"Music"
-				}
-			],
-			"has_video":false
-		}
-    ]
+  "articles": [
+    {
+      "link": "https://www.facebook.com/21785951839/posts/10154828396751840",
+      "headline": "Céline Dion Flawlessly Does Sia, Rihanna And Michael Jackson's Impressions On \"Wheel Of Musical\" | 9GAG.tv",
+      "excerpt": "She absolutely killed the Rihanna one﻿! 😱 👍🏻",
+      "keywords": "",
+      "source": {
+        "publisher": "9gag.com",
+        "link": "http://9gag.com",
+        "country": "",
+        "country_code": ""
+      },
+      "nw_score": 293.6889989229701,
+      "max_nw_score": 4386.930955036105,
+      "fb_data": {
+        "total_engagement_count": 38186,
+        "total_count_delta": 4071,
+        "delta_period": 211,
+        "delta_period_unit": "m",
+        "reactions": {
+          "comments": 1151,
+          "likes": 34347,
+          "shares": 2688,
+          "loves": 1690,
+          "wows": 168,
+          "hahas": 2632,
+          "sads": 4,
+          "angrys": 7
+        }
+      },
+      "fb_post": {
+        "post_type": "Link",
+        "page_name": "9GAG",
+        "category": "",
+        "external_link": "http://9gag.com/tv/p/al7Z4Z"
+      },
+      "tw_data": {
+        "tw_count": 0,
+        "total_count_delta": 0,
+        "delta_period": 211,
+        "delta_period_unit": "m"
+      },
+      "li_data": {
+        "li_count": 0,
+        "total_count_delta": 0,
+        "delta_period": 211,
+        "delta_period_unit": "m"
+      },
+      "tw_creator": "",
+      "delta_time": 211,
+      "recent_fb_counts": 4071,
+      "recent_tw_counts": 0,
+      "uuid": "8e9d7920-51c9-11e6-ac9d-695918d06269",
+      "publication_timestamp": 1469383500000,
+      "image_link": "https://external.xx.fbcdn.net/safe_image.php?d=AQD5xuMpNiZCMO0y&url=http%3A%2F%2Fcdn-jarvis-fun.9cache.com%2Fmedia%2Fphoto%2FpRQVbOydQ_1200w_v1.jpg",
+      "relatedStories": [],
+      "topics": [
+        {
+          "id": 285,
+          "name": "Viral Sites"
+        }
+      ],
+      "has_video": false
+    }
+  ]
 }
 ```
 
@@ -596,8 +632,8 @@ This endpoint retrieves all articles matching the filters provided.
 
 ### Parameters
 
-* Stories are filtered and sorted using the following `JSON` encoded parameters. 
-* Required fields are denoted *. 
+* Stories are filtered and sorted using the following `JSON` encoded parameters.
+* Required fields are denoted *.
 * Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
 
 Parameter | Default | Type | Description
@@ -606,8 +642,8 @@ filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
-sort_by | default | String | One of the following: `default`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_total`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`.
-video_only | false |   |
+sort_by | default | String | One of the following: `default`, `fb_total_interaction`, `fb_total`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`. When searching by the content_type `fb_posts` it's possible sort by `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.
+video_only | false | Boolean |
 default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 find_related | true | Boolean | Related stories will be collapsed when set.
@@ -615,18 +651,18 @@ content_type | stories | String | Filters by one of the following types: `storie
 
 ### Available fields for filtering
 
-Field | Type 
------ | ---- 
+Field | Type
+----- | ----
 headline |  
 summary |  
 authors |  
-<del>country</del> | Number. Deprecated: use country_code instead 
-country_code | Two letter (lower case) ISO 3166 country code 
-region_code | Available regions (lower case): `na`, `eu`, `oc`, `sea`, `sa`, `as`, `me`, `af` 
-language | Two letter ISO 639-1 language code 
-categories | Number 
+<del>country</del> | Number. Deprecated: use country_code instead
+country_code | Two letter (lower case) ISO 3166 country code
+region_code | Available regions (lower case): `na`, `eu`, `oc`, `sea`, `sa`, `as`, `me`, `af`
+language | Two letter ISO 639-1 language code
+categories | Number
 publisher | TLD such as newswhip.com
-domain | Exact domain where the article was published. i.e. blog.newswhip.com 
+domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href |   
 
 <aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
@@ -647,7 +683,7 @@ curl -H "Content-Type: application/json" -X POST -d '{
 ```
 
 ```php
-<?php 
+<?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
@@ -663,87 +699,57 @@ $response = $client->post('https://api.newswhip.com/v1/stats?key=YOUR_API_KEY', 
 		"aggregate_by" : "domain"
 	}']);
 echo $response->getBody();
-?> 
+?>
 ```
 
 ```json
 [
-    {
-        "key": "news.discovery.com",
-        "stats": {
-            "fb_total": {
-                "count": 3,
-                "min": 20.0,
-                "max": 19625.0,
-                "avg": 6558.333333333333,
-                "sum": 19675.0,
-                "sum_of_squares": 3.85141925E8,
-                "variance": 8.536890555555557E7,
-                "std_deviation": 9239.529509426093
-            },
-            "twitter": {
-                "count": 3,
-                "min": 17.0,
-                "max": 128.0,
-                "avg": 69.0,
-                "sum": 207.0,
-                "sum_of_squares": 20517.0,
-                "variance": 2078.0,
-                "std_deviation": 45.58508528016593
-            },
-            "linkedin": {
-                "count": 3,
-                "min": 0.0,
-                "max": 11.0,
-                "avg": 7.333333333333333,
-                "sum": 22.0,
-                "sum_of_squares": 242.0,
-                "variance": 26.888888888888886,
-                "std_deviation": 5.185449728701348
-            },
-            "fb_shares": {
-                "count": 3,
-                "min": 15.0,
-                "max": 1416.0,
-                "avg": 482.6666666666667,
-                "sum": 1448.0,
-                "sum_of_squares": 2005570.0,
-                "variance": 435556.2222222222,
-                "std_deviation": 659.9668341835234
-            },
-            "fb_comments": {
-                "count": 3,
-                "min": 0.0,
-                "max": 1164.0,
-                "avg": 388.6666666666667,
-                "sum": 1166.0,
-                "sum_of_squares": 1354900.0,
-                "variance": 300571.55555555556,
-                "std_deviation": 548.2440656820241
-            },
-            "fb_likes": {
-                "count": 3,
-                "min": 3.0,
-                "max": 17045.0,
-                "avg": 5687.0,
-                "sum": 17061.0,
-                "sum_of_squares": 2.90532203E8,
-                "variance": 6.4502098666666664E7,
-                "std_deviation": 8031.319858321337
-            },
-            "pinterest": {
-                "count": 3,
-                "min": 0.0,
-                "max": 1.0,
-                "avg": 0.6666666666666666,
-                "sum": 2.0,
-                "sum_of_squares": 2.0,
-                "variance": 0.22222222222222224,
-                "std_deviation": 0.4714045207910317
-            }
-        },
-        "total": 19904.0
-    }
+  {
+    "key": "geek.com",
+    "stats": {
+      "fb_total": {
+        "count": 3,
+        "min": 56,
+        "max": 3839,
+        "avg": 1609.3333333333333,
+        "sum": 4828,
+        "sum_of_squares": 15611546,
+        "variance": 2613894.888888889,
+        "std_deviation": 1616.7544306074715
+      },
+      "twitter": {
+        "count": 3,
+        "min": 90,
+        "max": 200,
+        "avg": 133.33333333333334,
+        "sum": 400,
+        "sum_of_squares": 60200,
+        "variance": 2288.8888888888882,
+        "std_deviation": 47.84233364802441
+      },
+      "pinterest": {
+        "count": 3,
+        "min": 0,
+        "max": 3,
+        "avg": 1,
+        "sum": 3,
+        "sum_of_squares": 9,
+        "variance": 2,
+        "std_deviation": 1.4142135623730951
+      },
+      "linkedin": {
+        "count": 3,
+        "min": 0,
+        "max": 7,
+        "avg": 3,
+        "sum": 9,
+        "sum_of_squares": 53,
+        "variance": 8.666666666666666,
+        "std_deviation": 2.943920288775949
+      }
+    },
+    "total": 5237
+  }
 ]
 ```
 
@@ -753,7 +759,7 @@ This endpoint retrieves stats for articles matching your filters.
 
 ### Parameters
 
-Stories are filtered and sorted using the following JSON encoded parameters. 
+Stories are filtered and sorted using the following JSON encoded parameters.
 Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
 
 Parameter | Default | Type | Description
@@ -762,9 +768,9 @@ filters* |  | Array[String] | List of Lucene QueryString filters to be applied t
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
 to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
 language | Any | Two letter ISO 639-1 language code |
-sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_likes`, `fb_shares`, `fb_comments`, `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
+sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
 aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country`, `categories`
-video_only | false | 
+video_only | false |
 default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
 size |   | Integer | Max number of aggregations to be returned.
 
@@ -774,7 +780,7 @@ size |   | Integer | Max number of aggregations to be returned.
 
 Field | Description
 --------- | -----------
-link | 
+link |
 headline |  
 excerpt |  summary for the story
 source.publisher |  domain of source publication
@@ -800,5 +806,3 @@ Field | Description
 --------- | -----------
 id |  NewsWhip's unique id for this Topic
 name |  English name for this topic
-
-
