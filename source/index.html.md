@@ -328,7 +328,7 @@ There are 2 different endpoints:
 
 ``` shell
 curl -H "Content-Type: application/json" -X POST -d '{
-    "filters": ["country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"],
+    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
     "language": "en",
     "video_only":false,
     "sort_by": "nw_max_score",
@@ -344,17 +344,17 @@ use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY', [
-	'headers' => ['Content-Type' => 'application/json'],
-	'body' => '{
-		"filters": [
-			"country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"
-		],
-    	"language": "en",
-    	"video_only":false,
-    	"sort_by": "nw_max_score",
-    	"find_related": false,
-    	"size": 1
-	}']);
+    'headers' => ['Content-Type' => 'application/json'],
+    'body' => '{
+        "filters": [
+            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
+        ],
+        "language": "en",
+        "video_only":false,
+        "sort_by": "nw_max_score",
+        "find_related": false,
+        "size": 1
+    }']);
 echo $response->getBody();
 ?>
 ```
@@ -363,52 +363,48 @@ echo $response->getBody();
 {
   "articles": [
     {
-      "link": "http://www.etonline.com/news/193862_celine_dion_slays_impressions_of_cher_sia_and_rihanna_on_tonight_show/",
-      "headline": "Celine Dion Slays Impressions of Cher, Sia, and Rihanna on ‘Tonight Show’",
-      "excerpt": "The singer even twerked to Rihanna!",
-      "keywords": "celine dion,jimmy fallon,tonight show,Wheel of Impressions",
+      "link": "http://www.rap-up.com/2016/11/15/partynextdoor-talks-drake-rihanna-jeremih-tour/",
+      "headline": "PARTYNEXTDOOR Talks Drake, Rihanna, & Touring with Jeremih",
+      "excerpt": "In the midst of his \"Summer's Over Tour\" with Jeremih, PARTYNEXTDOOR stopped by Power 98 in Charlotte, North Carolina for ...",
+      "keywords": "",
       "source": {
-        "publisher": "etonline.com",
-        "link": "http://etonline.com",
+        "publisher": "rap-up.com",
+        "link": "http://rap-up.com",
         "country": "United States",
         "country_code": "us"
       },
-      "nw_score": 2.8004523617691546,
-      "max_nw_score": 1206.030546972232,
+      "nw_score": 0.05852343318906164,
+      "max_nw_score": 729.5439348623742,
       "fb_data": {
-        "total_engagement_count": 28527,
-        "total_count_delta": 78,
-        "delta_period": 839,
+        "total_engagement_count": 2128,
+        "total_count_delta": 3,
+        "delta_period": 1033,
         "delta_period_unit": "m"
       },
       "tw_data": {
-        "tw_count": 110,
+        "tw_count": 20,
         "total_count_delta": 0,
-        "delta_period": 839,
+        "delta_period": 1033,
         "delta_period_unit": "m"
       },
       "li_data": {
-        "li_count": 1,
+        "li_count": 0,
         "total_count_delta": 0,
-        "delta_period": 839,
+        "delta_period": 1033,
         "delta_period_unit": "m"
       },
-      "tw_creator": "Rachel McRady",
-      "delta_time": 839,
-      "recent_fb_counts": 78,
+      "tw_creator": null,
+      "delta_time": 1033,
+      "recent_fb_counts": 3,
       "recent_tw_counts": 0,
-      "uuid": "ecc1ca00-4fef-11e6-9e85-8b1fd34d6bab",
-      "publication_timestamp": 1469179492000,
-      "image_link": "http://www.etonline.com/media/video/2016/07/24256059/et_celinedion_072116_hulu.jpg",
+      "uuid": "cec8e680-ab68-11e6-a1c9-8b1fd34d6bab",
+      "publication_timestamp": 1479237731560,
+      "image_link": "http://www.rap-up.com/wp-content/uploads/2016/11/partynextdoor-red.jpg",
       "relatedStories": [],
       "topics": [
         {
           "id": 3,
           "name": "Entertainment"
-        },
-        {
-          "id": 699,
-          "name": "Celebrity"
         }
       ],
       "has_video": true
@@ -421,7 +417,7 @@ echo $response->getBody();
 
 ``` shell
 curl -H "Content-Type: application/json" -X POST -d '{
-    "filters": ["country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"],
+    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
     "language": "en",
     "video_only":false,
     "sort_by": "nw_max_score",
@@ -438,18 +434,18 @@ use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY', [
-	'headers' => ['Content-Type' => 'application/json'],
-	'body' => '{
-		"filters": [
-			"country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"
-		],
-    	"language": "en",
-    	"video_only":false,
-    	"sort_by": "nw_max_score",
-    	"find_related": false,
-    	"size": 1,
-    	"content_type": "fb_posts"
-	}']);
+    'headers' => ['Content-Type' => 'application/json'],
+    'body' => '{
+        "filters": [
+            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
+        ],
+        "language": "en",
+        "video_only":false,
+        "sort_by": "nw_max_score",
+        "find_related": false,
+        "size": 1,
+        "content_type": "fb_posts"
+    }']);
 echo $response->getBody();
 ?>
 ```
@@ -458,64 +454,75 @@ echo $response->getBody();
 {
   "articles": [
     {
-      "link": "https://www.facebook.com/21785951839/posts/10154828396751840",
-      "headline": "Céline Dion Flawlessly Does Sia, Rihanna And Michael Jackson's Impressions On \"Wheel Of Musical\" | 9GAG.tv",
-      "excerpt": "She absolutely killed the Rihanna one﻿! 😱 👍🏻",
+      "link": "https://www.facebook.com/10092511675/posts/10154185324896676",
+      "headline": "Rihanna's cover photo",
+      "excerpt": "",
       "keywords": "",
       "source": {
-        "publisher": "9gag.com",
-        "link": "http://9gag.com",
-        "country": "",
-        "country_code": ""
+        "publisher": "",
+        "link": "http://",
+        "country": "United States",
+        "country_code": "us"
       },
-      "nw_score": 293.6889989229701,
-      "max_nw_score": 4386.930955036105,
+      "nw_score": 1.632236314298637,
+      "max_nw_score": 5046.852808216844,
       "fb_data": {
-        "total_engagement_count": 38186,
-        "total_count_delta": 4071,
-        "delta_period": 211,
+        "total_engagement_count": 24808,
+        "total_count_delta": 42,
+        "delta_period": 453,
         "delta_period_unit": "m",
         "reactions": {
-          "comments": 1151,
-          "likes": 34347,
-          "shares": 2688,
-          "loves": 1690,
-          "wows": 168,
-          "hahas": 2632,
-          "sads": 4,
+          "comments": 449,
+          "likes": 20772,
+          "shares": 280,
+          "loves": 3169,
+          "wows": 100,
+          "hahas": 26,
+          "sads": 5,
           "angrys": 7
         }
       },
       "fb_post": {
-        "post_type": "Link",
-        "page_name": "9GAG",
-        "category": "",
-        "external_link": "http://9gag.com/tv/p/al7Z4Z"
+        "post_type": "Photo",
+        "page_name": "Rihanna",
+        "category": ""
       },
       "tw_data": {
         "tw_count": 0,
         "total_count_delta": 0,
-        "delta_period": 211,
+        "delta_period": 453,
         "delta_period_unit": "m"
       },
       "li_data": {
         "li_count": 0,
         "total_count_delta": 0,
-        "delta_period": 211,
+        "delta_period": 453,
         "delta_period_unit": "m"
       },
       "tw_creator": "",
-      "delta_time": 211,
-      "recent_fb_counts": 4071,
+      "delta_time": 453,
+      "recent_fb_counts": 42,
       "recent_tw_counts": 0,
-      "uuid": "8e9d7920-51c9-11e6-ac9d-695918d06269",
-      "publication_timestamp": 1469383500000,
-      "image_link": "https://external.xx.fbcdn.net/safe_image.php?d=AQD5xuMpNiZCMO0y&url=http%3A%2F%2Fcdn-jarvis-fun.9cache.com%2Fmedia%2Fphoto%2FpRQVbOydQ_1200w_v1.jpg",
+      "uuid": "3f0bea00-adda-11e6-9b4e-dd9ee0636270",
+      "publication_timestamp": 1479506348000,
+      "image_link": "https://scontent.xx.fbcdn.net/v/t1.0-9/q81/s720x720/15073550_10154185324731676_7190497282078870243_n.jpg?oh=e399b348b5f0242da43d363343cacd0b&oe=58C338AC",
       "relatedStories": [],
       "topics": [
         {
-          "id": 285,
-          "name": "Viral Sites"
+          "id": 3,
+          "name": "Entertainment"
+        },
+        {
+          "id": 4,
+          "name": "Culture"
+        },
+        {
+          "id": 9,
+          "name": "Music"
+        },
+        {
+          "id": 699,
+          "name": "Celebrity"
         }
       ],
       "has_video": false
@@ -574,9 +581,9 @@ curl -H "Content-Type: application/json" -X POST -d '{
     "filters": [
         "3d printing"
     ],
-	"language" : "en",
-	"sort_by" : "fb_total.sum",
-	"aggregate_by" : "domain"
+    "language" : "en",
+    "sort_by" : "fb_total.sum",
+    "aggregate_by" : "domain"
 }' "https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"
 ```
 
@@ -587,15 +594,15 @@ use GuzzleHttp\Client;
 
 $client = new Client();
 $response = $client->post('https://api.newswhip.com/v1/stats?key=YOUR_API_KEY', [
-	'headers' => ['Content-Type' => 'application/json'],
-	'body' => '{
-		"filters": [
-			"3d printing"
-		],
-		"language" : "en",
-		"sort_by" : "fb_total.sum",
-		"aggregate_by" : "domain"
-	}']);
+    'headers' => ['Content-Type' => 'application/json'],
+    'body' => '{
+        "filters": [
+            "3d printing"
+        ],
+        "language" : "en",
+        "sort_by" : "fb_total.sum",
+        "aggregate_by" : "domain"
+    }']);
 echo $response->getBody();
 ?>
 ```
