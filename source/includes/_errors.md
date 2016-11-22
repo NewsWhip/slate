@@ -28,6 +28,10 @@ We don't currently support JSONP.
 
 # Changelog
 
+### Version 1.0.7 (2016-22-11)
+
+- Updated examples of POST /v1/articles
+
 ### Version 1.0.6 (2016-04-08)
 
 - Added option to sort by `fb_total_engagement` in POST /v1/articles
