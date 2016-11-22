@@ -6,19 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference | NewsWhip</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-      <script src="javascripts/all.js" type="text/javascript"></script>
-
-      <script>
-        $(function() {
-          setupLanguages(["shell","php"]);
-        });
-      </script>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -155,14 +228,14 @@
 
 <p><code class="prettyprint">GET /v1/local</code></p>
 
-<h2 id="get-/v1/region">GET /v1/region</h2>
+<h2 id="get-v1-region">GET /v1/region</h2>
 
 <blockquote>
 <p>Get the top trending English content published in the last 24 hours</p>
 </blockquote>
-<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -171,101 +244,101 @@
 <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.fcbarcelona.com/football/first-team/news/2016-2017/fc-barcelona-v-leicester-city-victory-in-the-battle-of-champions-4-2-"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FC Barcelona v Leicester City: Victory in the battle of champions (4-2) | FC Barcelona"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goals from Munir (2) and Luis Suárez put Barça in early command, and a late strike from Mújica puts paid to Premiership champions’ bid to make a comeback"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcbarcelona.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://fcbarcelona.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.fcbarcelona.com/football/first-team/news/2016-2017/fc-barcelona-v-leicester-city-victory-in-the-battle-of-champions-4-2-"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FC Barcelona v Leicester City: Victory in the battle of champions (4-2) | FC Barcelona"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goals from Munir (2) and Luis Suárez put Barça in early command, and a late strike from Mújica puts paid to Premiership champions’ bid to make a comeback"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcbarcelona.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://fcbarcelona.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">637.4492809499226</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">3814.5714659846194</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">62988</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">9820</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">637.4492809499226</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">3814.5714659846194</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">62988</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">9820</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">9820</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9cb602c0-59b7-11e6-aec9-8557dc1ae32f"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1470255517000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://pro-cdn-public-fcb.everincloud.com/20157/0/document_thumbnail/20197/163/163/14590883/1.0-1/14590883.png?t=1453214443000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">9820</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9cb602c0-59b7-11e6-aec9-8557dc1ae32f"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1470255517000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://pro-cdn-public-fcb.everincloud.com/20157/0/document_thumbnail/20197/163/163/14590883/1.0-1/14590883.png?t=1453214443000"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.goal.com/en/match/barcelona-vs-leicester-city/2223206/report"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona 4 - 2 Leicester City Match report - 8/3/16 International Champions Cup - Goal.com"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Read the full Barcelona v Leicester City match report, including goals, incidents, and much more. Have your say on the game in our comments feature."</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal.com"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://goal.com"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.goal.com/en/match/barcelona-vs-leicester-city/2223206/report"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona 4 - 2 Leicester City Match report - 8/3/16 International Champions Cup - Goal.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Read the full Barcelona v Leicester City match report, including goals, incidents, and much more. Have your say on the game in our comments feature."</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://goal.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">514.8946690316512</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">1740.3519248567559</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">44464</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">8736</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+          </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">514.8946690316512</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">1740.3519248567559</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">44464</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">8736</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+          </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+          </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">8736</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39d81a0-59b5-11e6-8992-ffce69f79e2d"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1470254187000</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">8736</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39d81a0-59b5-11e6-8992-ffce69f79e2d"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1470254187000</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sports"</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sports"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soccer"</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soccer"</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">],</span><span class="w">
-          </span><span class="s2">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+          </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="s2">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -297,14 +370,14 @@
 </tr>
 </tbody></table>
 
-<h2 id="get-/v1/publisher">GET /v1/publisher</h2>
+<h2 id="get-v1-publisher">GET /v1/publisher</h2>
 
 <blockquote>
 <p>Get the top trending content published in the last 24 hours by the New York Times.</p>
 </blockquote>
-<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -336,14 +409,14 @@
 </tr>
 </tbody></table>
 
-<h2 id="get-/v1/local">GET /v1/local</h2>
+<h2 id="get-v1-local">GET /v1/local</h2>
 
 <blockquote>
 <p>Get the top trending content published in Seattle, in the last 12 hours.</p>
 </blockquote>
-<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -375,14 +448,14 @@
 </tr>
 </tbody></table>
 
-<h2 id="get-/v1/search">GET /v1/search</h2>
+<h2 id="get-v1-search">GET /v1/search</h2>
 
 <blockquote>
 <p>Get the top trending content published talking about <code class="prettyprint">Tom Cruise</code>, in the last 24 hours.</p>
 </blockquote>
-<pre><code class="highlight shell">curl <span class="s2">"https://api.newswhip.com/v1/search?q=Tom%20Cruise&amp;key=YOUR_API_KEY"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/search?q=Tom%20Cruise&amp;key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -421,13 +494,13 @@
 <li><code class="prettyprint">POST /v1/stats</code> - provides stats on the content matching the filters provided</li>
 </ul>
 
-<h2 id="post-/v1/articles">POST /v1/articles</h2>
+<h2 id="post-v1-articles">POST /v1/articles</h2>
 
 <blockquote>
 <p>Get the top trending stories published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago</p>
 </blockquote>
-<pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
-    "filters": ["country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"],
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
     "language": "en",
     "video_only":false,
     "sort_by": "nw_max_score",
@@ -435,7 +508,7 @@
     "size": 1
 }'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -444,7 +517,7 @@
     <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
     <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
         "filters": [
-            "country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"
+            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
         ],
         "language": "en",
         "video_only":false,
@@ -455,58 +528,54 @@
 <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.etonline.com/news/193862_celine_dion_slays_impressions_of_cher_sia_and_rihanna_on_tonight_show/"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Celine Dion Slays Impressions of Cher, Sia, and Rihanna on ‘Tonight Show’"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The singer even twerked to Rihanna!"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">"celine dion,jimmy fallon,tonight show,Wheel of Impressions"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"etonline.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://etonline.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.rap-up.com/2016/11/15/partynextdoor-talks-drake-rihanna-jeremih-tour/"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARTYNEXTDOOR Talks Drake, Rihanna, &amp; Touring with Jeremih"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In the midst of his \"Summer's Over Tour\" with Jeremih, PARTYNEXTDOOR stopped by Power 98 in Charlotte, North Carolina for ..."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rap-up.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rap-up.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.8004523617691546</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">1206.030546972232</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">28527</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">839</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05852343318906164</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">729.5439348623742</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2128</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">839</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">839</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rachel McRady"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">839</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ecc1ca00-4fef-11e6-9e85-8b1fd34d6bab"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1469179492000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.etonline.com/media/video/2016/07/24256059/et_celinedion_072116_hulu.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cec8e680-ab68-11e6-a1c9-8b1fd34d6bab"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479237731560</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.rap-up.com/wp-content/uploads/2016/11/partynextdoor-red.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entertainment"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">699</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Celebrity"</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entertainment"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -515,8 +584,8 @@
 <blockquote>
 <p>Get the top trending Facebook posts published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago</p>
 </blockquote>
-<pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
-    "filters": ["country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"],
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
     "language": "en",
     "video_only":false,
     "sort_by": "nw_max_score",
@@ -525,7 +594,7 @@
     "content_type": "fb_posts"
 }'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -534,7 +603,7 @@
     <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
     <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
         "filters": [
-            "country_code:us OR country_code:gb and -publisher:youtube.com and headline:rihanna"
+            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
         ],
         "language": "en",
         "video_only":false,
@@ -546,70 +615,81 @@
 <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/21785951839/posts/10154828396751840"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Céline Dion Flawlessly Does Sia, Rihanna And Michael Jackson's Impressions On \"Wheel Of Musical\" | 9GAG.tv"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"She absolutely killed the Rihanna one﻿! 😱 👍🏻"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9gag.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://9gag.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/10092511675/posts/10154185324896676"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rihanna's cover photo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">293.6889989229701</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">4386.930955036105</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">38186</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">4071</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"reactions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1151</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">34347</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">2688</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"loves"</span><span class="p">:</span><span class="w"> </span><span class="mi">1690</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"wows"</span><span class="p">:</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"hahas"</span><span class="p">:</span><span class="w"> </span><span class="mi">2632</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"sads"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"angrys"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.632236314298637</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">5046.852808216844</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">24808</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reactions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">449</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">20772</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">280</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"loves"</span><span class="p">:</span><span class="w"> </span><span class="mi">3169</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"wows"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"hahas"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"sads"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"angrys"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"fb_post"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"post_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Link"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"page_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9GAG"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"external_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://9gag.com/tv/p/al7Z4Z"</span><span class="w">
+      </span><span class="nt">"fb_post"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"post_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Photo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"page_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rihanna"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">4071</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8e9d7920-51c9-11e6-ac9d-695918d06269"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1469383500000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://external.xx.fbcdn.net/safe_image.php?d=AQD5xuMpNiZCMO0y&amp;url=http%3A%2F%2Fcdn-jarvis-fun.9cache.com%2Fmedia%2Fphoto%2FpRQVbOydQ_1200w_v1.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="s2">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3f0bea00-adda-11e6-9b4e-dd9ee0636270"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479506348000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scontent.xx.fbcdn.net/v/t1.0-9/q81/s720x720/15073550_10154185324731676_7190497282078870243_n.jpg?oh=e399b348b5f0242da43d363343cacd0b&amp;oe=58C338AC"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Viral Sites"</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entertainment"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Culture"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Music"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">699</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Celebrity"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -753,12 +833,12 @@
 
 <aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
-<h2 id="post-/v1/stats">POST /v1/stats</h2>
+<h2 id="post-v1-stats">POST /v1/stats</h2>
 
 <blockquote>
 <p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
 </blockquote>
-<pre><code class="highlight shell">curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
     "filters": [
         "3d printing"
     ],
@@ -767,7 +847,7 @@
     "aggregate_by" : "domain"
 }'</span> <span class="s2">"https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"</span>
 </code></pre>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
 
@@ -785,52 +865,52 @@
 <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight json"><span class="p">[</span><span class="w">
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geek.com"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"fb_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">3839</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">1609.3333333333333</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">4828</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">15611546</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2613894.888888889</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1616.7544306074715</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geek.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fb_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">3839</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">1609.3333333333333</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">4828</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">15611546</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2613894.888888889</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1616.7544306074715</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"twitter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">133.33333333333334</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">60200</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2288.8888888888882</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">47.84233364802441</span><span class="w">
+      </span><span class="nt">"twitter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">133.33333333333334</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">60200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2288.8888888888882</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">47.84233364802441</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"pinterest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.4142135623730951</span><span class="w">
+      </span><span class="nt">"pinterest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.4142135623730951</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"linkedin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.666666666666666</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.943920288775949</span><span class="w">
+      </span><span class="nt">"linkedin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.666666666666666</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.943920288775949</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5237</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5237</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -1068,7 +1148,13 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 
 <h1 id="changelog">Changelog</h1>
 
-<h3 id="version-1.0.6-(2016-04-08)">Version 1.0.6 (2016-04-08)</h3>
+<h3 id="version-1-0-7-2016-22-11">Version 1.0.7 (2016-22-11)</h3>
+
+<ul>
+<li>Updated examples of POST /v1/articles</li>
+</ul>
+
+<h3 id="version-1-0-6-2016-04-08">Version 1.0.6 (2016-04-08)</h3>
 
 <ul>
 <li>Added option to sort by <code class="prettyprint">fb_total_engagement</code> in POST /v1/articles</li>
@@ -1076,33 +1162,33 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <li>Removed <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code> from <code class="prettyprint">sort_by</code> in POST /v1/stats</li>
 </ul>
 
-<h3 id="version-1.0.5-(2016-20-06)">Version 1.0.5 (2016-20-06)</h3>
+<h3 id="version-1-0-5-2016-20-06">Version 1.0.5 (2016-20-06)</h3>
 
 <ul>
 <li>Added <code class="prettyprint">content_type</code> field in POST /v1/articles</li>
 <li>Updated examples of POST /v1/articles</li>
 </ul>
 
-<h3 id="version-1.0.4-(2015-12-03)">Version 1.0.4 (2015-12-03)</h3>
+<h3 id="version-1-0-4-2015-12-03">Version 1.0.4 (2015-12-03)</h3>
 
 <ul>
 <li>Fixed typo in GET /v1/search example</li>
 </ul>
 
-<h3 id="version-1.0.3-(2015-07-09)">Version 1.0.3 (2015-07-09)</h3>
+<h3 id="version-1-0-3-2015-07-09">Version 1.0.3 (2015-07-09)</h3>
 
 <ul>
 <li>Added <code class="prettyprint">region_code</code> and <code class="prettyprint">domain</code> to available fields for filtering</li>
 <li>Added <code class="prettyprint">keywords</code> field to Article entity</li>
 </ul>
 
-<h3 id="version-1.0.2-(2015-03-03)">Version 1.0.2 (2015-03-03)</h3>
+<h3 id="version-1-0-2-2015-03-03">Version 1.0.2 (2015-03-03)</h3>
 
 <ul>
 <li>Added <code class="prettyprint">has_video</code> field to Article entity</li>
 </ul>
 
-<h3 id="version-1.0.1-(2015-02-11)">Version 1.0.1 (2015-02-11)</h3>
+<h3 id="version-1-0-1-2015-02-11">Version 1.0.1 (2015-02-11)</h3>
 
 <ul>
 <li>Added a new <code class="prettyprint">sort_by</code> method: <code class="prettyprint">created_at</code> to sort by most recent</li>
@@ -1110,7 +1196,7 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 <li>In Entities, Article. The field <code class="prettyprint">country_code</code> replaces <code class="prettyprint">country</code>. The contents of <code class="prettyprint">country</code> will be set to &lsquo;World&rsquo;</li>
 </ul>
 
-<h3 id="version-1.0.0-(2014-11-21)">Version 1.0.0 (2014-11-21)</h3>
+<h3 id="version-1-0-0-2014-11-21">Version 1.0.0 (2014-11-21)</h3>
 
 <ul>
 <li>First public version</li>
