@@ -28,7 +28,7 @@ We don't currently support JSONP.
 
 # Changelog
 
-### Version 1.0.6 (2016-22-11)
+### Version 1.0.7 (2016-22-11)
 
 - Updated examples of POST /v1/articles
 
