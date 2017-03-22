@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference | NewsWhip</title>
+    <title>API Documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -88,10 +88,10 @@
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+      <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,24 +101,31 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="php">php</a>
         </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <div id="toc">
       </div>
-        <ul class="toc-footer">
-            <li><a href='#getting-api-access'>Sign Up for a Developer Key</a></li>
-            <li><p>© 2016 NewsWhip Media Ltd.</p></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="overview">Overview</h1>
+        <hr>
+
+<p>title: API Reference | NewsWhip</p>
+
+<p>language_tabs:
+  - shell
+  - php</p>
+
+<p>toc_footers:
+  - <a href='#getting-api-access'>Sign Up for a Developer Key</a>
+  - <p>© 2016 NewsWhip Media Ltd.</p></p>
+
+<p>includes:
+  - errors</p>
+
+<h2 id="search-true">search: true</h2>
+
+<h1 id="overview">Overview</h1>
 
 <p>Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorized and ranked.</p>
 
@@ -140,7 +147,7 @@
 
 <p>Our API is made available to NewsWhip clients and developers who wish to work with streams of trending content in any niche. Right now, it&rsquo;s powering widgets on major news sites, internal dashboards, and mobile apps in Europe and North America.</p>
 
-<p>For details on getting access, email: <a href="mailto:api@newswhip.com">api@newswhip.com</a>.</p>
+<p>For details on getting access, please email: <a href="mailto:api@newswhip.com">api@newswhip.com</a>.</p>
 
 <h1 id="rate-limits">Rate Limits</h1>
 
@@ -487,10 +494,11 @@
 
 <p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
 
-<p>There are 2 different endpoints:</p>
+<p>There are 3 different endpoints:</p>
 
 <ul>
-<li><code class="prettyprint">POST /v1/articles</code> - provides content by matching it against a set of filters</li>
+<li><code class="prettyprint">POST /v1/articles</code> - provides stories(web articles, youtube post) by matching it against a set of filters</li>
+<li><code class="prettyprint">POST /v1/fbPosts</code> - provides facebook posts by matching it against a set of filters</li>
 <li><code class="prettyprint">POST /v1/stats</code> - provides stats on the content matching the filters provided</li>
 </ul>
 
@@ -1094,119 +1102,9 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
-
-<p>The NewsWhip API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request could not be parsed</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; Your API key is not allowed to access this resource. Your API key is expired or invalid.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; Enhance your calm! or contact us for higher limits!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Please try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
-
-<h1 id="more-information">More Information</h1>
-
-<h2 id="server-side-caching">Server-side Caching</h2>
-
-<ul>
-<li><code class="prettyprint">GET</code> queries are cached (per API Key) for a small amount of time. Usually about 3 minutes. Check the HTTP headers sent by our servers for an exact value.</li>
-<li><code class="prettyprint">POST</code> queries are never cached.</li>
-</ul>
-
-<h2 id="cross-origin-resource-sharing">Cross-Origin Resource Sharing</h2>
-
-<ul>
-<li><code class="prettyprint">GET</code> endpoints support 1 <code class="prettyprint">Cross-origin resource sharing</code> per API key. Contact api@newswhip.com to set this up.</li>
-<li><code class="prettyprint">POST</code> endpoints are server-side only.</li>
-</ul>
-
-<h2 id="jsonp">JSONP</h2>
-
-<p>We don&rsquo;t currently support JSONP.</p>
-
-<h1 id="changelog">Changelog</h1>
-
-<h3 id="version-1-0-7-2016-22-11">Version 1.0.7 (2016-22-11)</h3>
-
-<ul>
-<li>Updated examples of POST /v1/articles</li>
-</ul>
-
-<h3 id="version-1-0-6-2016-04-08">Version 1.0.6 (2016-04-08)</h3>
-
-<ul>
-<li>Added option to sort by <code class="prettyprint">fb_total_engagement</code> in POST /v1/articles</li>
-<li>Restricted option to sort by <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_loves</code>, <code class="prettyprint">fb_wows</code>, <code class="prettyprint">fb_hahas</code>, <code class="prettyprint">fb_sads</code>, <code class="prettyprint">fb_angrys</code> only for <code class="prettyprint">content_type</code> <code class="prettyprint">fb_posts</code>  in POST /v1/articles</li>
-<li>Removed <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code> from <code class="prettyprint">sort_by</code> in POST /v1/stats</li>
-</ul>
-
-<h3 id="version-1-0-5-2016-20-06">Version 1.0.5 (2016-20-06)</h3>
-
-<ul>
-<li>Added <code class="prettyprint">content_type</code> field in POST /v1/articles</li>
-<li>Updated examples of POST /v1/articles</li>
-</ul>
-
-<h3 id="version-1-0-4-2015-12-03">Version 1.0.4 (2015-12-03)</h3>
-
-<ul>
-<li>Fixed typo in GET /v1/search example</li>
-</ul>
-
-<h3 id="version-1-0-3-2015-07-09">Version 1.0.3 (2015-07-09)</h3>
-
-<ul>
-<li>Added <code class="prettyprint">region_code</code> and <code class="prettyprint">domain</code> to available fields for filtering</li>
-<li>Added <code class="prettyprint">keywords</code> field to Article entity</li>
-</ul>
-
-<h3 id="version-1-0-2-2015-03-03">Version 1.0.2 (2015-03-03)</h3>
-
-<ul>
-<li>Added <code class="prettyprint">has_video</code> field to Article entity</li>
-</ul>
-
-<h3 id="version-1-0-1-2015-02-11">Version 1.0.1 (2015-02-11)</h3>
-
-<ul>
-<li>Added a new <code class="prettyprint">sort_by</code> method: <code class="prettyprint">created_at</code> to sort by most recent</li>
-<li>The filtering field <code class="prettyprint">country</code> is deprecated, use <code class="prettyprint">country_code</code> instead</li>
-<li>In Entities, Article. The field <code class="prettyprint">country_code</code> replaces <code class="prettyprint">country</code>. The contents of <code class="prettyprint">country</code> will be set to &lsquo;World&rsquo;</li>
-</ul>
-
-<h3 id="version-1-0-0-2014-11-21">Version 1.0.0 (2014-11-21)</h3>
-
-<ul>
-<li>First public version</li>
-</ul>
-
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
