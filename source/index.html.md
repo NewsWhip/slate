@@ -37,7 +37,7 @@ All NewsWhip API endpoints require an API key. Your API key should be passed wit
 
 Our API is made available to NewsWhip clients and developers who wish to work with streams of trending content in any niche. Right now, it's powering widgets on major news sites, internal dashboards, and mobile apps in Europe and North America.
 
-For details on getting access, please email: [api@newswhip.com](mailto:api@newswhip.com).
+For details on getting access, email: [api@newswhip.com](mailto:api@newswhip.com).
 
 # Rate Limits
 
