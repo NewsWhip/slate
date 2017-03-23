@@ -317,10 +317,9 @@ search_term | Matches all stories containing `{search_term}`.
 
 The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints your application gets full access to NewsWhip's database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.
 
-There are 3 different endpoints:
+There are 2 different endpoints:
 
 * `POST /v1/articles` - provides stories(web articles, youtube post) by matching it against a set of filters
-* `POST /v1/fbPosts` - provides facebook posts by matching it against a set of filters
 * `POST /v1/stats` - provides stats on the content matching the filters provided
 
 ## POST /v1/articles
