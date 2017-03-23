@@ -1,4 +1,4 @@
-﻿---
+---
 title: API Reference | NewsWhip
 
 language_tabs:
