@@ -348,7 +348,7 @@ $response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY
     'headers' => ['Content-Type' => 'application/json'],
     'body' => '{
         "filters": [
-            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
+            "country_code:(us OR gb) AND -publisher:youtube.com AND headline:rihanna"
         ],
         "language": "en",
         "video_only":false,
@@ -551,7 +551,7 @@ Parameter | Default | Type | Description
 filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/4_10_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering below.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
-language | Any | Two letter ISO 639-1 language code |
+language | Any | [Two letter ISO 639-1 language code](#supported-languages) |
 sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`.
 video_only | false | Boolean |
 default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use default_fields instead
@@ -571,7 +571,7 @@ authors |
 <del>country</del> | Number. Deprecated: use country_code instead
 country_code | Two letter (lower case) ISO 3166 country code
 region_code | Available regions (lower case): `na`, `eu`, `oc`, `sea`, `sa`, `as`, `me`, `af`
-language | Two letter ISO 639-1 language code
+language | [Two letter ISO 639-1 language code](#supported-languages)
 categories | Number
 publisher | TLD such as newswhip.com
 domain | Exact domain where the article was published. i.e. blog.newswhip.com
@@ -581,116 +581,10 @@ siteStructure| Search for articles that have a particular path on a site eg. /ta
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150” </aside>
 
+
 ## POST /v1/fbPosts
 
-> Filter on articles posted to facebook
-
-``` shell
-curl -H "Content-Type: application/json" -X POST -d '{
-    "filters": [
-        "3d printing"
-    ],
-    "language" : "en",
-    "sort_by" : "fb_total.sum",
-    "aggregate_by" : "domain"
-}' "https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"
-```
-
-```php
-<?php
-require 'vendor/autoload.php';
-use GuzzleHttp\Client;
-
-$client = new Client();
-$response = $client->post('https://api.newswhip.com/v1/stats?key=YOUR_API_KEY', [
-    'headers' => ['Content-Type' => 'application/json'],
-    'body' => '{
-        "filters": [
-            "3d printing"
-        ],
-        "language" : "en",
-        "sort_by" : "fb_total.sum",
-        "aggregate_by" : "domain"
-    }']);
-echo $response->getBody();
-?>
-```
-
-```json
-[
-  {
-    "key": "geek.com",
-    "stats": {
-      "fb_total": {
-        "count": 3,
-        "min": 56,
-        "max": 3839,
-        "avg": 1609.3333333333333,
-        "sum": 4828,
-        "sum_of_squares": 15611546,
-        "variance": 2613894.888888889,
-        "std_deviation": 1616.7544306074715
-      },
-      "twitter": {
-        "count": 3,
-        "min": 90,
-        "max": 200,
-        "avg": 133.33333333333334,
-        "sum": 400,
-        "sum_of_squares": 60200,
-        "variance": 2288.8888888888882,
-        "std_deviation": 47.84233364802441
-      },
-      "pinterest": {
-        "count": 3,
-        "min": 0,
-        "max": 3,
-        "avg": 1,
-        "sum": 3,
-        "sum_of_squares": 9,
-        "variance": 2,
-        "std_deviation": 1.4142135623730951
-      },
-      "linkedin": {
-        "count": 3,
-        "min": 0,
-        "max": 7,
-        "avg": 3,
-        "sum": 9,
-        "sum_of_squares": 53,
-        "variance": 8.666666666666666,
-        "std_deviation": 2.943920288775949
-      }
-    },
-    "total": 5237
-  }
-]
-```
-
-`POST /v1/fbPosts`
-
-This endpoint retrieves stats for articles matching your filters.
-
-### Parameters
-
-Stories are filtered and sorted using the following JSON encoded parameters.
-Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
-
-Parameter | Default | Type | Description
---------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering above.
-from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
-to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
-language | Any | Two letter ISO 639-1 language code |
-sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
-aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
-video_only | false |
-default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
-size |   | Integer | Max number of aggregations to be returned.
-
-## POST /v1/stats
-
-> Get the top English language publishers that create the best performing content on Facebook about `"3d printing"` since a week ago
+> Filter on facebook posts published in U.S for the past week
 
 ``` shell
 curl --request POST \
@@ -780,30 +674,167 @@ This endpoint retrieves articles from Facebook matching your filters.
 
 ### Parameters
 
+Stories are filtered and sorted using the following JSON encoded parameters.
+Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering above.
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
+to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
+language | Any | [Two letter ISO 639-1 language code](#supported-languages) |
+sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
+aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
+video_only | false |
+default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
+size |   | Integer | Max number of aggregations to be returned.
+
+## POST /v1/stats
+
+> Get the top English language publishers that create the best performing content on Facebook about `"3d printing"` since a week ago
+
+``` shell
+curl -H "Content-Type: application/json" -X POST -d '{
+    "filters": [
+        "3d printing"
+    ],
+    "language" : "en",
+    "sort_by" : "fb_total.sum",
+    "aggregate_by" : "domain"
+}' "https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"
+```
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+
+$client = new Client();
+$response = $client->post('https://api.newswhip.com/v1/stats?key=YOUR_API_KEY', [
+    'headers' => ['Content-Type' => 'application/json'],
+    'body' => '{
+        "filters": [
+            "3d printing"
+        ],
+        "language" : "en",
+        "sort_by" : "fb_total.sum",
+        "aggregate_by" : "domain"
+    }']);
+echo $response->getBody();
+?>
+```
+
+```json
+[
+  {
+    "key": "geek.com",
+    "stats": {
+      "fb_total": {
+        "count": 3,
+        "min": 56,
+        "max": 3839,
+        "avg": 1609.3333333333333,
+        "sum": 4828,
+        "sum_of_squares": 15611546,
+        "variance": 2613894.888888889,
+        "std_deviation": 1616.7544306074715
+      },
+      "twitter": {
+        "count": 3,
+        "min": 90,
+        "max": 200,
+        "avg": 133.33333333333334,
+        "sum": 400,
+        "sum_of_squares": 60200,
+        "variance": 2288.8888888888882,
+        "std_deviation": 47.84233364802441
+      },
+      "pinterest": {
+        "count": 3,
+        "min": 0,
+        "max": 3,
+        "avg": 1,
+        "sum": 3,
+        "sum_of_squares": 9,
+        "variance": 2,
+        "std_deviation": 1.4142135623730951
+      },
+      "linkedin": {
+        "count": 3,
+        "min": 0,
+        "max": 7,
+        "avg": 3,
+        "sum": 9,
+        "sum_of_squares": 53,
+        "variance": 8.666666666666666,
+        "std_deviation": 2.943920288775949
+      }
+    },
+    "total": 5237
+  }
+]
+```
+
+`POST /v1/stats`
+
+This endpoint retrieves stats for articles matching your filters.
+
+### Parameters
+
 * Available fields for filtering: language, country_code, region_code, authors, page_id(facebook page id), page_name(facebook page username, the one come after ‘@’), external_link(the href inside facebook post), fb_story(string), fb_sponsor_tags.id, fb_sponsor_tags.name
 * Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
 * Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query
 * country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
 * Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150”
 
->>>>>>> 5a921721a14c29d1d533c4e106201a74365b74f5
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</href>.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
 to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
-language | Any | Two letter ISO 639-1 language code |
+language | Any | [Two letter ISO 639-1 language code](#supported-languages) |
 default_fields | page_id, page_name, external_link | Array[String] | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 content_type| | String | video, live_video, link, photo, status, branded_content, event
 sort_by* |  | String | default, fb_total_engagement, fb_likes, fb_shares, fb_comments, fb_loves, fb_wows, fb_hahas, fb_sads, fb_angrys
 
 
+## Supported languages
 
-
-
-
+Language | Code
+-------- | ----
+English | en
+Spanish | es 
+French | fr
+German | de
+Dutch | nl
+Italian | it
+Portuguese | pt
+Swedish | sv
+Finnish | fi 
+Norwegian | nb
+Japanese | ja
+Turkish | tr
+Arabic | ar
+Armenian | hy
+Basque | eu
+Bulgarian | bg
+Catalan | ca
+Chinese | zh
+Korean | ko
+Czech | cs
+Galician | gl
+Greek | el
+Hindi | hi
+Hungarian | hu
+Indonesian | id
+Irish | ga
+Persian | fa
+Romanian | ro
+Russian | ru
+Sorani | ku
+Thai | th
 
 # Entities
 
