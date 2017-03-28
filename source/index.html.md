@@ -541,8 +541,7 @@ This endpoint retrieves all articles matching the filters provided.
 * Stories are filtered and sorted using the following `JSON` encoded parameters.
 * Required fields are denoted *.
 * Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
-* Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query
-* country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
+*Maximum of 10 lucene queries at one time with a maximum of 150 Terms per lucene query, terms calculation follows lucene query string semantics, e.g: 'country_code:us' counts as 1 term, 'country_code:(us AND uk)' counts as 2 terms, headline: “The Right Way” counts as 3 terms"
 
 
 
@@ -554,8 +553,8 @@ to | Now | Unix timestamp in milliseconds | Filters articles published before `{
 language | Any | Two letter ISO 639-1 language code |
 sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`.
 video_only | false | Boolean |
-default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use default_fields instead
-default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [“headline”, “summary”, “authors”]
+default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use `default_fields` instead
+default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [`“headline”`, `“summary”`, `“authors”`]
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 find_related | true | Boolean | Related stories will be collapsed when set.
 content_type | stories | String | Filters by `stories` or `you tube`.
@@ -684,14 +683,14 @@ This endpoint retrieves articles from Facebook matching your filters.
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
-from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
-to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
+to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
-default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use default_fields instead
-default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [“headline”, “summary”, “authors”]
+default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use `default_fields` instead
+default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [ `"page_id"`, `"page_name"`, `"external_link"`]
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
-content_type| | String | video, live_video, link, photo, status, branded_content, event
-sort_by* |  | String | default, fb_total_engagement, fb_likes, fb_shares, fb_comments, fb_loves, fb_wows, fb_hahas, fb_sads, fb_angrys
+content_type| | String | `video`, `live_video`, `link`, `photo`, `status`, `branded_content`, `event`
+sort_by* |  | String | `default`, `fb_total_engagement`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`
 
 ### Available fields for filtering Facebook Posts
 
@@ -809,8 +808,8 @@ Required fields are denoted *. Filtering by category or country requires ids whi
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
-from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
-to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
+to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
 sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
 aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
