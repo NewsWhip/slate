@@ -319,7 +319,8 @@ The POST API endpoints are designed for increased flexibility and are much more 
 
 There are 2 different endpoints:
 
-* `POST /v1/articles` - provides stories(web articles, youtube post) by matching it against a set of filters
+* `POST /v1/articles` - provides stories(web articles, youtube post) matching the filters provided
+* `POST /v1/fbPosts` - provides facebook posts matching the filters provided
 * `POST /v1/stats` - provides stats on the content matching the filters provided
 
 ## POST /v1/articles
@@ -328,7 +329,7 @@ There are 2 different endpoints:
 
 ``` shell
 curl -H "Content-Type: application/json" -X POST -d '{
-    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
+    "filters": ["country_code:(us OR gb) AND -publisher:youtube.com AND headline:rihanna"],
     "language": "en",
     "video_only":false,
     "sort_by": "nw_max_score",
@@ -538,16 +539,19 @@ This endpoint retrieves all articles matching the filters provided.
 ### Parameters
 
 * Stories are filtered and sorted using the following `JSON` encoded parameters.
+
 * Required fields are denoted *.
-* Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
-* Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query
-* country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
+
+* Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/coverage/)
+
+* Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query, e.g: country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
+
 * Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150”
 
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/4_10_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering below.
+filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering below.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
@@ -557,7 +561,7 @@ default_field | Relevant field | String | Field to be used when filtering by key
 default_fields | Relevant fields | Array[String] |You can now provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [“headline”, “summary”, “authors”]
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 find_related | true | Boolean | Related stories will be collapsed when set.
-content_type | stories | String | Filters by one of the following types: `stories`, `fb_posts`, `youtube`.
+content_type | stories | String | Filters by one of the following types: `stories`, `youtube`.
 
 ### Available fields for filtering
 
