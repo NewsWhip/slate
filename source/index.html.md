@@ -558,12 +558,8 @@ default_field | Relevant field | String |  Note: This will be deprecated on the 
 default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [“headline”, “summary”, “authors”]
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 find_related | true | Boolean | Related stories will be collapsed when set.
-<<<<<<< HEAD
 content_type | stories | String | Filters by `stories` or `you tube`.
-=======
-content_type | stories | String | Filters by one of the following types: `stories`, `fb_posts`, `youtube`.
-siteStructure| | String | Search for articles on a particular path on site eg /tag/politics (Note that a / needs to be delimited with a double backslash eg. "\\\\\/tag\\\\\/politics")
->>>>>>> 5a921721a14c29d1d533c4e106201a74365b74f5
+
 
 ### Available fields for filtering Articles/Stats request
 
@@ -784,12 +780,8 @@ This endpoint retrieves articles from Facebook matching your filters.
 
 ### Parameters
 
-<<<<<<< HEAD
-Stories are filtered and sorted using the following JSON encoded parameters.
-Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
-=======
 * Available fields for filtering: language, country_code, region_code, authors, page_id(facebook page id), page_name(facebook page username, the one come after ‘@’), external_link(the href inside facebook post), fb_story(string), fb_sponsor_tags.id, fb_sponsor_tags.name
-* Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
+* Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
 * Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query
 * country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
 * Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150”
