@@ -320,7 +320,6 @@ The POST API endpoints are designed for increased flexibility and are much more 
 There are 2 different endpoints:
 
 * `POST /v1/articles` - provides stories(web articles, youtube post) by matching it against a set of filters
-* `POST /v1/fbPosts` - provides on articles posted to facebook
 * `POST /v1/stats` - provides stats on the content matching the filters provided
 
 ## POST /v1/articles
@@ -414,6 +413,123 @@ echo $response->getBody();
 }
 ```
 
+> Get the top trending Facebook posts published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago
+
+``` shell
+curl -H "Content-Type: application/json" -X POST -d '{
+    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
+    "language": "en",
+    "video_only":false,
+    "sort_by": "nw_max_score",
+    "find_related": false,
+    "size": 1,
+    "content_type": "fb_posts"
+}' "https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"
+```
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+
+$client = new Client();
+$response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY', [
+    'headers' => ['Content-Type' => 'application/json'],
+    'body' => '{
+        "filters": [
+            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
+        ],
+        "language": "en",
+        "video_only":false,
+        "sort_by": "nw_max_score",
+        "find_related": false,
+        "size": 1,
+        "content_type": "fb_posts"
+    }']);
+echo $response->getBody();
+?>
+```
+
+```json
+{
+  "articles": [
+    {
+      "link": "https://www.facebook.com/10092511675/posts/10154185324896676",
+      "headline": "Rihanna's cover photo",
+      "excerpt": "",
+      "keywords": "",
+      "source": {
+        "publisher": "",
+        "link": "http://",
+        "country": "United States",
+        "country_code": "us"
+      },
+      "nw_score": 1.632236314298637,
+      "max_nw_score": 5046.852808216844,
+      "fb_data": {
+        "total_engagement_count": 24808,
+        "total_count_delta": 42,
+        "delta_period": 453,
+        "delta_period_unit": "m",
+        "reactions": {
+          "comments": 449,
+          "likes": 20772,
+          "shares": 280,
+          "loves": 3169,
+          "wows": 100,
+          "hahas": 26,
+          "sads": 5,
+          "angrys": 7
+        }
+      },
+      "fb_post": {
+        "post_type": "Photo",
+        "page_name": "Rihanna",
+        "category": ""
+      },
+      "tw_data": {
+        "tw_count": 0,
+        "total_count_delta": 0,
+        "delta_period": 453,
+        "delta_period_unit": "m"
+      },
+      "li_data": {
+        "li_count": 0,
+        "total_count_delta": 0,
+        "delta_period": 453,
+        "delta_period_unit": "m"
+      },
+      "tw_creator": "",
+      "delta_time": 453,
+      "recent_fb_counts": 42,
+      "recent_tw_counts": 0,
+      "uuid": "3f0bea00-adda-11e6-9b4e-dd9ee0636270",
+      "publication_timestamp": 1479506348000,
+      "image_link": "https://scontent.xx.fbcdn.net/v/t1.0-9/q81/s720x720/15073550_10154185324731676_7190497282078870243_n.jpg?oh=e399b348b5f0242da43d363343cacd0b&oe=58C338AC",
+      "relatedStories": [],
+      "topics": [
+        {
+          "id": 3,
+          "name": "Entertainment"
+        },
+        {
+          "id": 4,
+          "name": "Culture"
+        },
+        {
+          "id": 9,
+          "name": "Music"
+        },
+        {
+          "id": 699,
+          "name": "Celebrity"
+        }
+      ],
+      "has_video": false
+    }
+  ]
+}
+```
 
 `POST /v1/articles`
 
@@ -423,27 +539,27 @@ This endpoint retrieves all articles matching the filters provided.
 
 * Stories are filtered and sorted using the following `JSON` encoded parameters.
 * Required fields are denoted *.
-* Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
-*Maximum of 10 lucene queries at one time with a maximum of 150 Terms per lucene query, terms calculation follows lucene query string semantics, e.g: 'country_code:us' counts as 1 term, 'country_code:(us AND uk)' counts as 2 terms, headline: “The Right Way” counts as 3 terms"
-
+* Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
+* Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query
+* country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
+* Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150”
 
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
+filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/4_10_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering below.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
 sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`.
 video_only | false | Boolean |
-default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use `default_fields` instead
-default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [`“headline”`, `“summary”`, `“authors”`]
+default_field | Relevant field | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
+default_fields | Relevant fields | Array[String] |You can now provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [“headline”, “summary”, “authors”]
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 find_related | true | Boolean | Related stories will be collapsed when set.
-content_type | stories | String | Filters by `stories` or `you tube`.
+content_type | stories | String | Filters by one of the following types: `stories`, `fb_posts`, `youtube`.
 
-
-### Available fields for filtering Articles/Stats request
+### Available fields for filtering
 
 Field | Type
 ----- | ----
@@ -457,142 +573,9 @@ language | Two letter ISO 639-1 language code
 categories | Number
 publisher | TLD such as newswhip.com
 domain | Exact domain where the article was published. i.e. blog.newswhip.com
-href | 
-siteStructure| Search for articles that have a particular path on a site eg. /tag/politics. (Note forward slashes need to be delimited inside lucene queries eg. "\\\\\/tags/\\\\\politics")  
+href |   
 
-<aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150” </aside>
-
-
-
-
-## POST /v1/fbPost
-
-> Get all facebook articles from the us that of content-type status and sort by the number of likes
-
-``` shell
-curl --request POST \
-  --url 'https://api.newswhip.com/api/v1/fbPosts?key=YOUR_API_KEY' \
-  --header 'content-type: application/json' \
-  --data '{"filters": ["country_code:us"],  "sort_by":"fb_likes", "content_type":"Status"}'
-```
-
-```php
-<?php
-require 'vendor/autoload.php';
-use GuzzleHttp\Client;
-
-$client = new Client();
-$response = $client->post('https://api.newswhip.com/v1/fbPosts?key=YOUR_API_KEY', [
-    'headers' => ['Content-Type' => 'application/json'],
-    'body' => '{"filters": ["country_code:us"],
-                "sort_by":"fb_likes",
-                "content_type":"Status"
-               }');
-echo $response->getBody();
-?>
-```
-
-```json
-{
-  "articles": [
-    {
-      "uuid": "88f1d630-0e37-11e7-a11b-f19bb9338e3c",
-      "publication_timestamp": 1490101524000,
-      "link": "https://www.facebook.com/101306095226/posts/10158668596705227",
-      "headline": "",
-      "excerpt": "You don’t have to preach to people. You don’t have to try to straighten them out. Just be happy, be friendly, be a person of excellence. That’s how you let your light shine, with your actions, not just with your words.",
-      "keywords": "",
-      "source": {
-        "publisher": "",
-        "link": "http://",
-        "country": "United States",
-        "country_code": "us"
-      },
-      "image_link": "",
-      "has_video": false,
-      "delta_time": 755,
-      "nw_score": 1.7270200991461944,
-      "max_nw_score": 18721.35463966274,
-      "topics": [
-        {
-          "id": 756,
-          "name": "Religion"
-        },
-        {
-          "id": 4,
-          "name": "Culture"
-        }
-      ],
-      "page_id": "101306095226",
-      "page_name": "JoelOsteen",
-      "post_type": "Status",
-      "is_live_video": false,
-      "fb_story": "",
-      "fb_sponsor_tags": [],
-      "fb_data": {
-        "total_engagement_count": 231152,
-        "total_count_delta": 75,
-        "delta_period": 755,
-        "delta_period_unit": "m",
-        "reactions": {
-          "comments": 4302,
-          "likes": 156310,
-          "shares": 52868,
-          "loves": 17327,
-          "wows": 272,
-          "hahas": 47,
-          "sads": 25,
-          "angrys": 1
-        }
-      },
-      "recent_fb_counts": 75
-    }
-    ]
-    }
-```
-
-`POST /v1/fbPosts`
-
-This endpoint retrieves articles from Facebook matching your filters.
-
-### Parameters
-
-* Available fields for filtering: language, country_code, region_code, authors, page_id(facebook page id), page_name(facebook page username, the one come after ‘@’), external_link(the href inside facebook post), fb_story(string), fb_sponsor_tags.id, fb_sponsor_tags.name
-* Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
-* Maximum of 10 lucene queries at one time with a maximum of 150 terms per lucene query
-* country_code:us counts as 1 term, country_code:(us AND uk) counts as 2 terms, headline: "The Right Way" counts as 3 terms
-
-
-Parameter | Default | Type | Description
---------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
-from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
-to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
-language | Any | Two letter ISO 639-1 language code |
-default_field | Relevant field | String |  Note: This will be deprecated on the 01-06-2017, use `default_fields` instead
-default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [ `"page_id"`, `"page_name"`, `"external_link"`]
-size |   | Integer | Max number of articles to be returned (includes relatedStories.)
-content_type| | String | `video`, `live_video`, `link`, `photo`, `status`, `branded_content`, `event`
-sort_by |  | String | `default`, `fb_total_engagement`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`
-
-### Available fields for filtering Facebook Posts
-
-Field | Type
------ | ----
-language | String
-country_code | Two letter (lower case) ISO 3166 country code
-region_code | Available regions (lower case): `na`, `eu`, `oc`, `sea`, `sa`, `as`, `me`, `af`
-authors | String
-page_id(facebook page id) | String
-page_name(facebook page username- the one come after ‘@’) | String
-external_link(the href inside facebook post) | String
-fb_story | String
-fb_sponsor_tags.id | String
-fb_sponsor_tags.name | String
-
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150” </aside>
-
+<aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 ## POST /v1/stats
 
@@ -687,24 +670,127 @@ This endpoint retrieves stats for articles matching your filters.
 ### Parameters
 
 Stories are filtered and sorted using the following JSON encoded parameters.
-Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](https://www.newswhip.com/coverage/)
+Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
-from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
-to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
+filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering above.
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
+to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
 language | Any | Two letter ISO 639-1 language code |
 sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
-aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
+aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country`, `categories`
 video_only | false |
 default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
 size |   | Integer | Max number of aggregations to be returned.
 
 
+## POST /v1/fbPosts
 
+> Filter on articles posted to facebook
 
+``` shell
+curl -H "Content-Type: application/json" -X POST -d '{
+    "filters": [
+        "3d printing"
+    ],
+    "language" : "en",
+    "sort_by" : "fb_total.sum",
+    "aggregate_by" : "domain"
+}' "https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"
+```
 
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+
+$client = new Client();
+$response = $client->post('https://api.newswhip.com/v1/stats?key=YOUR_API_KEY', [
+    'headers' => ['Content-Type' => 'application/json'],
+    'body' => '{
+        "filters": [
+            "3d printing"
+        ],
+        "language" : "en",
+        "sort_by" : "fb_total.sum",
+        "aggregate_by" : "domain"
+    }']);
+echo $response->getBody();
+?>
+```
+
+```json
+[
+  {
+    "key": "geek.com",
+    "stats": {
+      "fb_total": {
+        "count": 3,
+        "min": 56,
+        "max": 3839,
+        "avg": 1609.3333333333333,
+        "sum": 4828,
+        "sum_of_squares": 15611546,
+        "variance": 2613894.888888889,
+        "std_deviation": 1616.7544306074715
+      },
+      "twitter": {
+        "count": 3,
+        "min": 90,
+        "max": 200,
+        "avg": 133.33333333333334,
+        "sum": 400,
+        "sum_of_squares": 60200,
+        "variance": 2288.8888888888882,
+        "std_deviation": 47.84233364802441
+      },
+      "pinterest": {
+        "count": 3,
+        "min": 0,
+        "max": 3,
+        "avg": 1,
+        "sum": 3,
+        "sum_of_squares": 9,
+        "variance": 2,
+        "std_deviation": 1.4142135623730951
+      },
+      "linkedin": {
+        "count": 3,
+        "min": 0,
+        "max": 7,
+        "avg": 3,
+        "sum": 9,
+        "sum_of_squares": 53,
+        "variance": 8.666666666666666,
+        "std_deviation": 2.943920288775949
+      }
+    },
+    "total": 5237
+  }
+]
+```
+
+`POST /v1/stats`
+
+This endpoint retrieves stats for articles matching your filters.
+
+### Parameters
+
+Stories are filtered and sorted using the following JSON encoded parameters.
+Required fields are denoted *. Filtering by category or country requires ids which can be found here: [NewsWhip API](http://www.newswhip.com/api#regions-covered)
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering above.
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after {from}.
+to | Now | Unix timestamp in milliseconds | Filters articles published before {to}.
+language | Any | Two letter ISO 639-1 language code |
+sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`.
+aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country`, `categories`
+video_only | false |
+default_field | Relevant fields | String | Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String.
+size |   | Integer | Max number of aggregations to be returned.
 
 # Entities
 
