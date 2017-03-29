@@ -504,20 +504,19 @@ This endpoint retrieves all articles matching the filters provided.
 * Stories are filtered and sorted using the following `JSON` encoded parameters
 * Required fields are denoted *
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
-* Maximum of 10 lucene queries at one time with a maximum of 150 Terms per lucene query, terms calculation follows lucene query string semantics, e.g: 'country_code:us' counts as 1 term, 'country_code:(us AND uk)' counts as 2 terms, headline: “The Right Way” counts as 3 terms"
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering down below
+filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
 sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`. When searching by the content_type `youtube` it’s supported to sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`
-video_only | false | Boolean | This field is ignored when content_type is set to `youtube`
+video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
-default_fields | [`headline`, `summary`, `authors`] | Array[String] |Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
+default_fields | `[headline, summary, authors]` | Array[String] |Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of articles to be returned (includes relatedStories)
-find_related | true | Boolean | Related stories will be collapsed when set. Ignored when content_type is set to `youtube`
+find_related | true | Boolean | Related stories will be collapsed when set. Ignored when searching by the content_type `youtube`
 content_type | stories | String | Filters by `stories` or `youtube`
 
 
@@ -645,12 +644,11 @@ This endpoint retrieves articles from Facebook matching your filters.
 * Facebook posts are filtered and sorted using the following `JSON` encoded parameters
 * Required fields are denoted *
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
-* Maximum of 10 lucene queries at one time with a maximum of 150 Terms per lucene query, terms calculation follows lucene query string semantics, e.g: 'country_code:us' counts as 1 term, 'country_code:(us AND uk)' counts as 2 terms, headline: “The Right Way” counts as 3 terms"
 
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields down below
+filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
@@ -772,11 +770,10 @@ This endpoint retrieves stats for articles matching your filters.
 * Article stats are filtered and sorted using the following `JSON` encoded parameters
 * Required fields are denoted *
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
-* Maximum of 10 lucene queries at one time with a maximum of 150 Terms per lucene query, terms calculation follows lucene query string semantics, e.g: 'country_code:us' counts as 1 term, 'country_code:(us AND uk)' counts as 2 terms, headline: “The Right Way” counts as 3 terms"
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of Lucene QueryString filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
+filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
