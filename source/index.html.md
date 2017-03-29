@@ -514,7 +514,7 @@ language | Any | Two letter ISO 639-1 language code | See availalbe languages <a
 sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`. When searching by the content_type `youtube` it’s supported to sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`
 video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
-default_fields | `[headline, summary, authors]` | Array[String] | Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
+default_fields | <code style="white-space:nowrap">[headline, summary, authors]</code> | Array[String] | Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of articles to be returned (includes relatedStories)
 find_related | true | Boolean | Related stories will be collapsed when set. Ignored when searching by the content_type `youtube`
 content_type | stories | String | Filters by `stories` or `youtube`
