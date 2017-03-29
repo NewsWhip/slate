@@ -535,9 +535,9 @@ categories | Number
 publisher | TLD such as newswhip.com
 domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href | 
-siteStructure| Handy for articles that followes a particular path on a site, e.g: to look for all articles with url follows `http://www.complex.com/tag/politics`, use filter as `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding researved characters)
+siteStructure| Handy for articles that followes a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding researved characters)
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with `\\` before the character, i.e: f-150 should be wrapped up as `f\\-150`, or wrapped inside double quotes as `"f-150"` </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as `"f-150"` </aside>
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 
