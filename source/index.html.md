@@ -514,7 +514,7 @@ language | Any | Two letter ISO 639-1 language code | See availalbe languages <a
 sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `created_at`. When searching by the content_type `youtube` it’s supported to sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`
 video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
-default_fields | `[headline, summary, authors]` | Array[String] |Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
+default_fields | `[headline, summary, authors]` | Array[String] | Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of articles to be returned (includes relatedStories)
 find_related | true | Boolean | Related stories will be collapsed when set. Ignored when searching by the content_type `youtube`
 content_type | stories | String | Filters by `stories` or `youtube`
@@ -535,7 +535,7 @@ categories | Number
 publisher | TLD such as newswhip.com
 domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href | 
-siteStructure| Search for articles that followes a particular path on a site, e.g: To look for all articles with url follows `http://www.complex.com/tag/politics`, `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient, please also check the note down below regarding researved characters
+siteStructure| Handy for articles that followes a particular path on a site, e.g: to look for all articles with url follows `http://www.complex.com/tag/politics`, use filter as `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding researved characters)
 
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with `\\` before the character, i.e: f-150 should be wrapped up as `f\\-150`, or wrapped inside double quotes as `"f-150"` </aside>
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
