@@ -414,123 +414,6 @@ echo $response->getBody();
 }
 ```
 
-> Get the top trending Facebook posts published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago
-
-``` shell
-curl -H "Content-Type: application/json" -X POST -d '{
-    "filters": ["(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"],
-    "language": "en",
-    "video_only":false,
-    "sort_by": "nw_max_score",
-    "find_related": false,
-    "size": 1,
-    "content_type": "fb_posts"
-}' "https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"
-```
-
-```php
-<?php
-require 'vendor/autoload.php';
-use GuzzleHttp\Client;
-
-$client = new Client();
-$response = $client->post('https://api.newswhip.com/v1/articles?key=YOUR_API_KEY', [
-    'headers' => ['Content-Type' => 'application/json'],
-    'body' => '{
-        "filters": [
-            "(country_code:us OR country_code:gb) AND -publisher:youtube.com AND headline:rihanna"
-        ],
-        "language": "en",
-        "video_only":false,
-        "sort_by": "nw_max_score",
-        "find_related": false,
-        "size": 1,
-        "content_type": "fb_posts"
-    }']);
-echo $response->getBody();
-?>
-```
-
-```json
-{
-  "articles": [
-    {
-      "link": "https://www.facebook.com/10092511675/posts/10154185324896676",
-      "headline": "Rihanna's cover photo",
-      "excerpt": "",
-      "keywords": "",
-      "source": {
-        "publisher": "",
-        "link": "http://",
-        "country": "United States",
-        "country_code": "us"
-      },
-      "nw_score": 1.632236314298637,
-      "max_nw_score": 5046.852808216844,
-      "fb_data": {
-        "total_engagement_count": 24808,
-        "total_count_delta": 42,
-        "delta_period": 453,
-        "delta_period_unit": "m",
-        "reactions": {
-          "comments": 449,
-          "likes": 20772,
-          "shares": 280,
-          "loves": 3169,
-          "wows": 100,
-          "hahas": 26,
-          "sads": 5,
-          "angrys": 7
-        }
-      },
-      "fb_post": {
-        "post_type": "Photo",
-        "page_name": "Rihanna",
-        "category": ""
-      },
-      "tw_data": {
-        "tw_count": 0,
-        "total_count_delta": 0,
-        "delta_period": 453,
-        "delta_period_unit": "m"
-      },
-      "li_data": {
-        "li_count": 0,
-        "total_count_delta": 0,
-        "delta_period": 453,
-        "delta_period_unit": "m"
-      },
-      "tw_creator": "",
-      "delta_time": 453,
-      "recent_fb_counts": 42,
-      "recent_tw_counts": 0,
-      "uuid": "3f0bea00-adda-11e6-9b4e-dd9ee0636270",
-      "publication_timestamp": 1479506348000,
-      "image_link": "https://scontent.xx.fbcdn.net/v/t1.0-9/q81/s720x720/15073550_10154185324731676_7190497282078870243_n.jpg?oh=e399b348b5f0242da43d363343cacd0b&oe=58C338AC",
-      "relatedStories": [],
-      "topics": [
-        {
-          "id": 3,
-          "name": "Entertainment"
-        },
-        {
-          "id": 4,
-          "name": "Culture"
-        },
-        {
-          "id": 9,
-          "name": "Music"
-        },
-        {
-          "id": 699,
-          "name": "Celebrity"
-        }
-      ],
-      "has_video": false
-    }
-  ]
-}
-```
 
 `POST /v1/articles`
 
@@ -547,7 +430,7 @@ This endpoint retrieves all articles matching the filters provided.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/4_10_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
+filters* |  | Array[String] | List of [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`.
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`.
 language | Any | Two letter ISO 639-1 language code |
@@ -579,6 +462,7 @@ siteStructure| Search for articles that have a particular path on a site eg. /ta
 
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\\ before the character, i.e: f-150 should be wrapped up as f\\\\\\\\-150, or wrapped inside double quotes as “f-150” </aside>
+
 
 
 
@@ -690,7 +574,7 @@ default_field | Relevant field | String |  Note: This will be deprecated on the 
 default_fields | Relevant fields | Array[String] |You can provide up to 3 supported fields to run against the terms that doesn’t contain a specified field. By default,  it covers [ `"page_id"`, `"page_name"`, `"external_link"`]
 size |   | Integer | Max number of articles to be returned (includes relatedStories.)
 content_type| | String | `video`, `live_video`, `link`, `photo`, `status`, `branded_content`, `event`
-sort_by* |  | String | `default`, `fb_total_engagement`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`
+sort_by |  | String | `default`, `fb_total_engagement`, `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`
 
 ### Available fields for filtering Facebook Posts
 
