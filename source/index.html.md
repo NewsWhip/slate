@@ -849,6 +849,46 @@ topics | List of `Topic`
 keywords | comma separated string of keywords attributed to this story
 has_video | set to `true` when the story has an embedded video
 
+## FacebookPost
+
+Field | Description
+--------- | ---------
+page_id | Id of Facebook Page
+page_name | Name of Facebook Page 
+post_type | Type of Post eg. Status
+is_live_video | Is content live video
+fb_story | ???
+fb_sponsor_tags | ???
+fb_data.total_engagement_count | Total Engagement on Facebook
+fb_data.total_count_delta | Change in total over delta period     
+fb_data.delta_period | period over which delta is measured
+fb_data.delta_period_unit | Unit of delta period 
+reactions.comments | Number of comments
+reactions.likes | Number of Likes 
+reactions.shares | Number of shares 
+reactions.loves | Number of Loves
+reactions.wows | Number of Wows
+reactions.hahas | Number of Hahas
+reactions.sads | Number of Sads
+reactions.angrys | Number of Angrys
+uuid | Newswhip's unique story identifier
+publication_timestamp | Timestamp representing when the article was published
+link | Link to post
+headline | Headline of post
+excerpt | Excerpt from post
+keywords | Keywords in Article     
+source.publisher| Publisher of the original article
+source.link | Link to article
+source.country | Country of source
+source.country_code | Country code of country 
+image_link |  Where available, link to the source's featured image
+has_video | set to `true` when the story has an embedded video
+delta_time | ????
+nw_score |  NewsWhip's current social speed for the story
+max_nw_score | Max Newswhip score all time
+topics.id | id of topic 
+topics.name | Name of topic
+
 ## Topic
 
 Field | Description
