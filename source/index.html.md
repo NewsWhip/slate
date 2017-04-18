@@ -859,18 +859,8 @@ post_type | Type of Post eg. Status
 is_live_video | Is content live video
 fb_story | ???
 fb_sponsor_tags | ???
-fb_data.total_engagement_count | Total Engagement on Facebook
-fb_data.total_count_delta | Change in total over delta period     
-fb_data.delta_period | period over which delta is measured
-fb_data.delta_period_unit | Unit of delta period 
-reactions.comments | Number of comments
-reactions.likes | Number of Likes 
-reactions.shares | Number of shares 
-reactions.loves | Number of Loves
-reactions.wows | Number of Wows
-reactions.hahas | Number of Hahas
-reactions.sads | Number of Sads
-reactions.angrys | Number of Angrys
+fb_data | An object describing total and recent Facebook interactions
+reactions| An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)
 uuid | Newswhip's unique story identifier
 publication_timestamp | Timestamp representing when the article was published
 link | Link to post
