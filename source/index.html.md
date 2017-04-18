@@ -613,7 +613,6 @@ echo $response->getBody();
       },
       "image_link": "",
       "has_video": false,
-      "delta_time": 283,
       "nw_score": 3.6609456724297877,
       "max_nw_score": 4590.83356759275,
       "topics": [
@@ -873,7 +872,6 @@ source.country | Country of source
 source.country_code | Country code of country 
 image_link |  Where available, link to the source's featured image
 has_video | set to `true` when the story has an embedded video
-delta_time | is the time(minute as unit) since our last data collection on an article
 nw_score |  NewsWhip's current social speed for the story
 max_nw_score | Max Newswhip score all time
 topics.id | id of topic 
