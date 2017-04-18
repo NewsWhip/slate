@@ -862,7 +862,7 @@ fb_data | An object describing total and recent Facebook interactions
 reactions| An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)
 uuid | Newswhip's unique story identifier
 publication_timestamp | Timestamp representing when the article was published
-link | Link to post
+link | Link of the post
 headline | Headline of post
 excerpt | Excerpt from post
 keywords | Keywords in Article     
