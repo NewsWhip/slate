@@ -868,7 +868,6 @@ excerpt | Excerpt from post
 keywords | Keywords in Article     
 source.publisher| Publisher of the original article
 source.link | Link to article
-source.country | Country of source
 source.country_code | Country code of country 
 image_link |  Where available, link to the source's featured image
 has_video | set to `true` when the story has an embedded video
