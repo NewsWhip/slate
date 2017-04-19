@@ -780,7 +780,7 @@ sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is o
 aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
 video_only | false |
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
-default_fields | [`headline`, `summary`, `authors`] | Array[String] |Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
+default_fields | [<code style="white-space:nowrap">`headline`</code>, <code style="white-space:nowrap">`summary`</code>, <code style="white-space:nowrap">`authors`</code>] | Array[String] |Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of aggregations to be returned
 
 
