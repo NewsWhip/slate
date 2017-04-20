@@ -4,7 +4,7 @@ The NewsWhip API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request could not be parsed
+400 | Bad Request -- Your request could not be parsed.
 403 | Forbidden -- Your API key is not allowed to access this resource. Your API key is expired or invalid.
 429 | Too Many Requests -- Enhance your calm! or contact us for higher limits!
 500 | Internal Server Error -- We had a problem with our server. Please try again later.
