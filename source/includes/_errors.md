@@ -28,7 +28,7 @@ We don't currently support JSONP.
 
 # Changelog
 
-### Version 1.0.8 (2017-03-29)
+### Version 1.0.8 (2017-04-21)
 
 - Added /v1/fbPost endpoint
 - Added default_fields to all POST requests
