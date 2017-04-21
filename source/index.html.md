@@ -511,8 +511,8 @@ filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apach
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
-sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, <del>`nw_score`</del>, `nw_max_score`, `created_at`.
-sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at` 
+sort_by | default | String | One of the following: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_max_score`, `created_at`.
+sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at` ,  `nw_score` ( nw_score will be deprecated on the 01-06-2017)
 video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
 default_fields | [<code style="white-space:nowrap">"headline"</code>, <code style="white-space:nowrap">"summary"</code>, <code style="white-space:nowrap">"authors"</code>] | Array[String] | Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
