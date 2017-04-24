@@ -120,7 +120,7 @@
       <div class="content">
         <h1 id="overview">Overview</h1>
 
-<p>Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorized and ranked.</p>
+<p>Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorised and ranked.</p>
 
 <p>The NewsWhip API is language agnostic. Any HTTP client or library can be used with this API.</p>
 
@@ -144,7 +144,7 @@
 
 <h1 id="rate-limits">Rate Limits</h1>
 
-<p>Each API key is limited by default to 100 API requests per 5 minutes. Once you exceed this limit, calls will return:</p>
+<p>By default, API keys have limits of 100 API requests per 5 minutes. Once you exceed this limit, calls will return:</p>
 
 <table><thead>
 <tr>
@@ -483,7 +483,7 @@
 
 <h1 id="post-requests">POST Requests</h1>
 
-<p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
+<p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
 
 <p>There are 2 different endpoints:</p>
 
@@ -496,7 +496,7 @@
 <h2 id="post-v1-articles">POST /v1/articles</h2>
 
 <blockquote>
-<p>Get the top trending stories published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago</p>
+<p>Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headlien and are not published in youtube.com over the last 7 days</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
     "filters": ["country_code:(us OR gb) AND -publisher:youtube.com AND headline:rihanna"],
@@ -667,7 +667,7 @@
 <ul>
 <li>Stories are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
 <li>Required fields are denoted *</li>
-<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>Filtering by category or country requires country_ids. These are found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
 </ul>
 
 <table><thead>
@@ -806,7 +806,7 @@
 </tr>
 <tr>
 <td>siteStructure</td>
-<td>Handy for articles that followes a particular path on a site, e.g: to look for all articles with url follows &ldquo;http://www.complex.com/tag/politics&rdquo;, use filter with <code class="prettyprint">publisher:complex.com AND siteStructure:\\/tags\\/politics</code> or <code class="prettyprint">publisher:complex.com AND siteStructure:&quot;/tags/politics&quot;</code> will be sufficient(check the note down below regarding researved characters)</td>
+<td>Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows &ldquo;http://www.complex.com/tag/politics&rdquo;, use filter with <code class="prettyprint">publisher:complex.com AND siteStructure:\\/tags\\/politics</code> or <code class="prettyprint">publisher:complex.com AND siteStructure:&quot;/tags/politics&quot;</code> will be sufficient(check the note down below regarding reserved characters)</td>
 </tr>
 </tbody></table>
 
