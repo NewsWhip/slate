@@ -17,7 +17,7 @@ search: true
 
 # Overview
 
-Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorized and ranked.
+Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorised and ranked.
 
 The NewsWhip API is language agnostic. Any HTTP client or library can be used with this API.
 
@@ -41,7 +41,7 @@ For details on getting access, email: [api@newswhip.com](mailto:api@newswhip.com
 
 # Rate Limits
 
-Each API key is limited by default to 100 API requests per 5 minutes. Once you exceed this limit, calls will return:
+By default, API keys have limits of 100 API requests per 5 minutes. Once you exceed this limit, calls will return:
 
 Error Code | Meaning
 ---------- | -------
@@ -313,7 +313,7 @@ search_term | Matches all stories containing `{search_term}`.
 
 # POST Requests
 
-The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints your application gets full access to NewsWhip's database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.
+The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip's database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.
 
 There are 2 different endpoints:
 
@@ -324,7 +324,7 @@ There are 2 different endpoints:
 
 ## POST /v1/articles
 
-> Get the top trending stories published in United States or United Kingdom that talk about Rihanna not published in youtube.com since a week ago
+> Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headlien and are not published in youtube.com over the last 7 days
 
 ``` shell
 curl -H "Content-Type: application/json" -X POST -d '{
@@ -503,7 +503,7 @@ This endpoint retrieves all articles matching the filters provided.
 
 * Stories are filtered and sorted using the following `JSON` encoded parameters
 * Required fields are denoted *
-* Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
+* Filtering by category or country requires country_ids. These are found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
@@ -536,7 +536,7 @@ categories | Number
 publisher | TLD such as newswhip.com
 domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href | 
-siteStructure| Handy for articles that followes a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding researved characters)
+siteStructure| Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding reserved characters)
 
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as `"f-150"` </aside>
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
