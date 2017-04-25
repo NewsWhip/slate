@@ -538,7 +538,7 @@ domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href | 
 siteStructure| Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding reserved characters)
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as "f-150", however please note that "" will replace the special char with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as "f-150", however please note that "" will replace the special characters inside with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 
@@ -672,7 +672,7 @@ fb_story | String
 fb_sponsor_tags.id | String
 fb_sponsor_tags.name | String
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as “f-150”, however please note that "" will replace the special char with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms</aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as “f-150”, however please note that "" will replace the special characters inside with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms</aside>
 
 
 ## POST /v1/stats
