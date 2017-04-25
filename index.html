@@ -682,7 +682,7 @@
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Up to 10 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
 </tr>
 <tr>
 <td>from</td>
@@ -810,7 +810,7 @@
 </tr>
 </tbody></table>
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as `&quot;f-150&rdquo;` </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as &quot;f-150&rdquo;, however please note that &ldquo;&rdquo; will replace the special characters inside with empty space, so f\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
 
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
@@ -926,7 +926,7 @@
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Up to 10 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
 </tr>
 <tr>
 <td>from</td>
@@ -1022,7 +1022,7 @@
 </tr>
 </tbody></table>
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as “f-150” </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as “f-150”, however please note that &rdquo;&ldquo; will replace the special characters inside with empty space, so f\\-150 will be counted as 1 term while “f-150” is counted as 2 terms</aside>
 
 <h2 id="post-v1-stats">POST /v1/stats</h2>
 
@@ -1130,7 +1130,7 @@
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Up to 10 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&rdquo;. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&rdquo;. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.</td>
 </tr>
 <tr>
 <td>from</td>
