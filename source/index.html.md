@@ -507,7 +507,7 @@ This endpoint retrieves all articles matching the filters provided.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
@@ -538,7 +538,7 @@ domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href | 
 siteStructure| Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding reserved characters)
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as `"f-150"` </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as "f-150", however please note that "" will replace the special char with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 
@@ -648,7 +648,7 @@ This endpoint retrieves articles from Facebook matching your filters.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
@@ -672,7 +672,7 @@ fb_story | String
 fb_sponsor_tags.id | String
 fb_sponsor_tags.name | String
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as “f-150” </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as “f-150”, however please note that "" will replace the special char with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms</aside>
 
 
 ## POST /v1/stats
@@ -773,7 +773,7 @@ This endpoint retrieves stats for articles matching your filters.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
