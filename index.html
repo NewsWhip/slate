@@ -1368,21 +1368,49 @@
 </tr>
 <tr>
 <td>fb_data</td>
-<td>Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,</td>
+<td>Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)</td>
+</tr>
+<tr>
+<td>tw_data</td>
+<td>An object describing total and recent Twitter interactions</td>
+</tr>
+<tr>
+<td>li_data</td>
+<td>An object describing total and recent LinkedIn interactions</td>
+</tr>
+<tr>
+<td>tw_creator</td>
+<td>Nullable. Where available, the creator&rsquo;s Twitter handle as supplied through Twitter Cards</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>NewsWhip&rsquo;s unique story identifier</td>
+</tr>
+<tr>
+<td>publication_timestamp</td>
+<td>Timestamp representing when the article was published</td>
+</tr>
+<tr>
+<td>image_link</td>
+<td>Where available, link to the source&rsquo;s featured image</td>
+</tr>
+<tr>
+<td>relatedStories</td>
+<td>List of <code class="prettyprint">Article</code> related to this story</td>
+</tr>
+<tr>
+<td>topics</td>
+<td>List of <code class="prettyprint">Topic</code></td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>comma separated string of keywords attributed to this story</td>
+</tr>
+<tr>
+<td>has_video</td>
+<td>set to <code class="prettyprint">true</code> when the story has an embedded video</td>
 </tr>
 </tbody></table>
-
-<p>reactions)
-tw_data | An object describing total and recent Twitter interactions
-li_data | An object describing total and recent LinkedIn interactions
-tw_creator |  Nullable. Where available, the creator&rsquo;s Twitter handle as supplied through Twitter Cards
-uuid |  NewsWhip&rsquo;s unique story identifier
-publication_timestamp |  Timestamp representing when the article was published
-image_link |  Where available, link to the source&rsquo;s featured image
-relatedStories |  List of <code class="prettyprint">Article</code> related to this story
-topics | List of <code class="prettyprint">Topic</code>
-keywords | comma separated string of keywords attributed to this story
-has_video | set to <code class="prettyprint">true</code> when the story has an embedded video</p>
 
 <h2 id="facebookpost">FacebookPost</h2>
 
