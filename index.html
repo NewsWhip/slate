@@ -1372,7 +1372,7 @@
 </tr>
 <tr>
 <td>tw_data</td>
-<td>An object describing total and recent Twitter interactions</td>
+<td>Twitter Interactions  (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)</td>
 </tr>
 <tr>
 <td>li_data</td>
@@ -1446,27 +1446,73 @@
 </tr>
 <tr>
 <td>fb_data</td>
-<td>Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,</td>
+<td>Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)</td>
+</tr>
+<tr>
+<td>reactions</td>
+<td>An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>Newswhip&rsquo;s unique story identifier</td>
+</tr>
+<tr>
+<td>publication_timestamp</td>
+<td>Timestamp representing when the article was published</td>
+</tr>
+<tr>
+<td>link</td>
+<td>Link of the post</td>
+</tr>
+<tr>
+<td>headline</td>
+<td>Headline of post</td>
+</tr>
+<tr>
+<td>excerpt</td>
+<td>Excerpt from post</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>Keywords in Article</td>
+</tr>
+<tr>
+<td>source.publisher</td>
+<td>Publisher of the original article</td>
+</tr>
+<tr>
+<td>source.link</td>
+<td>Link to article</td>
+</tr>
+<tr>
+<td>source.country_code</td>
+<td>Country code of country</td>
+</tr>
+<tr>
+<td>image_link</td>
+<td>Where available, link to the source&rsquo;s featured image</td>
+</tr>
+<tr>
+<td>has_video</td>
+<td>set to <code class="prettyprint">true</code> when the story has an embedded video</td>
+</tr>
+<tr>
+<td>nw_score</td>
+<td>NewsWhip&rsquo;s current social speed for the story</td>
+</tr>
+<tr>
+<td>max_nw_score</td>
+<td>Max Newswhip score all time</td>
+</tr>
+<tr>
+<td>topics.id</td>
+<td>id of topic</td>
+</tr>
+<tr>
+<td>topics.name</td>
+<td>Name of topic</td>
 </tr>
 </tbody></table>
-
-<p>reactions)
-reactions| An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)
-uuid | Newswhip&rsquo;s unique story identifier
-publication_timestamp | Timestamp representing when the article was published
-link | Link of the post
-headline | Headline of post
-excerpt | Excerpt from post
-keywords | Keywords in Article<br>
-source.publisher| Publisher of the original article
-source.link | Link to article
-source.country_code | Country code of country 
-image_link |  Where available, link to the source&rsquo;s featured image
-has_video | set to <code class="prettyprint">true</code> when the story has an embedded video
-nw_score |  NewsWhip&rsquo;s current social speed for the story
-max_nw_score | Max Newswhip score all time
-topics.id | id of topic 
-topics.name | Name of topic</p>
 
 <h2 id="topic">Topic</h2>
 
