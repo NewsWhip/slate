@@ -837,8 +837,7 @@ source.link |  website of source publication
 <del>source.country</del> |  deprecated
 source.country_code | country of source publication
 nw_score | NewsWhip's current social speed for the story
-fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,
-reactions)
+fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
 tw_data | An object describing total and recent Twitter interactions
 li_data | An object describing total and recent LinkedIn interactions
 tw_creator |  Nullable. Where available, the creator's Twitter handle as supplied through Twitter Cards
