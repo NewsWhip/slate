@@ -507,7 +507,7 @@ This endpoint retrieves all articles matching the filters provided.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
@@ -538,12 +538,12 @@ domain | Exact domain where the article was published. i.e. blog.newswhip.com
 href | 
 siteStructure| Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding reserved characters)
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as `"f-150"` </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as "f-150", however please note that "" will replace the special characters inside with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
 <aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 
 
-## POST /v1/fbPost
+## POST /v1/fbPosts
 
 > Get all facebook posts from Donald J. Trump's fb page that of content-type status and sort by the number of likes
 
@@ -648,14 +648,14 @@ This endpoint retrieves articles from Facebook matching your filters.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
 default_fields | [ <code style="white-space:nowrap">`page_id`</code>, <code style="white-space:nowrap">`page_name`</code>, <code style="white-space:nowrap">`external_link`</code>] | Array[String] |Up to 3 available fields to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of articles to be returned (includes relatedStories.)
 content_type| | String | `video`, `live_video`, `link`, `photo`, `status`, `branded_content`, `event`
-sort_by | `default` | String | `default`,`nw_max_score`,' `fb_overperforming`, `fb_total_engagement`, `created_at` `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.(The `default` sort_by is `nw_max score` when the selected time-range is <= 25h, otherwise it will be `fb_overperforming`)
+sort_by | `default` | String | `default`,`nw_max_score`,`fb_overperforming`, `fb_total_engagement`, `created_at` `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.(The `default` sort_by is `nw_max score` when the selected time-range is <= 25h, otherwise it will be `fb_overperforming`)
 
 ### Available fields for filtering Facebook Posts
 
@@ -672,7 +672,7 @@ fb_story | String
 fb_sponsor_tags.id | String
 fb_sponsor_tags.name | String
 
-<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as “f-150” </aside>
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as “f-150”, however please note that "" will replace the special characters inside with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms</aside>
 
 
 ## POST /v1/stats
@@ -773,11 +773,11 @@ This endpoint retrieves stats for articles matching your filters.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 10 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
-sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_dev`
+sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_deviation`
 aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
 video_only | false |
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
@@ -837,9 +837,9 @@ source.link |  website of source publication
 <del>source.country</del> |  deprecated
 source.country_code | country of source publication
 nw_score | NewsWhip's current social speed for the story
-fb_data | An object describing total and recent Facebook interactions
-tw_data | An object describing total and recent Twitter interactions
-li_data | An object describing total and recent LinkedIn interactions
+fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
+tw_data | Twitter Interactions (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)
+li_data |LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
 tw_creator |  Nullable. Where available, the creator's Twitter handle as supplied through Twitter Cards
 uuid |  NewsWhip's unique story identifier
 publication_timestamp |  Timestamp representing when the article was published
@@ -859,7 +859,7 @@ post_type | Type of Post eg. Status
 is_live_video | Is content live video
 fb_story | is a description generated by facebook about an event eg. when two people become friends
 fb_sponsor_tags | facebook sponsors if available
-fb_data | An object describing total and recent Facebook interactions
+fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
 reactions| An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)
 uuid | Newswhip's unique story identifier
 publication_timestamp | Timestamp representing when the article was published
