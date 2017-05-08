@@ -543,7 +543,7 @@ siteStructure| Handy for articles that follows a particular path on a site, e.g:
 
 
 
-## POST /v1/fbPost
+## POST /v1/fbPosts
 
 > Get all facebook posts from Donald J. Trump's fb page that of content-type status and sort by the number of likes
 
