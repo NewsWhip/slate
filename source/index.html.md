@@ -652,7 +652,7 @@ filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apach
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
-default_fields | [ <code style="white-space:nowrap">`page_id`</code>, <code style="white-space:nowrap">`page_name`</code>, <code style="white-space:nowrap">`external_link`</code>] | Array[String] |Up to 3 available fields to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
+default_fields | [ <code style="white-space:nowrap">`page_name`</code>, <code style="white-space:nowrap">`external_link`</code>] | Array[String] |Up to 3 available fields to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of articles to be returned (includes relatedStories.)
 content_type| | String | `video`, `live_video`, `link`, `photo`, `status`, `branded_content`, `event`
 sort_by | `default` | String | `default`,`nw_max_score`,`fb_overperforming`, `fb_total_engagement`, `created_at` `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.(The `default` sort_by is `nw_max score` when the selected time-range is <= 25h, otherwise it will be `fb_overperforming`)
