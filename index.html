@@ -194,16 +194,17 @@ $(document).ready(function() {
 
 <p>The real-time GET API endpoints are designed to mirror Spike&rsquo;s functionality. You can get all trending content in any Niche or Region, ordered by any social metric.</p>
 
-<p>There are 4 different endpoints:</p>
+<p>There are 5 different endpoints:</p>
 
 <ul>
 <li><code class="prettyprint">GET /v1/region/{region}/{category}/{time_period}</code></li>
 <li><code class="prettyprint">GET /v1/publisher/{publisher}/{time_period}</code></li>
 <li><code class="prettyprint">GET /v1/local/{city}/All/{time_period}</code></li>
 <li><code class="prettyprint">GET /v1/search?q={search_term}</code></li>
+<li><code class="prettyprint">GET /v1/trendingEntities?timeRange{time in hours}&amp;q={search_term}</code></li>
 </ul>
 
-<p>All 4 GET endpoints accept the following Query Parameters:</p>
+<p>All region, publisher, local and search endpoints support the following Query Parameters:</p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -498,6 +499,84 @@ $(document).ready(function() {
 </tr>
 </tbody></table>
 
+<h2 id="get-v1-trendingentities">GET /v1/trendingEntities</h2>
+
+<blockquote>
+<p>Get the top entities that have become trending in the last x hours</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/trendingEntities?timeRange=24&amp;q=Sports&amp;key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/trendingEntities'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_GET</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'timeRange'</span> <span class="o">=&gt;</span> <span class="s1">'24'</span><span class="p">,</span>
+  <span class="s1">'q'</span> <span class="o">=&gt;</span> <span class="s1">'Sports'</span><span class="p">,</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'T4hC9wTT7p83C'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setContentType</span><span class="p">(</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setPostFields</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"trendingEntities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Nicky Hayden"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Mike Greenberg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Game"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Rohit Sharma"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Ariana Grande"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Nashville Predators"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Cris Cyborg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Anaheim Ducks"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"BCCI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Los Angeles Lakers"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RBI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FA"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"World Series"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Petco Park"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Dray Day"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /v1/trendingEntities</code></p>
+
+<p>This endpoint gets the trending entities over a certain {time in hours}. A trending entity is a an entity that has become popular that wasn&rsquo;t popular before.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>All parameters for trending entities are optional</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search-term</td>
+<td>Matches all trending entities related to the given <code class="prettyprint">{search_term}</code>.</td>
+</tr>
+<tr>
+<td>time-in-hours</td>
+<td>Searches for trending entities over the given number of hours (default=24)</td>
+</tr>
+</tbody></table>
+
 <h1 id="post-requests">POST Requests</h1>
 
 <p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
@@ -674,6 +753,35 @@ $(document).ready(function() {
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight plaintext"><code>
+`GET /v1/region/{region}/{category}/{time_period}`
+
+This endpoint retrieves all articles published in `{region}` and `{category}` within the `{time_period}`.
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+region | Filters articles published in `{region}`. See above for available countries. i.e. `U.S.`, `France`, `Ireland`. Note: the region should be passed in English.
+category | Filters articles by `{category}`. See above for available categories. i.e. `All`, `News`, `Pre-Viral`. Note: the category should be passed in English.
+time_period | Filters articles published within the last `{time_period}` hours. Valid `time_periods` range from 1 up to 168 hours
+
+## GET /v1/publisher
+
+&gt; Get the top trending content published in the last 24 hours by the New York Times.
+
+``` shell
+curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
 
 <p><code class="prettyprint">POST /v1/articles</code></p>
 
@@ -769,7 +877,7 @@ $(document).ready(function() {
 </tr>
 </tbody></table>
 
-<h3 id="available-fields-for-filtering-articles-stats-request">Available fields for filtering Articles/Stats request</h3>
+<h3 id="available-fields-for-filtering-articles-stats-trendingentities-request">Available fields for filtering Articles/Stats/TrendingEntities request</h3>
 
 <table><thead>
 <tr>
@@ -779,15 +887,15 @@ $(document).ready(function() {
 </thead><tbody>
 <tr>
 <td>headline</td>
-<td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>summary</td>
-<td></td>
+<td>String</td>
 </tr>
 <tr>
 <td>authors</td>
-<td></td>
+<td>String</td>
 </tr>
 <tr>
 <td><del>country</del></td>
@@ -829,7 +937,7 @@ $(document).ready(function() {
 
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as &quot;f-150&rdquo;, however please note that &ldquo;&rdquo; will replace the special characters inside with empty space, so f\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
 
-<aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
+<aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 <h2 id="post-v1-fbposts">POST /v1/fbPosts</h2>
 
@@ -1168,22 +1276,22 @@ $(document).ready(function() {
 <td>See availalbe languages <a href="#supported-languages">here</a></td>
 </tr>
 <tr>
-<td>sort_by*</td>
-<td></td>
-<td>String.{aggregation_name}.{stat_value}</td>
-<td><code class="prettyprint">{aggregation_name}</code> is one of <code class="prettyprint">fb_total</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">pinterest</code> and <code class="prettyprint">{stat_value}</code> is one of <code class="prettyprint">count</code>, <code class="prettyprint">min</code>, <code class="prettyprint">max</code>, <code class="prettyprint">avg</code>, <code class="prettyprint">sum</code>, <code class="prettyprint">sum_of_squares</code>, <code class="prettyprint">variance</code>, <code class="prettyprint">std_deviation</code></td>
+<td>sort_by</td>
+<td><code class="prettyprint">default</code></td>
+<td>String</td>
+<td>One of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
 </tr>
 <tr>
-<td>aggregate_by*</td>
-<td></td>
+<td>sort_by (Youtube)</td>
+<td><code class="prettyprint">created_at</code></td>
 <td>String</td>
-<td>Groups all matched stories by any of the following: <code class="prettyprint">publisher</code>, <code class="prettyprint">domains</code>, <code class="prettyprint">domain</code>, <code class="prettyprint">language</code>, <code class="prettyprint">authors</code>, <code class="prettyprint">country_code</code>, <code class="prettyprint">categories</code></td>
+<td>When searching by the content_type <code class="prettyprint">youtube</code>, sort by <code class="prettyprint">yt_likes</code>, <code class="prettyprint">yt_views</code>, <code class="prettyprint">yt_comments</code>, <code class="prettyprint">yt_dislikes</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">created_at</code></td>
 </tr>
 <tr>
 <td>video_only</td>
 <td>false</td>
-<td></td>
-<td></td>
+<td>Boolean</td>
+<td>Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
 </tr>
 <tr>
 <td>default_field</td>
@@ -1193,7 +1301,7 @@ $(document).ready(function() {
 </tr>
 <tr>
 <td>default_fields</td>
-<td>[<code style="white-space:nowrap"><code class="prettyprint">headline</code></code>, <code style="white-space:nowrap"><code class="prettyprint">summary</code></code>, <code style="white-space:nowrap"><code class="prettyprint">authors</code></code>]</td>
+<td>[<code style="white-space:nowrap">&quot;headline&quot;</code>, <code style="white-space:nowrap">&quot;summary&quot;</code>, <code style="white-space:nowrap">&quot;authors&quot;</code>]</td>
 <td>Array[String]</td>
 <td>Up to 3 available fields to be used filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String</td>
 </tr>
@@ -1201,7 +1309,120 @@ $(document).ready(function() {
 <td>size</td>
 <td>200</td>
 <td>Integer</td>
-<td>Max number of aggregations to be returned</td>
+<td>Max number of articles to be returned (includes relatedStories)</td>
+</tr>
+<tr>
+<td>find_related</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Related stories will be collapsed when set. Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
+</tr>
+<tr>
+<td>content_type</td>
+<td>stories</td>
+<td>String</td>
+<td>Filters by <code class="prettyprint">stories</code> or <code class="prettyprint">youtube</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="post-v1-trendingentities">POST /v1/trendingEntities</h2>
+
+<blockquote>
+<p>Get the top entities that have becomne trending in the last x hours</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'http://localhost:9000/api/v1/trendingEntities?key=YOUR_API_KEY'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+   "filters": [],
+ "from":1481932800000,
+ "to":1494975600000
+}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://localhost:9000/api/v1/trendingEntities'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'YOUR_API_KEY'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'{
+   "filters": [],
+ "from":1481932800000,
+ "to":1494975600000
+}'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"trendingEntities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Donald Trump"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Barack Obama"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"U.S"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Republican"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FBI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"James Comey"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Democrats"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Manchester United"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Premier League"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"IPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Sean Spicer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"House"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CNN"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/trendingEntities</code></p>
+
+<p>This endpoint gets the trending entity over a certain {time in hours}. A trending entity is a an entity that has become popular that wasn&rsquo;t popular before.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Article stats are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>As the trendingEntities is aggregating a large about of data it can take up to 5 seconds to return.</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Publisher ,Categories, Headline</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
 </tr>
 </tbody></table>
 
