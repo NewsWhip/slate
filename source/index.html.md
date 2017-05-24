@@ -63,14 +63,15 @@ NewsWhip provides 2 different endpoints designed for different use cases, each a
 
 The real-time GET API endpoints are designed to mirror Spike's functionality. You can get all trending content in any Niche or Region, ordered by any social metric.
 
-There are 4 different endpoints:
+There are 5 different endpoints:
 
 * `GET /v1/region/{region}/{category}/{time_period}`
 * `GET /v1/publisher/{publisher}/{time_period}`
 * `GET /v1/local/{city}/All/{time_period}`
 * `GET /v1/search?q={search_term}`
+* `GET /v1/trendingEntities?timeRange{time in hours}&q={search_term}`
 
-All 4 GET endpoints accept the following Query Parameters:
+All region, publisher, local and search endpoints support the following Query Parameters:
 
 ### Query Parameters
 
@@ -92,8 +93,8 @@ To retrieve a full list of the available fields for each filter (regions, catego
 `GET /v1/local`
 
 
-## GET /v1/region
 
+## GET /v1/region
 > Get the top trending English content published in the last 24 hours
 
 ``` shell
@@ -111,7 +112,7 @@ echo $response->getBody();
 ?>
 ```
 
-```json
+``` json
 {
   "articles": [
     {
@@ -311,6 +312,76 @@ Parameter | Description
 --------- | -----------
 search_term | Matches all stories containing `{search_term}`.
 
+## GET /v1/trendingEntities 
+
+> Get the top entities that have become trending in the last x hours
+
+``` shell
+curl "https://api.newswhip.com/v1/trendingEntities?timeRange=24&q=Sports&key=YOUR_API_KEY"
+```
+
+``` php
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.newswhip.com/v1/trendingEntities');
+$request->setMethod(HTTP_METH_GET);
+
+$request->setQueryData(array(
+  'timeRange' => '24',
+  'q' => 'Sports',
+  'key' => 'T4hC9wTT7p83C'
+));
+
+$request->setContentType('application/x-www-form-urlencoded');
+$request->setPostFields(null);
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+?>
+```
+
+```json
+{
+  "trendingEntities": [
+    "Nicky Hayden",
+    "Mike Greenberg",
+    "Game",
+    "Rohit Sharma",
+    "Ariana Grande",
+    "Nashville Predators",
+    "Cris Cyborg",
+    "Anaheim Ducks",
+    "BCCI",
+    "Los Angeles Lakers",
+    "RBI",
+    "FA",
+    "World Series",
+    "Petco Park",
+    "Dray Day"
+  ]
+}
+```
+
+`GET /v1/trendingEntities`
+
+This endpoint gets the trending entities over a certain {time in hours}. A trending entity is a an entity that has become popular that wasn't popular before.
+
+### Parameters
+
+* All parameters for trending entities are optional
+
+Parameter | Description
+--------- | -----------
+search-term | Matches all trending entities related to the given `{search_term}`.
+time-in-hours | Searches for trending entities over the given number of hours (default=24)
+
+
 # POST Requests
 
 The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip's database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.
@@ -495,6 +566,40 @@ echo $response->getBody();
 }
 ```
 
+```
+
+`GET /v1/region/{region}/{category}/{time_period}`
+
+This endpoint retrieves all articles published in `{region}` and `{category}` within the `{time_period}`.
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+region | Filters articles published in `{region}`. See above for available countries. i.e. `U.S.`, `France`, `Ireland`. Note: the region should be passed in English.
+category | Filters articles by `{category}`. See above for available categories. i.e. `All`, `News`, `Pre-Viral`. Note: the category should be passed in English.
+time_period | Filters articles published within the last `{time_period}` hours. Valid `time_periods` range from 1 up to 168 hours
+
+## GET /v1/publisher
+
+> Get the top trending content published in the last 24 hours by the New York Times.
+
+``` shell
+curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
+```
+
+``` php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+
+$client = new Client();
+$response = $client->get('https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY', []);
+echo $response->getBody();
+?>
+```
+
+
 `POST /v1/articles`
 
 This endpoint retrieves all articles matching the filters provided.
@@ -521,13 +626,13 @@ find_related | true | Boolean | Related stories will be collapsed when set. Igno
 content_type | stories | String | Filters by `stories` or `youtube`
 
 
-### Available fields for filtering Articles/Stats request
+### Available fields for filtering Articles/Stats/TrendingEntities request
 
 Field | Type
 ----- | ----
-headline |  
-summary |  
-authors |  
+headline | String
+summary | String
+authors | String 
 <del>country</del> | Number. Deprecated: use country_code instead
 country_code | Two letter (lower case) ISO 3166 country code
 region_code | Available regions (lower case): `na`, `eu`, `oc`, `sea`, `sa`, `as`, `me`, `af`
@@ -539,7 +644,7 @@ href |
 siteStructure| Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding reserved characters)
 
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as "f-150", however please note that "" will replace the special characters inside with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
-<aside class="notice">Due to historical reasons, the query able fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
+<aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
 
 
 
@@ -554,7 +659,7 @@ curl --request POST \
   --data '{"filters": ["country_code:us"],  "sort_by":"fb_likes", "content_type":"Status"}'
 ```
 
-```php
+``` php
 <?php
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
@@ -777,12 +882,101 @@ filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apach
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
-sort_by* |  | String.{aggregation_name}.{stat_value} | `{aggregation_name}` is one of `fb_total`, `twitter`, `linkedin`, `pinterest` and `{stat_value}` is one of `count`, `min`, `max`, `avg`, `sum`, `sum_of_squares`, `variance`, `std_deviation`
-aggregate_by* |  | String | Groups all matched stories by any of the following: `publisher`, `domains`, `domain`, `language`, `authors`, `country_code`, `categories`
-video_only | false |
+sort_by |`default` | String | One of the following: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_overperforming`)
+sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at`
+video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
-default_fields | [<code style="white-space:nowrap">`headline`</code>, <code style="white-space:nowrap">`summary`</code>, <code style="white-space:nowrap">`authors`</code>] | Array[String] |Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
-size | 200 | Integer | Max number of aggregations to be returned
+default_fields | [<code style="white-space:nowrap">"headline"</code>, <code style="white-space:nowrap">"summary"</code>, <code style="white-space:nowrap">"authors"</code>] | Array[String] | Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
+size | 200 | Integer | Max number of articles to be returned (includes relatedStories)
+find_related | true | Boolean | Related stories will be collapsed when set. Ignored when searching by the content_type `youtube`
+content_type | stories | String | Filters by `stories` or `youtube`
+
+
+
+## POST /v1/trendingEntities
+
+> Get the top entities that have becomne trending in the last x hours
+
+
+``` shell
+curl -X POST \
+  'http://localhost:9000/api/v1/trendingEntities?key=YOUR_API_KEY' \
+  -H 'content-type: application/json' \
+  -d '{
+   "filters": [],
+ "from":1481932800000,
+ "to":1494975600000
+}'
+```
+
+```php
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('http://localhost:9000/api/v1/trendingEntities');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setQueryData(array(
+  'key' => 'YOUR_API_KEY'
+));
+
+$request->setBody('{
+   "filters": [],
+ "from":1481932800000,
+ "to":1494975600000
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+?>
+```
+
+```json
+{
+  "trendingEntities": [
+    "Donald Trump",
+    "Barack Obama",
+    "U.S",
+    "Republican",
+    "US",
+    "FBI",
+    "James Comey",
+    "Democrats",
+    "Manchester United",
+    "Premier League",
+    "IPL",
+    "Sean Spicer",
+    "House",
+    "UK",
+    "CNN"
+  ]
+}
+```
+
+`POST /v1/trendingEntities`
+
+This endpoint gets the trending entity over a certain {time in hours}. A trending entity is a an entity that has become popular that wasn't popular before.
+
+### Parameters
+
+* Article stats are filtered and sorted using the following `JSON` encoded parameters
+* Required fields are denoted *
+* Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
+* As the trendingEntities is aggregating a large about of data it can take up to 5 seconds to return.
+
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+filters* |  | Array[String] | Publisher ,Categories, Headline
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
+to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
+
+
 
 
 ### Supported languages
