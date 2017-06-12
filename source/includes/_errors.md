@@ -28,6 +28,9 @@ We don't currently support JSONP.
 
 # Changelog
 
+### Version 1.0.8 (2017-06-12)
+- Added predicted interactions to the articles endpoint
+
 ### Version 1.0.8 (2017-04-21)
 
 - Added /v1/fbPost endpoint
