@@ -78,7 +78,7 @@ All region, publisher, local and search endpoints support the following Query Pa
 Parameter | Default | Description
 --------- | ------- | -----------
 video_only | false | If set to true, the result will ONLY include content with embedded video.
-sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`
+sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `predicted_interactions`
 size |  | Number of articles to be returned (including related articles).
 
 To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:
@@ -1042,6 +1042,8 @@ relatedStories |  List of `Article` related to this story
 topics | List of `Topic`
 keywords | comma separated string of keywords attributed to this story
 has_video | set to `true` when the story has an embedded video
+predicted_interactions | How many interactions are expected on the article based on current velocity
+
 
 ## FacebookPost
 
