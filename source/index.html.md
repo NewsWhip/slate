@@ -972,7 +972,7 @@ This endpoint gets the trending entity over a certain {time in hours}. A trendin
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Publisher ,Categories, Headline
+filters* |  | Array[String] | publisher, categories, headline, countryCode
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 
@@ -1034,6 +1034,7 @@ nw_score | NewsWhip's current social speed for the story
 fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
 tw_data | Twitter Interactions (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)
 li_data |LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
+predicted_interactions | How many interactions are expected on the article based on current velocity
 tw_creator |  Nullable. Where available, the creator's Twitter handle as supplied through Twitter Cards
 uuid |  NewsWhip's unique story identifier
 publication_timestamp |  Timestamp representing when the article was published
@@ -1042,7 +1043,6 @@ relatedStories |  List of `Article` related to this story
 topics | List of `Topic`
 keywords | comma separated string of keywords attributed to this story
 has_video | set to `true` when the story has an embedded video
-predicted_interactions | How many interactions are expected on the article based on current velocity
 
 
 ## FacebookPost
