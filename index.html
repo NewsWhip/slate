@@ -223,7 +223,7 @@ $(document).ready(function() {
 <tr>
 <td>sort_by</td>
 <td>default</td>
-<td>Defines how the articles are ranked. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code></td>
+<td>Defines how the articles are ranked. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">predicted_interactions</code></td>
 </tr>
 <tr>
 <td>size</td>
@@ -1410,7 +1410,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Publisher ,Categories, Headline</td>
+<td>publisher, categories, headline, countryCode</td>
 </tr>
 <tr>
 <td>from</td>
@@ -1613,6 +1613,10 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <tr>
 <td>li_data</td>
 <td>LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)</td>
+</tr>
+<tr>
+<td>predicted_interactions</td>
+<td>How many interactions are expected on the article based on current velocity</td>
 </tr>
 <tr>
 <td>tw_creator</td>
@@ -1821,6 +1825,12 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <p>We don&rsquo;t currently support JSONP.</p>
 
 <h1 id="changelog">Changelog</h1>
+
+<h3 id="version-1-0-8-2017-06-12">Version 1.0.8 (2017-06-12)</h3>
+
+<ul>
+<li>Added predicted interactions to the articles endpoint</li>
+</ul>
 
 <h3 id="version-1-0-8-2017-04-21">Version 1.0.8 (2017-04-21)</h3>
 
