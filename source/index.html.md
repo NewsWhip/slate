@@ -640,7 +640,7 @@ language | [Two letter ISO 639-1 language code](#supported-languages)
 categories | Number
 publisher | TLD such as newswhip.com
 domain | Exact domain where the article was published. i.e. blog.newswhip.com
-href | 
+href | Search buy the full url of the article eg. "href:\"https://www.coldwellbankerhomes.com/az/concho/669-county-road-8235-stanford/pid_18337473/\""
 siteStructure| Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows "http://www.complex.com/tag/politics", use filter with `publisher:complex.com AND siteStructure:\\/tags\\/politics` or `publisher:complex.com AND siteStructure:"/tags/politics"` will be sufficient(check the note down below regarding reserved characters)
 
 <aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ " ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\\\ before the character, i.e: f-150 should be wrapped up as f\\\\-150, or wrapped inside double quotes as "f-150", however please note that "" will replace the special characters inside with empty space, so f\\\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
