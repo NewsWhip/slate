@@ -28,6 +28,10 @@ We don't currently support JSONP.
 
 # Changelog
 
+### Version 1.0.9 (2017-08-15)
+- Added twitterInfluencer endpoint
+- Added facebookInflunecer endpoint
+
 ### Version 1.0.8 (2017-06-12)
 - Added predicted interactions to the articles endpoint
 

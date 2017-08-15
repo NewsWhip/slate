@@ -978,6 +978,262 @@ to | Now | Unix timestamp in milliseconds | Filters articles published before `{
 
 
 
+## POST /v1/twitterInfluencers
+
+> Get the top Influencers on twitter for a particluar query
+
+
+``` shell
+curl -X POST \
+  'http://localhost:9000/api/v1/twitterInfluencers?key=TESTKEY123' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: febf25b3-4a8c-e754-0dfd-344e4f73d950' \
+  -d '{
+"filters":["countryCode:us"],
+"size":250
+}'
+```
+
+```php
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('http://localhost:9000/api/v1/twitterInfluencers');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setQueryData(array(
+  'key' => 'TESTKEY123'
+));
+
+$request->setHeaders(array(
+  'postman-token' => '0852de28-170e-b2eb-373a-9604fd946f43',
+  'cache-control' => 'no-cache',
+  'content-type' => 'application/json'
+));
+
+$request->setBody('{
+"filters":["countryCode:us"],
+"size":250
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+?>
+```
+
+```json
+[
+    {
+        "id": 19394188,
+        "twitter_handle": "SenJohnMcCain",
+        "likes_count": 44,
+        "followers_count": 2420952,
+        "following_count": 378,
+        "statuses_count": 13275,
+        "max_retweet_value": 37155,
+        "social_referrals": [
+            {
+                "article_id": "207d6140-7fb7-11e7-b89c-b3951ad1b925",
+                "twitter_url": "https://twitter.com/any/status/896515795114766337",
+                "favourite_count": 101087,
+                "rt_count": 37155,
+                "created_at": 1502580996000,
+                "description": "Washington, D.C. – U.S. Senator John McCain (R-AZ) released the following statement today on the white supremacist attack in Charlottesville, Virginia:",
+                "article_url": "https://www.mccain.senate.gov/public/index.cfm?p=press-releases&id=64ED6753-345F-4F64-9B64-2D8BDAE952B5"
+            }
+        ]
+    },
+    {
+        "id": 25073877,
+        "twitter_handle": "realDonaldTrump",
+        "likes_count": 13,
+        "followers_count": 35875762,
+        "following_count": 45,
+        "statuses_count": 35546,
+        "max_retweet_value": 19712,
+        "social_referrals": [
+            {
+                "article_id": "eb7b2b50-7c5d-11e7-b37d-8972c3c8a811",
+                "twitter_url": "https://twitter.com/any/status/895794792747216896",
+                "favourite_count": 77366,
+                "rt_count": 19712,
+                "created_at": 1502409096000,
+                "description": "President Trump is the new 'comeback kid,' with his approval rating in a new national poll rebounding after a freefall.",
+                "article_url": "http://www.washingtonexaminer.com/trump-approval-rebounds-to-45-surges-among-hispanics-union-homes-men/article/2630910"
+            }
+        ]
+    },
+    {
+        "id": 16299301,
+        "twitter_handle": "audrawilliams",
+        "likes_count": 6379,
+        "followers_count": 5428,
+        "following_count": 3542,
+        "statuses_count": 23797,
+        "max_retweet_value": 15821,
+        "social_referrals": [
+            {
+                "article_id": "b573f800-7fd4-11e7-9a30-c9dd3e4cb15e",
+                "twitter_url": "https://twitter.com/any/status/896717616600895488",
+                "favourite_count": 18928,
+                "rt_count": 15821,
+                "created_at": 1502629114000,
+                "description": "State police and national guardsmen watched passively for hours as self-proclaimed Nazis engaged in street battles with counter-protesters. ProPublica reporter A.C. Thompson was on the scene and reports that the authorities turned the streets of the city over to groups of militiamen armed with assau",
+                "article_url": "https://www.propublica.org/article/police-stood-by-as-mayhem-mounted-in-charlottesville"
+            }
+        ]
+    }
+  ]
+```
+
+`POST /v1/twitterInfluencers`
+
+This endpoint show the twitter uses that have the most influence on stories related to your search.
+
+### Parameters
+
+* Twitter Influencer are filtered and sorted using the following `JSON` encoded parameters
+* Required fields are denoted *
+* Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
+* As the twitterInfluencers is aggregating a large about of data it can take up to 5 seconds to return.
+* If a query String is passed into the filter it will search on headline, authors and summary.
+
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+filters* |  | Array[String] | Can use the following filters publisher, categories, countryCode, headline, summary, region_code, language, domain
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
+to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
+language | | String
+size | 200 | number | Number of influencer to return (max 500)
+
+## POST /v1/facebookInfluencers
+
+> Get the top Facebook influencer for a particular query.
+
+
+``` shell
+curl -X POST \
+  'http://localhost:9000/api/v1/facebookInfluencers?key=TESTKEY123' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: aa66ba20-a73c-e673-a090-273b7ac8e796' \
+  -d '{
+"filters":[]
+}'
+```
+
+```php
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('http://localhost:9000/api/v1/facebookInfluencers');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setQueryData(array(
+  'key' => 'TESTKEY123'
+));
+
+$request->setHeaders(array(
+  'postman-token' => 'cb82aa90-c5f5-ae9b-6786-dcf488c738fa',
+  'cache-control' => 'no-cache',
+  'content-type' => 'application/json'
+));
+
+$request->setBody('{
+"filters":[]
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+?>
+```
+
+```json
+[
+    {
+        "fb_page_id": 9124187907,
+        "fb_username": "senatorsanders",
+        "about": "Sen. Bernie Sanders of Vermont is the longest serving independent in U.S. congressional history.",
+        "followers_count": 7365398,
+        "likes_count": 7365398,
+        "profile_image": "https://scontent.xx.fbcdn.net/v/t1.0-1/c20.0.50.50/p50x50/400832_10151148541197908_1621512611_n.jpg?oh=1d45b3c211e83e5925b08bde7b25ca68&oe=59F0258C",
+        "max_fb_interactions": 309693,
+        "social_referrals": [
+            {
+                "article_id": "f2cff040-7fa3-11e7-927a-ebb7ea9adb61",
+                "fb_post_id": "9124187907_10156228952697908",
+                "headline": "Trump blames 'many sides' after violent white supremacist rally in Virginia",
+                "description": "President Donald Trump on Saturday blamed \"many sides\" for the violent clashes between protesters and white supremacists in Charlottesville, Virginia.",
+                "fb_total_interactions": 309693,
+                "created_at": 1502573718000,
+                "article_url": "http://www.chicagotribune.com/news/nationworld/politics/ct-trump-charlottesville-violence-20170812-story.html"
+            },
+            {
+                "article_id": "232be030-804b-11e7-b89c-b3951ad1b925",
+                "fb_post_id": "9124187907_10156231562862908",
+                "headline": "Mother Of Charlottesville Victim Heather Heyer: 'I’m Proud Of What She Did'",
+                "description": "\"I want her death to be a rallying cry for justice,\" Susan Bro told HuffPost.",
+                "fb_total_interactions": 161923,
+                "created_at": 1502647806000,
+                "article_url": "http://www.huffingtonpost.com/entry/mother-of-charlottesville-victim-heather-heyer-im-proud-of-what-she-did_us_59907c45e4b09071f69a796c"
+            },
+            {
+                "article_id": "e3c52d10-7d08-11e7-b37d-8972c3c8a811",
+                "fb_post_id": "9124187907_10156223123517908",
+                "headline": "Orlando Becomes 40th City to Commit to 100% Renewable Energy",
+                "description": "\"All across our state and our nation, cities are committing to a future powered by 100 percent clean and renewable energy for all.\"",
+                "fb_total_interactions": 49137,
+                "created_at": 1502419020000,
+                "article_url": "https://www.ecowatch.com/orlando-renewable-energy-2470947578.html"
+            },
+            {
+                "article_id": "52af27e0-7f88-11e7-927a-ebb7ea9adb61",
+                "fb_post_id": "9124187907_10156234293192908",
+                "headline": "KING: Charlottesville is an ugly reminder racism thrives in 2017",
+                "description": "If you ever wondered what it would be like to live in 1937 or 1957, you don't have to look far. We are living in it.",
+                "fb_total_interactions": 21361,
+                "created_at": 1502730360000,
+                "article_url": "http://www.nydailynews.com/news/national/king-charlottesville-ugly-reminder-racism-thrives-2017-article-1.3406189"
+            }
+        ]
+    }
+]
+```
+
+`POST /v1/facebookInfluencers`
+
+This endpoint show the Facebook users that have the most influence on stories related to your search.
+
+### Parameters
+
+* Facebook Influencer are filtered and sorted using the following `JSON` encoded parameters
+* Required fields are denoted *
+* Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
+* As the facebookInfluencers is aggregating a large about of data it can take up to 5 seconds to return.
+* If a query String is passed into the filter it will search on headline, authors and summary.
+
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+filters* |  | Array[String] | Can use the following filters publisher, categories, countryCode, headline, summary, region_code, language, domain
+from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
+to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
+language | | String
+size | 200 | number | Number of influencer to return (max 500)
+
+# Entities
 
 ### Supported languages
 
@@ -1016,9 +1272,6 @@ Sorani | ku
 Thai | th
 
 
-
-# Entities
-
 ## Article
 
 Field | Description
@@ -1053,10 +1306,10 @@ page_id | Id of Facebook Page
 page_name | Name of Facebook Page 
 post_type | Type of Post eg. Status
 is_live_video | Is content live video
-fb_story | is a description generated by facebook about an event eg. when two people become friends
-fb_sponsor_tags | facebook sponsors if available
+fb_story | is a description generated by Facebook about an event eg. when two people become friends
+fb_sponsor_tags | Facebook sponsors if available
 fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
-reactions| An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)
+reactions| An object describing the Facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)
 uuid | Newswhip's unique story identifier
 publication_timestamp | Timestamp representing when the article was published
 link | Link of the post
@@ -1079,3 +1332,24 @@ Field | Description
 --------- | -----------
 id |  NewsWhip's unique id for this Topic
 name |  English name for this topic
+
+## TwitterInfluencer
+id | twitter id of the influencer
+twitter_handle | The twitter handle of the influencer
+likes_count | Number of likes this user has
+followers_count | Number of followers this user has
+following_count | Number of accounts this user is following
+statuses_count | Number of statuses this user has posted
+max_retweet_value | The number of retweets on this uses most influenced article
+social_referrals | List of the social referrals of a user
+
+## FacebookInfluencer
+
+fb_page_id | The Facebook page id of the influencer
+fb_username | The Facebook username of the influencer
+about | The description on the Facebook page of the influencer
+followers_count | The number of users following this user on Facebook
+likes_count | The number of likes this user has on Facebook
+profile_image | The URL of the users profile picture
+max_fb_interactions | The number of interaction on the users most influenced stories
+social_referrals | The list of articles that this user has influenced
