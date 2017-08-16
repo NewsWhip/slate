@@ -78,7 +78,7 @@ All region, publisher, local and search endpoints support the following Query Pa
 Parameter | Default | Description
 --------- | ------- | -----------
 video_only | false | If set to true, the result will ONLY include content with embedded video.
-sort_by | default | Defines how the articles are ranked. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `predicted_interactions`
+sort_by | default | Sorts articles in descending order. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `predicted_interactions`
 size |  | Number of articles to be returned (including related articles).
 
 To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:
@@ -389,13 +389,13 @@ The POST API endpoints are designed for increased flexibility and are much more 
 There are 2 different endpoints:
 
 * `POST /v1/articles` - provides stories(web articles, youtube post) matching the query provided
-* `POST /v1/fbPosts` - provides facebook posts matching the query provided 
+* `POST /v1/fbPosts` - provides Facebook posts matching the query provided 
 * `POST /v1/stats` - provides stats on the content matching the query provided
 
 
 ## POST /v1/articles
 
-> Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headlien and are not published in youtube.com over the last 7 days
+> Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headline and are not published in youtube.com over the last 7 days
 
 ``` shell
 curl -H "Content-Type: application/json" -X POST -d '{
@@ -612,12 +612,12 @@ This endpoint retrieves all articles matching the filters provided.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
-language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
-sort_by |`default` | String | One of the following: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_overperforming`)
-sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at`
+language | Any | Two letter ISO 639-1 language code | See available languages <a href="#supported-languages">here</a>
+sort_by |`default` | String | Sorts one of the following in descending order: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_overperforming`)
+sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort in descending order by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at`
 video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
 default_fields | [<code style="white-space:nowrap">"headline"</code>, <code style="white-space:nowrap">"summary"</code>, <code style="white-space:nowrap">"authors"</code>] | Array[String] | Up to 3 available fields to be used filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
@@ -650,11 +650,11 @@ siteStructure| Handy for articles that follows a particular path on a site, e.g:
 
 ## POST /v1/fbPosts
 
-> Get all facebook posts from Donald J. Trump's fb page that of content-type status and sort by the number of likes
+> Get all Facebook posts from Donald J. Trump's fb page that of content-type status and sort by the number of likes
 
 ``` shell
 curl --request POST \
-  --url 'https://api.newswhip.com/api/v1/fbPosts?key=YOUR_API_KEY' \
+  --url 'https://api.newswhip.com/v1/fbPosts?key=YOUR_API_KEY' \
   --header 'content-type: application/json' \
   --data '{"filters": ["country_code:us"],  "sort_by":"fb_likes", "content_type":"Status"}'
 ```
@@ -753,14 +753,14 @@ This endpoint retrieves articles from Facebook matching your filters.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters to be applied to the fbPosts. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering down below
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
-language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
+language | Any | Two letter ISO 639-1 language code | See available languages <a href="#supported-languages">here</a>
 default_fields | [ <code style="white-space:nowrap">`page_name`</code>, <code style="white-space:nowrap">`external_link`</code>] | Array[String] |Up to 3 available fields to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of articles to be returned (includes relatedStories.)
 content_type| | String | `video`, `live_video`, `link`, `photo`, `status`, `branded_content`, `event`
-sort_by | `default` | String | `default`,`nw_max_score`,`fb_overperforming`, `fb_total_engagement`, `created_at` `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.(The `default` sort_by is `nw_max score` when the selected time-range is <= 25h, otherwise it will be `fb_overperforming`)
+sort_by | `default` | String | Sorts by the following in descending order`default`,`nw_max_score`,`fb_overperforming`, `fb_total_engagement`, `created_at` `fb_likes`, `fb_shares`, `fb_comments`, `fb_loves`, `fb_wows`, `fb_hahas`, `fb_sads`, `fb_angrys`.(The `default` sort_by is `nw_max score` when the selected time-range is <= 25h, otherwise it will be `fb_overperforming`)
 
 ### Available fields for filtering Facebook Posts
 
@@ -878,11 +878,11 @@ This endpoint retrieves stats for articles matching your filters.
 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
-filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
+filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description) filters are allowed to be applied to the articles. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: `country_code:us` counts as 1 Term, `country_code:(us AND uk)` counts as 2 Terms, `headline: “The Right Way”` counts as 3 terms". See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
-language | Any | Two letter ISO 639-1 language code | See availalbe languages <a href="#supported-languages">here</a>
-sort_by |`default` | String | One of the following: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_overperforming`)
+language | Any | Two letter ISO 639-1 language code | See available languages <a href="#supported-languages">here</a>
+sort_by |`default` | String | One of the following in descending order: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_overperforming`)
 sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at`
 video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
@@ -895,12 +895,12 @@ content_type | stories | String | Filters by `stories` or `youtube`
 
 ## POST /v1/trendingEntities
 
-> Get the top entities that have becomne trending in the last x hours
+> Get the top entities that have become trending in the last x hours
 
 
 ``` shell
 curl -X POST \
-  'http://localhost:9000/api/v1/trendingEntities?key=YOUR_API_KEY' \
+  'http://api.newswhip.com/v1/trendingEntities?key=YOUR_API_KEY' \
   -H 'content-type: application/json' \
   -d '{
    "filters": [],
@@ -913,7 +913,7 @@ curl -X POST \
 <?php
 
 $request = new HttpRequest();
-$request->setUrl('http://localhost:9000/api/v1/trendingEntities');
+$request->setUrl('http://st:9000/api/v1/trendingEntities');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setQueryData(array(
@@ -968,6 +968,7 @@ This endpoint gets the trending entity over a certain {time in hours}. A trendin
 * Required fields are denoted *
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
 * As the trendingEntities is aggregating a large about of data it can take up to 5 seconds to return.
+* The max number of trending entities returned is 15 but it can be less if you search is more specific
 
 
 Parameter | Default | Type | Description
@@ -980,12 +981,12 @@ to | Now | Unix timestamp in milliseconds | Filters articles published before `{
 
 ## POST /v1/twitterInfluencers
 
-> Get the top Influencers on twitter for a particluar query
+> Get the top Influencers on twitter for a particular query
 
 
 ``` shell
 curl -X POST \
-  'http://localhost:9000/api/v1/twitterInfluencers?key=TESTKEY123' \
+  'http://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'postman-token: febf25b3-4a8c-e754-0dfd-344e4f73d950' \
@@ -999,7 +1000,7 @@ curl -X POST \
 <?php
 
 $request = new HttpRequest();
-$request->setUrl('http://localhost:9000/api/v1/twitterInfluencers');
+$request->setUrl('http://api.newswhip.com/v1/twitterInfluencers');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setQueryData(array(
@@ -1103,6 +1104,7 @@ This endpoint show the twitter uses that have the most influence on stories rela
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
 * As the twitterInfluencers is aggregating a large about of data it can take up to 5 seconds to return.
 * If a query String is passed into the filter it will search on headline, authors and summary.
+* The results are sorted number of retweets
 
 
 Parameter | Default | Type | Description
@@ -1113,14 +1115,14 @@ to | Now | Unix timestamp in milliseconds | Filters articles published before `{
 language | | String
 size | 200 | number | Number of influencer to return (max 500)
 
-## POST /v1/facebookInfluencers
+## POST /v1/fbInfluencers
 
 > Get the top Facebook influencer for a particular query.
 
 
 ``` shell
 curl -X POST \
-  'http://localhost:9000/api/v1/facebookInfluencers?key=TESTKEY123' \
+  'http://api.newswhip.com/v1/facebookInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'postman-token: aa66ba20-a73c-e673-a090-273b7ac8e796' \
@@ -1133,7 +1135,7 @@ curl -X POST \
 <?php
 
 $request = new HttpRequest();
-$request->setUrl('http://localhost:9000/api/v1/facebookInfluencers');
+$request->setUrl('http://api.newswhip.com/v1/facebookInfluencers');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setQueryData(array(
@@ -1223,6 +1225,7 @@ This endpoint show the Facebook users that have the most influence on stories re
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
 * As the facebookInfluencers is aggregating a large about of data it can take up to 5 seconds to return.
 * If a query String is passed into the filter it will search on headline, authors and summary.
+* The results are sorted total number of Facebook interactions
 
 
 Parameter | Default | Type | Description
@@ -1334,7 +1337,9 @@ id |  NewsWhip's unique id for this Topic
 name |  English name for this topic
 
 ## TwitterInfluencer
-id | twitter id of the influencer
+Field | Description
+--------- | -----------
+twitter_id | twitter id of the influencer
 twitter_handle | The twitter handle of the influencer
 likes_count | Number of likes this user has
 followers_count | Number of followers this user has
@@ -1343,8 +1348,20 @@ statuses_count | Number of statuses this user has posted
 max_retweet_value | The number of retweets on this uses most influenced article
 social_referrals | List of the social referrals of a user
 
-## FacebookInfluencer
+## Social Referral (Twitter)
+Field | Description
+--------- | -----------    
+article_id | id of the article
+twitter_url | URl of the Twitter post
+favourite_count | The number of favorites this user has
+rt_count | The number of times the user has retweeted
+created_at | The date the article was created at
+description | Description of the article
+article_url | The original URL of the article
 
+## FacebookInfluencer
+Field | Description
+--------- | -----------
 fb_page_id | The Facebook page id of the influencer
 fb_username | The Facebook username of the influencer
 about | The description on the Facebook page of the influencer
@@ -1353,3 +1370,20 @@ likes_count | The number of likes this user has on Facebook
 profile_image | The URL of the users profile picture
 max_fb_interactions | The number of interaction on the users most influenced stories
 social_referrals | The list of articles that this user has influenced
+
+## Social Referral (Facebook)
+Field | Description
+--------- | -----------
+article_id | id of the article
+fb_post_id | Facebook Post Id
+headline | The headline of the article
+description | A description of the article
+fb_total_interactions | The total number of interactions on the Facebook post
+created_at | Unix timestamp for the time the article was posted
+article_url | The URL of the article influenced by the influencer
+
+
+
+
+
+
