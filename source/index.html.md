@@ -989,7 +989,6 @@ curl -X POST \
   'http://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
-  -H 'postman-token: febf25b3-4a8c-e754-0dfd-344e4f73d950' \
   -d '{
 "filters":["countryCode:us"],
 "size":250
@@ -1008,7 +1007,6 @@ $request->setQueryData(array(
 ));
 
 $request->setHeaders(array(
-  'postman-token' => '0852de28-170e-b2eb-373a-9604fd946f43',
   'cache-control' => 'no-cache',
   'content-type' => 'application/json'
 ));
@@ -1105,7 +1103,6 @@ curl -X POST \
   'http://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
-  -H 'postman-token: aa66ba20-a73c-e673-a090-273b7ac8e796' \
   -d '{
 "filters":[]
 }'
@@ -1123,7 +1120,6 @@ $request->setQueryData(array(
 ));
 
 $request->setHeaders(array(
-  'postman-token' => 'cb82aa90-c5f5-ae9b-6786-dcf488c738fa',
   'cache-control' => 'no-cache',
   'content-type' => 'application/json'
 ));
