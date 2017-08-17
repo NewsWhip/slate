@@ -223,7 +223,7 @@ $(document).ready(function() {
 <tr>
 <td>sort_by</td>
 <td>default</td>
-<td>Defines how the articles are ranked. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">predicted_interactions</code></td>
+<td>Sorts articles in descending order. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">predicted_interactions</code></td>
 </tr>
 <tr>
 <td>size</td>
@@ -585,14 +585,14 @@ $(document).ready(function() {
 
 <ul>
 <li><code class="prettyprint">POST /v1/articles</code> - provides stories(web articles, youtube post) matching the query provided</li>
-<li><code class="prettyprint">POST /v1/fbPosts</code> - provides facebook posts matching the query provided </li>
+<li><code class="prettyprint">POST /v1/fbPosts</code> - provides Facebook posts matching the query provided </li>
 <li><code class="prettyprint">POST /v1/stats</code> - provides stats on the content matching the query provided</li>
 </ul>
 
 <h2 id="post-v1-articles">POST /v1/articles</h2>
 
 <blockquote>
-<p>Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headlien and are not published in youtube.com over the last 7 days</p>
+<p>Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headline and are not published in youtube.com over the last 7 days</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
     "filters": ["country_code:(us OR gb) AND -publisher:youtube.com AND headline:rihanna"],
@@ -807,7 +807,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
 </tr>
 <tr>
 <td>from</td>
@@ -825,19 +825,19 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>language</td>
 <td>Any</td>
 <td>Two letter ISO 639-1 language code</td>
-<td>See availalbe languages <a href="#supported-languages">here</a></td>
+<td>See available languages <a href="#supported-languages">here</a></td>
 </tr>
 <tr>
 <td>sort_by</td>
 <td><code class="prettyprint">default</code></td>
 <td>String</td>
-<td>One of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
+<td>Sorts one of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
 </tr>
 <tr>
 <td>sort_by (Youtube)</td>
 <td><code class="prettyprint">created_at</code></td>
 <td>String</td>
-<td>When searching by the content_type <code class="prettyprint">youtube</code>, sort by <code class="prettyprint">yt_likes</code>, <code class="prettyprint">yt_views</code>, <code class="prettyprint">yt_comments</code>, <code class="prettyprint">yt_dislikes</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">created_at</code></td>
+<td>When searching by the content_type <code class="prettyprint">youtube</code>, sort in descending order by <code class="prettyprint">yt_likes</code>, <code class="prettyprint">yt_views</code>, <code class="prettyprint">yt_comments</code>, <code class="prettyprint">yt_dislikes</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">created_at</code></td>
 </tr>
 <tr>
 <td>video_only</td>
@@ -942,10 +942,10 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <h2 id="post-v1-fbposts">POST /v1/fbPosts</h2>
 
 <blockquote>
-<p>Get all facebook posts from Donald J. Trump&rsquo;s fb page that of content-type status and sort by the number of likes</p>
+<p>Get all Facebook posts from Donald J. Trump&rsquo;s fb page that of content-type status and sort by the number of likes</p>
 </blockquote>
 <pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
-  --url <span class="s1">'https://api.newswhip.com/api/v1/fbPosts?key=YOUR_API_KEY'</span> <span class="se">\</span>
+  --url <span class="s1">'https://api.newswhip.com/v1/fbPosts?key=YOUR_API_KEY'</span> <span class="se">\</span>
   --header <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   --data <span class="s1">'{"filters": ["country_code:us"],  "sort_by":"fb_likes", "content_type":"Status"}'</span>
 </code></pre>
@@ -1051,7 +1051,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the fbPosts. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the fbPosts. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
 </tr>
 <tr>
 <td>from</td>
@@ -1069,7 +1069,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>language</td>
 <td>Any</td>
 <td>Two letter ISO 639-1 language code</td>
-<td>See availalbe languages <a href="#supported-languages">here</a></td>
+<td>See available languages <a href="#supported-languages">here</a></td>
 </tr>
 <tr>
 <td>default_fields</td>
@@ -1093,7 +1093,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>sort_by</td>
 <td><code class="prettyprint">default</code></td>
 <td>String</td>
-<td><code class="prettyprint">default</code>,<code class="prettyprint">nw_max_score</code>,<code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">created_at</code> <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_loves</code>, <code class="prettyprint">fb_wows</code>, <code class="prettyprint">fb_hahas</code>, <code class="prettyprint">fb_sads</code>, <code class="prettyprint">fb_angrys</code>.(The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_overperforming</code>)</td>
+<td>Sorts by the following in descending order<code class="prettyprint">default</code>,<code class="prettyprint">nw_max_score</code>,<code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">created_at</code> <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_loves</code>, <code class="prettyprint">fb_wows</code>, <code class="prettyprint">fb_hahas</code>, <code class="prettyprint">fb_sads</code>, <code class="prettyprint">fb_angrys</code>.(The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_overperforming</code>)</td>
 </tr>
 </tbody></table>
 
@@ -1255,7 +1255,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>filters*</td>
 <td></td>
 <td>Array[String]</td>
-<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each fitler allowes up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&rdquo;. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&rdquo;. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.</td>
 </tr>
 <tr>
 <td>from</td>
@@ -1273,13 +1273,13 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>language</td>
 <td>Any</td>
 <td>Two letter ISO 639-1 language code</td>
-<td>See availalbe languages <a href="#supported-languages">here</a></td>
+<td>See available languages <a href="#supported-languages">here</a></td>
 </tr>
 <tr>
 <td>sort_by</td>
 <td><code class="prettyprint">default</code></td>
 <td>String</td>
-<td>One of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
+<td>One of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
 </tr>
 <tr>
 <td>sort_by (Youtube)</td>
@@ -1328,10 +1328,10 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <h2 id="post-v1-trendingentities">POST /v1/trendingEntities</h2>
 
 <blockquote>
-<p>Get the top entities that have becomne trending in the last x hours</p>
+<p>Get the top entities that have become trending in the last x hours</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
-  <span class="s1">'http://localhost:9000/api/v1/trendingEntities?key=YOUR_API_KEY'</span> <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/trendingEntities?key=YOUR_API_KEY'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
    "filters": [],
@@ -1342,7 +1342,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://localhost:9000/api/v1/trendingEntities'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://st:9000/api/v1/trendingEntities'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -1396,6 +1396,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <li>Required fields are denoted *</li>
 <li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
 <li>As the trendingEntities is aggregating a large about of data it can take up to 5 seconds to return.</li>
+<li>The max number of trending entities returned is 15 but it can be less if you search is more specific</li>
 </ul>
 
 <table><thead>
@@ -1425,6 +1426,302 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <td>Filters articles published before <code class="prettyprint">{to}</code></td>
 </tr>
 </tbody></table>
+
+<h2 id="post-v1-twitterinfluencers">POST /v1/twitterInfluencers</h2>
+
+<blockquote>
+<p>Get the top Influencers on twitter for a particular query</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -H <span class="s1">'postman-token: febf25b3-4a8c-e754-0dfd-344e4f73d950'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+"filters":["countryCode:us"],
+"size":250
+}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://api.newswhip.com/v1/twitterInfluencers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'TESTKEY123'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'postman-token'</span> <span class="o">=&gt;</span> <span class="s1">'0852de28-170e-b2eb-373a-9604fd946f43'</span><span class="p">,</span>
+  <span class="s1">'cache-control'</span> <span class="o">=&gt;</span> <span class="s1">'no-cache'</span><span class="p">,</span>
+  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'{
+"filters":["countryCode:us"],
+"size":250
+}'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"twitterInfluencers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"twitter_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">19394188</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"twitter_handle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SenJohnMcCain"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2439704</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">378</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"statuses_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">13287</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_retweet_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">37562</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"207d6140-7fb7-11e7-b89c-b3951ad1b925"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"twitter_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://twitter.com/any/status/896515795114766337"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"favourite_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">102465</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"rt_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">37562</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502580996000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington, D.C. – U.S. Senator John McCain (R-AZ) released the following statement today on the white supremacist attack in Charlottesville, Virginia:"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.mccain.senate.gov/public/index.cfm?p=press-releases&amp;id=64ED6753-345F-4F64-9B64-2D8BDAE952B5"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"twitter_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">592730371</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"twitter_handle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JackPosobiec"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">42372</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">184577</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">716</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"statuses_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100483</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_retweet_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">26625</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c12fb330-80ee-11e7-b89c-b3951ad1b925"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"twitter_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://twitter.com/any/status/897107711434915842"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"favourite_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">51500</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"rt_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">26625</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502722120000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nine people were killed and at least 30 others were wounded in shootings across Chicago between Friday night and Monday morning."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://abc7chicago.com/2305976/"</span><span class="w">
+                </span><span class="p">}</span><span class="w">        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/twitterInfluencers</code></p>
+
+<p>This endpoint show the twitter uses that have the most influence on stories related to your search.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Twitter Influencer are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>As the twitterInfluencers is aggregating a large about of data it can take up to 5 seconds to return.</li>
+<li>If a query String is passed into the filter it will search on headline, authors and summary.</li>
+<li>The results are sorted number of retweets</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Can use the following filters publisher, categories, countryCode, headline, summary, region_code, language, domain</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td></td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>number</td>
+<td>Number of influencer to return (max 500)</td>
+</tr>
+</tbody></table>
+
+<h2 id="post-v1-fbinfluencers">POST /v1/fbInfluencers</h2>
+
+<blockquote>
+<p>Get the top Facebook influencer for a particular query.</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -H <span class="s1">'postman-token: aa66ba20-a73c-e673-a090-273b7ac8e796'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+"filters":[]
+}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://api.newswhip.com/v1/fbInfluencers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'TESTKEY123'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'postman-token'</span> <span class="o">=&gt;</span> <span class="s1">'cb82aa90-c5f5-ae9b-6786-dcf488c738fa'</span><span class="p">,</span>
+  <span class="s1">'cache-control'</span> <span class="o">=&gt;</span> <span class="s1">'no-cache'</span><span class="p">,</span>
+  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'{
+"filters":[]
+}'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"fbInfluencers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"fb_page_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15704546335</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"fb_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FoxNews"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"about"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Welcome to the official Fox News facebook page.  Get breaking news, must see videos and exclusive interviews from the #1 name in news."</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15634977</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15634977</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"profile_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/417751_10150581617531336_1949382366_n.jpg?oh=be1fa613ac8f3c553749f213e5c2351a&amp;oe=5A197086"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_fb_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">587652</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27aeb210-8170-11e7-9a30-c9dd3e4cb15e"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_post_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15704546335_10155823554046336"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Iowa State Fair cow and boy taking nap wins the internet after photo goes viral"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This here is a little story about a boy and his cow."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">587652</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502816913000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"876a2d60-82ba-11e7-8b54-9f4c7b0f94de"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_post_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15704546335_10155831874366336"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gettysburg Stands Firm: Battlefield Says All Monuments Staying Put"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Officials at the Gettysburg National Military Park said Wednesday that the monuments at the expansive Pennsylvania battlefield will stay despite unrest over Confederate memorials."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">97525</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502931295000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://insider.foxnews.com/2017/08/16/gettysburg-confederate-monuments-not-moving-battlefield-says-pennsylvania-union"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"fb_page_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9124187907</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"fb_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"senatorsanders"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"about"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sen. Bernie Sanders of Vermont is the longest serving independent in U.S. congressional history."</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7371777</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7371777</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"profile_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scontent.xx.fbcdn.net/v/t1.0-1/c20.0.50.50/p50x50/400832_10151148541197908_1621512611_n.jpg?oh=1d45b3c211e83e5925b08bde7b25ca68&amp;oe=59F0258C"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_fb_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">311430</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2cff040-7fa3-11e7-927a-ebb7ea9adb61"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_post_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9124187907_10156228952697908"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trump blames 'many sides' after violent white supremacist rally in Virginia"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"President Donald Trump on Saturday blamed \"many sides\" for the violent clashes between protesters and white supremacists in Charlottesville, Virginia."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">311430</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502573718000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.chicagotribune.com/news/nationworld/politics/ct-trump-charlottesville-violence-20170812-story.html"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/fbInfluencers</code></p>
+
+<p>This endpoint show the Facebook users that have the most influence on stories related to your search.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Facebook Influencer are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>As the fbInfluencers is aggregating a large about of data it can take up to 5 seconds to return.</li>
+<li>If a query String is passed into the filter it will search on headline, authors and summary.</li>
+<li>The results are sorted total number of Facebook interactions</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Can use the following filters publisher, categories, countryCode, headline, summary, region_code, language, domain</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td></td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>number</td>
+<td>Number of influencer to return (max 500)</td>
+</tr>
+</tbody></table>
+
+<h1 id="entities">Entities</h1>
 
 <h3 id="supported-languages">Supported languages</h3>
 
@@ -1560,8 +1857,6 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 </tr>
 </tbody></table>
 
-<h1 id="entities">Entities</h1>
-
 <h2 id="article">Article</h2>
 
 <table><thead>
@@ -1678,11 +1973,11 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 </tr>
 <tr>
 <td>fb_story</td>
-<td>is a description generated by facebook about an event eg. when two people become friends</td>
+<td>is a description generated by Facebook about an event eg. when two people become friends</td>
 </tr>
 <tr>
 <td>fb_sponsor_tags</td>
-<td>facebook sponsors if available</td>
+<td>Facebook sponsors if available</td>
 </tr>
 <tr>
 <td>fb_data</td>
@@ -1690,7 +1985,7 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 </tr>
 <tr>
 <td>reactions</td>
-<td>An object descriping the facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)</td>
+<td>An object describing the Facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)</td>
 </tr>
 <tr>
 <td>uuid</td>
@@ -1772,6 +2067,166 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 </tr>
 </tbody></table>
 
+<h2 id="twitterinfluencer">TwitterInfluencer</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>twitter_id</td>
+<td>twitter id of the influencer</td>
+</tr>
+<tr>
+<td>twitter_handle</td>
+<td>The twitter handle of the influencer</td>
+</tr>
+<tr>
+<td>likes_count</td>
+<td>Number of likes this user has</td>
+</tr>
+<tr>
+<td>followers_count</td>
+<td>Number of followers this user has</td>
+</tr>
+<tr>
+<td>following_count</td>
+<td>Number of accounts this user is following</td>
+</tr>
+<tr>
+<td>statuses_count</td>
+<td>Number of statuses this user has posted</td>
+</tr>
+<tr>
+<td>max_retweet_value</td>
+<td>The number of retweets on this uses most influenced article</td>
+</tr>
+<tr>
+<td>social_referrals</td>
+<td>List of the social referrals of a user</td>
+</tr>
+</tbody></table>
+
+<h2 id="social-referral-twitter">Social Referral (Twitter)</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>article_id</td>
+<td>id of the article</td>
+</tr>
+<tr>
+<td>twitter_url</td>
+<td>URl of the Twitter post</td>
+</tr>
+<tr>
+<td>favourite_count</td>
+<td>The number of favorites this user has</td>
+</tr>
+<tr>
+<td>rt_count</td>
+<td>The number of times the user has retweeted</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>The date the article was created at</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the article</td>
+</tr>
+<tr>
+<td>article_url</td>
+<td>The original URL of the article</td>
+</tr>
+</tbody></table>
+
+<h2 id="facebookinfluencer">FacebookInfluencer</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fb_page_id</td>
+<td>The Facebook page id of the influencer</td>
+</tr>
+<tr>
+<td>fb_username</td>
+<td>The Facebook username of the influencer</td>
+</tr>
+<tr>
+<td>about</td>
+<td>The description on the Facebook page of the influencer</td>
+</tr>
+<tr>
+<td>followers_count</td>
+<td>The number of users following this user on Facebook</td>
+</tr>
+<tr>
+<td>likes_count</td>
+<td>The number of likes this user has on Facebook</td>
+</tr>
+<tr>
+<td>profile_image</td>
+<td>The URL of the users profile picture</td>
+</tr>
+<tr>
+<td>max_fb_interactions</td>
+<td>The number of interaction on the users most influenced stories</td>
+</tr>
+<tr>
+<td>social_referrals</td>
+<td>The list of articles that this user has influenced</td>
+</tr>
+</tbody></table>
+
+<h2 id="social-referral-facebook">Social Referral (Facebook)</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>article_id</td>
+<td>id of the article</td>
+</tr>
+<tr>
+<td>fb_post_id</td>
+<td>Facebook Post Id</td>
+</tr>
+<tr>
+<td>headline</td>
+<td>The headline of the article</td>
+</tr>
+<tr>
+<td>description</td>
+<td>A description of the article</td>
+</tr>
+<tr>
+<td>fb_total_interactions</td>
+<td>The total number of interactions on the Facebook post</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Unix timestamp for the time the article was posted</td>
+</tr>
+<tr>
+<td>article_url</td>
+<td>The URL of the article influenced by the influencer</td>
+</tr>
+</tbody></table>
+
           <h1 id="errors">Errors</h1>
 
 <p>The NewsWhip API uses the following error codes:</p>
@@ -1825,6 +2280,13 @@ curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
 <p>We don&rsquo;t currently support JSONP.</p>
 
 <h1 id="changelog">Changelog</h1>
+
+<h3 id="version-1-0-9-2017-08-15">Version 1.0.9 (2017-08-15)</h3>
+
+<ul>
+<li>Added twitterInfluencer endpoint</li>
+<li>Added facebookInflunecer endpoint</li>
+</ul>
 
 <h3 id="version-1-0-8-2017-06-12">Version 1.0.8 (2017-06-12)</h3>
 
