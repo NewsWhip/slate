@@ -1029,66 +1029,46 @@ try {
 ```
 
 ```json
-[
-    {
-        "id": 19394188,
-        "twitter_handle": "SenJohnMcCain",
-        "likes_count": 44,
-        "followers_count": 2420952,
-        "following_count": 378,
-        "statuses_count": 13275,
-        "max_retweet_value": 37155,
-        "social_referrals": [
-            {
-                "article_id": "207d6140-7fb7-11e7-b89c-b3951ad1b925",
-                "twitter_url": "https://twitter.com/any/status/896515795114766337",
-                "favourite_count": 101087,
-                "rt_count": 37155,
-                "created_at": 1502580996000,
-                "description": "Washington, D.C. – U.S. Senator John McCain (R-AZ) released the following statement today on the white supremacist attack in Charlottesville, Virginia:",
-                "article_url": "https://www.mccain.senate.gov/public/index.cfm?p=press-releases&id=64ED6753-345F-4F64-9B64-2D8BDAE952B5"
-            }
-        ]
-    },
-    {
-        "id": 25073877,
-        "twitter_handle": "realDonaldTrump",
-        "likes_count": 13,
-        "followers_count": 35875762,
-        "following_count": 45,
-        "statuses_count": 35546,
-        "max_retweet_value": 19712,
-        "social_referrals": [
-            {
-                "article_id": "eb7b2b50-7c5d-11e7-b37d-8972c3c8a811",
-                "twitter_url": "https://twitter.com/any/status/895794792747216896",
-                "favourite_count": 77366,
-                "rt_count": 19712,
-                "created_at": 1502409096000,
-                "description": "President Trump is the new 'comeback kid,' with his approval rating in a new national poll rebounding after a freefall.",
-                "article_url": "http://www.washingtonexaminer.com/trump-approval-rebounds-to-45-surges-among-hispanics-union-homes-men/article/2630910"
-            }
-        ]
-    },
-    {
-        "id": 16299301,
-        "twitter_handle": "audrawilliams",
-        "likes_count": 6379,
-        "followers_count": 5428,
-        "following_count": 3542,
-        "statuses_count": 23797,
-        "max_retweet_value": 15821,
-        "social_referrals": [
-            {
-                "article_id": "b573f800-7fd4-11e7-9a30-c9dd3e4cb15e",
-                "twitter_url": "https://twitter.com/any/status/896717616600895488",
-                "favourite_count": 18928,
-                "rt_count": 15821,
-                "created_at": 1502629114000,
-                "description": "State police and national guardsmen watched passively for hours as self-proclaimed Nazis engaged in street battles with counter-protesters. ProPublica reporter A.C. Thompson was on the scene and reports that the authorities turned the streets of the city over to groups of militiamen armed with assau",
-                "article_url": "https://www.propublica.org/article/police-stood-by-as-mayhem-mounted-in-charlottesville"
-            }
-        ]
+{
+    "twitterInfluencers": [
+        {
+            "twitter_id": 19394188,
+            "twitter_handle": "SenJohnMcCain",
+            "likes_count": 44,
+            "followers_count": 2439704,
+            "following_count": 378,
+            "statuses_count": 13287,
+            "max_retweet_value": 37562,
+            "social_referrals": [
+                {
+                    "article_id": "207d6140-7fb7-11e7-b89c-b3951ad1b925",
+                    "twitter_url": "https://twitter.com/any/status/896515795114766337",
+                    "favourite_count": 102465,
+                    "rt_count": 37562,
+                    "created_at": 1502580996000,
+                    "description": "Washington, D.C. – U.S. Senator John McCain (R-AZ) released the following statement today on the white supremacist attack in Charlottesville, Virginia:",
+                    "article_url": "https://www.mccain.senate.gov/public/index.cfm?p=press-releases&id=64ED6753-345F-4F64-9B64-2D8BDAE952B5"
+                }
+            ]
+        },
+        {
+            "twitter_id": 592730371,
+            "twitter_handle": "JackPosobiec",
+            "likes_count": 42372,
+            "followers_count": 184577,
+            "following_count": 716,
+            "statuses_count": 100483,
+            "max_retweet_value": 26625,
+            "social_referrals": [
+                {
+                    "article_id": "c12fb330-80ee-11e7-b89c-b3951ad1b925",
+                    "twitter_url": "https://twitter.com/any/status/897107711434915842",
+                    "favourite_count": 51500,
+                    "rt_count": 26625,
+                    "created_at": 1502722120000,
+                    "description": "Nine people were killed and at least 30 others were wounded in shootings across Chicago between Friday night and Monday morning.",
+                    "article_url": "http://abc7chicago.com/2305976/"
+                }        ]
     }
   ]
 ```
@@ -1122,7 +1102,7 @@ size | 200 | number | Number of influencer to return (max 500)
 
 ``` shell
 curl -X POST \
-  'http://api.newswhip.com/v1/facebookInfluencers?key=TESTKEY123' \
+  'http://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'postman-token: aa66ba20-a73c-e673-a090-273b7ac8e796' \
@@ -1135,7 +1115,7 @@ curl -X POST \
 <?php
 
 $request = new HttpRequest();
-$request->setUrl('http://api.newswhip.com/v1/facebookInfluencers');
+$request->setUrl('http://api.newswhip.com/v1/fbInfluencers');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setQueryData(array(
@@ -1163,58 +1143,59 @@ try {
 ```
 
 ```json
-[
-    {
-        "fb_page_id": 9124187907,
-        "fb_username": "senatorsanders",
-        "about": "Sen. Bernie Sanders of Vermont is the longest serving independent in U.S. congressional history.",
-        "followers_count": 7365398,
-        "likes_count": 7365398,
-        "profile_image": "https://scontent.xx.fbcdn.net/v/t1.0-1/c20.0.50.50/p50x50/400832_10151148541197908_1621512611_n.jpg?oh=1d45b3c211e83e5925b08bde7b25ca68&oe=59F0258C",
-        "max_fb_interactions": 309693,
-        "social_referrals": [
-            {
-                "article_id": "f2cff040-7fa3-11e7-927a-ebb7ea9adb61",
-                "fb_post_id": "9124187907_10156228952697908",
-                "headline": "Trump blames 'many sides' after violent white supremacist rally in Virginia",
-                "description": "President Donald Trump on Saturday blamed \"many sides\" for the violent clashes between protesters and white supremacists in Charlottesville, Virginia.",
-                "fb_total_interactions": 309693,
-                "created_at": 1502573718000,
-                "article_url": "http://www.chicagotribune.com/news/nationworld/politics/ct-trump-charlottesville-violence-20170812-story.html"
-            },
-            {
-                "article_id": "232be030-804b-11e7-b89c-b3951ad1b925",
-                "fb_post_id": "9124187907_10156231562862908",
-                "headline": "Mother Of Charlottesville Victim Heather Heyer: 'I’m Proud Of What She Did'",
-                "description": "\"I want her death to be a rallying cry for justice,\" Susan Bro told HuffPost.",
-                "fb_total_interactions": 161923,
-                "created_at": 1502647806000,
-                "article_url": "http://www.huffingtonpost.com/entry/mother-of-charlottesville-victim-heather-heyer-im-proud-of-what-she-did_us_59907c45e4b09071f69a796c"
-            },
-            {
-                "article_id": "e3c52d10-7d08-11e7-b37d-8972c3c8a811",
-                "fb_post_id": "9124187907_10156223123517908",
-                "headline": "Orlando Becomes 40th City to Commit to 100% Renewable Energy",
-                "description": "\"All across our state and our nation, cities are committing to a future powered by 100 percent clean and renewable energy for all.\"",
-                "fb_total_interactions": 49137,
-                "created_at": 1502419020000,
-                "article_url": "https://www.ecowatch.com/orlando-renewable-energy-2470947578.html"
-            },
-            {
-                "article_id": "52af27e0-7f88-11e7-927a-ebb7ea9adb61",
-                "fb_post_id": "9124187907_10156234293192908",
-                "headline": "KING: Charlottesville is an ugly reminder racism thrives in 2017",
-                "description": "If you ever wondered what it would be like to live in 1937 or 1957, you don't have to look far. We are living in it.",
-                "fb_total_interactions": 21361,
-                "created_at": 1502730360000,
-                "article_url": "http://www.nydailynews.com/news/national/king-charlottesville-ugly-reminder-racism-thrives-2017-article-1.3406189"
-            }
+{
+    "fbInfluencers": [
+        {
+            "fb_page_id": 15704546335,
+            "fb_username": "FoxNews",
+            "about": "Welcome to the official Fox News facebook page.  Get breaking news, must see videos and exclusive interviews from the #1 name in news.",
+            "followers_count": 15634977,
+            "likes_count": 15634977,
+            "profile_image": "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/417751_10150581617531336_1949382366_n.jpg?oh=be1fa613ac8f3c553749f213e5c2351a&oe=5A197086",
+            "max_fb_interactions": 587652,
+            "social_referrals": [
+                {
+                    "article_id": "27aeb210-8170-11e7-9a30-c9dd3e4cb15e",
+                    "fb_post_id": "15704546335_10155823554046336",
+                    "headline": "Iowa State Fair cow and boy taking nap wins the internet after photo goes viral",
+                    "description": "This here is a little story about a boy and his cow.",
+                    "fb_total_interactions": 587652,
+                    "created_at": 1502816913000,
+                    "article_url": "http://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"
+                },
+                {
+                    "article_id": "876a2d60-82ba-11e7-8b54-9f4c7b0f94de",
+                    "fb_post_id": "15704546335_10155831874366336",
+                    "headline": "Gettysburg Stands Firm: Battlefield Says All Monuments Staying Put",
+                    "description": "Officials at the Gettysburg National Military Park said Wednesday that the monuments at the expansive Pennsylvania battlefield will stay despite unrest over Confederate memorials.",
+                    "fb_total_interactions": 97525,
+                    "created_at": 1502931295000,
+                    "article_url": "http://insider.foxnews.com/2017/08/16/gettysburg-confederate-monuments-not-moving-battlefield-says-pennsylvania-union"
+                }
         ]
-    }
+    },
+    {
+            "fb_page_id": 9124187907,
+            "fb_username": "senatorsanders",
+            "about": "Sen. Bernie Sanders of Vermont is the longest serving independent in U.S. congressional history.",
+            "followers_count": 7371777,
+            "likes_count": 7371777,
+            "profile_image": "https://scontent.xx.fbcdn.net/v/t1.0-1/c20.0.50.50/p50x50/400832_10151148541197908_1621512611_n.jpg?oh=1d45b3c211e83e5925b08bde7b25ca68&oe=59F0258C",
+            "max_fb_interactions": 311430,
+            "social_referrals": [
+                {
+                    "article_id": "f2cff040-7fa3-11e7-927a-ebb7ea9adb61",
+                    "fb_post_id": "9124187907_10156228952697908",
+                    "headline": "Trump blames 'many sides' after violent white supremacist rally in Virginia",
+                    "description": "President Donald Trump on Saturday blamed \"many sides\" for the violent clashes between protesters and white supremacists in Charlottesville, Virginia.",
+                    "fb_total_interactions": 311430,
+                    "created_at": 1502573718000,
+                    "article_url": "http://www.chicagotribune.com/news/nationworld/politics/ct-trump-charlottesville-violence-20170812-story.html"
+                }
 ]
 ```
 
-`POST /v1/facebookInfluencers`
+`POST /v1/fbInfluencers`
 
 This endpoint show the Facebook users that have the most influence on stories related to your search.
 
@@ -1223,7 +1204,7 @@ This endpoint show the Facebook users that have the most influence on stories re
 * Facebook Influencer are filtered and sorted using the following `JSON` encoded parameters
 * Required fields are denoted *
 * Filtering by category or country requires ids which can be found here: [NewsWhip API Coverage](https://www.newswhip.com/coverage/)
-* As the facebookInfluencers is aggregating a large about of data it can take up to 5 seconds to return.
+* As the fbInfluencers is aggregating a large about of data it can take up to 5 seconds to return.
 * If a query String is passed into the filter it will search on headline, authors and summary.
 * The results are sorted total number of Facebook interactions
 
