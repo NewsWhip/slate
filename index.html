@@ -1,0 +1,2364 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="images/favicon-32x32.png" rel="icon" type="image/png" />
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference | NewsWhip</title>
+
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+    <script>
+//This is Google's default GA code
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-18201240-15', 'auto');
+ga('send', 'pageview');
+//This does hash-click tracking (inspired by http://stackoverflow.com/a/4813223)
+$(document).ready(function() {
+  $('.tocify-item a').on('click', function(){
+    ga('send', 'pageview', {'page': location.pathname + location.search  + location.hash});
+  });
+});
+</script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="php">php</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#getting-api-access'>Sign Up for a Developer Key</a></li>
+            <li><p>© 2016 NewsWhip Media Ltd.</p></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="overview">Overview</h1>
+
+<p>Welcome to the NewsWhip API documentation. The NewsWhip API provides access to real time data trends, aggregate data, statistics, and social numbers for all content we have been tracking since January 1, 2014 - hundreds of millions of stories, fully categorised and ranked.</p>
+
+<p>The NewsWhip API is language agnostic. Any HTTP client or library can be used with this API.</p>
+
+<p>This documentation is open source. If you&rsquo;ve found any errors, typos or would like to improve this document, feel free to send us a pull request: <a href="http://github.com/NewsWhip/slate">GitHub</a>.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<p>All NewsWhip API endpoints require an API key. Your API key should be passed with each <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request as a Query String.</p>
+
+<p><code class="prettyprint">GET /v1/region/U.S./Politics/24?key=YOUR_API_KEY</code></p>
+
+<p><code class="prettyprint">POST /v1/articles?key=YOUR_API_KEY</code></p>
+
+<aside class="warning">Your API key should be treated as a password. It should be kept secret at all times.</aside>
+
+<h2 id="getting-api-access">Getting API Access</h2>
+
+<p>Our API is made available to NewsWhip clients and developers who wish to work with streams of trending content in any niche. Right now, it&rsquo;s powering widgets on major news sites, internal dashboards, and mobile apps in Europe and North America.</p>
+
+<p>For details on getting access, email: <a href="mailto:api@newswhip.com">api@newswhip.com</a>.</p>
+
+<h1 id="rate-limits">Rate Limits</h1>
+
+<p>By default, API keys have limits of 100 API requests per 5 minutes. Once you exceed this limit, calls will return:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Contact us at api@newswhip.com if your application requires higher limits.</aside>
+
+<h1 id="api-endpoints">API Endpoints</h1>
+
+<p>NewsWhip provides 2 different endpoints designed for different use cases, each available at varying commercial rates.</p>
+
+<ul>
+<li><code class="prettyprint">GET</code> requests: best suited for finding real-time trending articles in any niche and social network, with or without video and published in any country up to a week ago.</li>
+<li><code class="prettyprint">POST</code> requests: best suited for very precise article filtering, real-time analytics, aggregations and reporting. These APIs slice and dice our data in any form you want.</li>
+</ul>
+
+<h3 id="https-endpoint">HTTPS Endpoint</h3>
+
+<p><code class="prettyprint">https://api.newswhip.com/</code></p>
+
+<h1 id="get-requests">GET Requests</h1>
+
+<p>The real-time GET API endpoints are designed to mirror Spike&rsquo;s functionality. You can get all trending content in any Niche or Region, ordered by any social metric.</p>
+
+<p>There are 5 different endpoints:</p>
+
+<ul>
+<li><code class="prettyprint">GET /v1/region/{region}/{category}/{time_period}</code></li>
+<li><code class="prettyprint">GET /v1/publisher/{publisher}/{time_period}</code></li>
+<li><code class="prettyprint">GET /v1/local/{city}/All/{time_period}</code></li>
+<li><code class="prettyprint">GET /v1/search?q={search_term}</code></li>
+<li><code class="prettyprint">GET /v1/trendingEntities?timeRange{time in hours}&amp;q={search_term}</code></li>
+</ul>
+
+<p>All region, publisher, local and search endpoints support the following Query Parameters:</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>video_only</td>
+<td>false</td>
+<td>If set to true, the result will ONLY include content with embedded video.</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>default</td>
+<td>Sorts articles in descending order. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">predicted_interactions</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td></td>
+<td>Number of articles to be returned (including related articles).</td>
+</tr>
+</tbody></table>
+
+<p>To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:</p>
+
+<h3 id="available-regions-and-categories">Available Regions and Categories</h3>
+
+<p><code class="prettyprint">GET /v1/region</code></p>
+
+<h3 id="sample-of-publishers-we-support">Sample of publishers we support</h3>
+
+<p><code class="prettyprint">GET /v1/publisher</code></p>
+
+<h3 id="available-cities-and-local-regions">Available cities and local regions</h3>
+
+<p><code class="prettyprint">GET /v1/local</code></p>
+
+<h2 id="get-v1-region">GET /v1/region</h2>
+
+<blockquote>
+<p>Get the top trending English content published in the last 24 hours</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/region/World/All/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.fcbarcelona.com/football/first-team/news/2016-2017/fc-barcelona-v-leicester-city-victory-in-the-battle-of-champions-4-2-"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FC Barcelona v Leicester City: Victory in the battle of champions (4-2) | FC Barcelona"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goals from Munir (2) and Luis Suárez put Barça in early command, and a late strike from Mújica puts paid to Premiership champions’ bid to make a comeback"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcbarcelona.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://fcbarcelona.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">637.4492809499226</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">3814.5714659846194</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">62988</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">9820</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9cb602c0-59b7-11e6-aec9-8557dc1ae32f"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1470255517000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://pro-cdn-public-fcb.everincloud.com/20157/0/document_thumbnail/20197/163/163/14590883/1.0-1/14590883.png?t=1453214443000"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.goal.com/en/match/barcelona-vs-leicester-city/2223206/report"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona 4 - 2 Leicester City Match report - 8/3/16 International Champions Cup - Goal.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Read the full Barcelona v Leicester City match report, including goals, incidents, and much more. Have your say on the game in our comments feature."</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://goal.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">514.8946690316512</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">1740.3519248567559</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">44464</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">8736</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"recent_fb_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">8736</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"recent_tw_counts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39d81a0-59b5-11e6-8992-ffce69f79e2d"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1470254187000</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sports"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soccer"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /v1/region/{region}/{category}/{time_period}</code></p>
+
+<p>This endpoint retrieves all articles published in <code class="prettyprint">{region}</code> and <code class="prettyprint">{category}</code> within the <code class="prettyprint">{time_period}</code>.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>region</td>
+<td>Filters articles published in <code class="prettyprint">{region}</code>. See above for available countries. i.e. <code class="prettyprint">U.S.</code>, <code class="prettyprint">France</code>, <code class="prettyprint">Ireland</code>. Note: the region should be passed in English.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>Filters articles by <code class="prettyprint">{category}</code>. See above for available categories. i.e. <code class="prettyprint">All</code>, <code class="prettyprint">News</code>, <code class="prettyprint">Pre-Viral</code>. Note: the category should be passed in English.</td>
+</tr>
+<tr>
+<td>time_period</td>
+<td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-v1-publisher">GET /v1/publisher</h2>
+
+<blockquote>
+<p>Get the top trending content published in the last 24 hours by the New York Times.</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<p><code class="prettyprint">GET /v1/publisher/{publisher}/{time_period}</code></p>
+
+<p>This endpoint retrieves all articles published by <code class="prettyprint">{publisher}</code> within the <code class="prettyprint">{time_period}</code>.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>publisher</td>
+<td>Any domain or subdomain. i.e. <code class="prettyprint">nytimes.com</code>, <code class="prettyprint">blog.newswhip.com</code>.</td>
+</tr>
+<tr>
+<td>time_period</td>
+<td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-v1-local">GET /v1/local</h2>
+
+<blockquote>
+<p>Get the top trending content published in Seattle, in the last 12 hours.</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/local/Seattle, WA/All/12?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<p><code class="prettyprint">GET /v1/local/{city}/All/{time_period}</code></p>
+
+<p>This endpoint retrieves all articles published in <code class="prettyprint">{city}</code> within the <code class="prettyprint">{time_period}</code>.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>Any city or local region. See above for available local regions. i.e. <code class="prettyprint">New York, NY</code>, <code class="prettyprint">London</code>, <code class="prettyprint">Toronto</code>, <code class="prettyprint">Hamburg-Schleswig-Holstein</code>.</td>
+</tr>
+<tr>
+<td>time_period</td>
+<td>Filters articles published within the last <code class="prettyprint">{time_period}</code> hours. Valid <code class="prettyprint">time_periods</code> range from 1 up to 168 hours</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-v1-search">GET /v1/search</h2>
+
+<blockquote>
+<p>Get the top trending content published talking about <code class="prettyprint">Tom Cruise</code>, in the last 24 hours.</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/search?q=Tom%20Cruise&amp;key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/search?q=Tom%20Cruise&amp;key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<p><code class="prettyprint">GET /v1/search?q={search_term}</code></p>
+
+<p>This endpoint retrieves all articles talking about <code class="prettyprint">{search_term}</code> in the last 24 hours.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search_term</td>
+<td>Matches all stories containing <code class="prettyprint">{search_term}</code>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-v1-trendingentities">GET /v1/trendingEntities</h2>
+
+<blockquote>
+<p>Get the top entities that have become trending in the last x hours</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.newswhip.com/v1/trendingEntities?timeRange=24&amp;q=Sports&amp;key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/trendingEntities'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_GET</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'timeRange'</span> <span class="o">=&gt;</span> <span class="s1">'24'</span><span class="p">,</span>
+  <span class="s1">'q'</span> <span class="o">=&gt;</span> <span class="s1">'Sports'</span><span class="p">,</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'T4hC9wTT7p83C'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setContentType</span><span class="p">(</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setPostFields</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"trendingEntities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Nicky Hayden"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Mike Greenberg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Game"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Rohit Sharma"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Ariana Grande"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Nashville Predators"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Cris Cyborg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Anaheim Ducks"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"BCCI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Los Angeles Lakers"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RBI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FA"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"World Series"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Petco Park"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Dray Day"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /v1/trendingEntities</code></p>
+
+<p>This endpoint gets the trending entities over a certain {time in hours}. A trending entity is a an entity that has become popular that wasn&rsquo;t popular before.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>All parameters for trending entities are optional</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search-term</td>
+<td>Matches all trending entities related to the given <code class="prettyprint">{search_term}</code>.</td>
+</tr>
+<tr>
+<td>time-in-hours</td>
+<td>Searches for trending entities over the given number of hours (default=24)</td>
+</tr>
+</tbody></table>
+
+<h1 id="post-requests">POST Requests</h1>
+
+<p>The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip&rsquo;s database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.</p>
+
+<p>There are 2 different endpoints:</p>
+
+<ul>
+<li><code class="prettyprint">POST /v1/articles</code> - provides stories(web articles, youtube post) matching the query provided</li>
+<li><code class="prettyprint">POST /v1/fbPosts</code> - provides Facebook posts matching the query provided </li>
+<li><code class="prettyprint">POST /v1/stats</code> - provides stats on the content matching the query provided</li>
+</ul>
+
+<h2 id="post-v1-articles">POST /v1/articles</h2>
+
+<blockquote>
+<p>Get the top trending stories published in the United States or the United Kingdom that have Rihanna in the headline and are not published in youtube.com over the last 7 days</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": ["country_code:(us OR gb) AND -publisher:youtube.com AND headline:rihanna"],
+    "language": "en",
+    "video_only":false,
+    "sort_by": "nw_max_score",
+    "find_related": false,
+    "size": 1
+}'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/articles?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "country_code:(us OR gb) AND -publisher:youtube.com AND headline:rihanna"
+        ],
+        "language": "en",
+        "video_only":false,
+        "sort_by": "nw_max_score",
+        "find_related": false,
+        "size": 1
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.rap-up.com/2016/11/15/partynextdoor-talks-drake-rihanna-jeremih-tour/"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARTYNEXTDOOR Talks Drake, Rihanna, &amp; Touring with Jeremih"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In the midst of his \"Summer's Over Tour\" with Jeremih, PARTYNEXTDOOR stopped by Power 98 in Charlotte, North Carolina for ..."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rap-up.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rap-up.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05852343318906164</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">729.5439348623742</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2128</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"tw_creator"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1033</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cec8e680-ab68-11e6-a1c9-8b1fd34d6bab"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479237731560</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.rap-up.com/wp-content/uploads/2016/11/partynextdoor-red.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entertainment"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Get the top trending  youtube posts that is talking about Rihanna since a week ago</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": ["country_code:(us OR gb) AND headline:rihanna"],
+    "language": "en",
+    "content_type": "youtube"
+}'</span> <span class="s2">"https://api.newswhip.com/v1/articles?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/articles?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "country_code:(us OR gb) AND headline:rihanna"
+        ],
+        "language": "en",
+        "content_type": "youtube"
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"youtube_post"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"ytLikes"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ytViews"</span><span class="p">:</span><span class="w"> </span><span class="mi">2795</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ytComments"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ytDislikes"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NowThis"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yt3.ggpht.com/-QYtGzlfBEUI/AAAAAAAAAAI/AAAAAAAAAAA/Pc6X3NBuup0/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.youtube.com/channel/UCn4sPeUomNGIr26bElVdDYg"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"tw_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tw_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"li_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"li_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relatedStories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6f17650-13fe-11e7-98a6-114dfe4272d3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1490737083000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.youtube.com/watch?v=o9ulb26biqI"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rihanna Rocks Iconic 'Psycho' Shower Scene"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rihanna Rocks Iconic 'Psycho' Shower Scene - But her 'Bates Motel' character is here to stay. --- Follow us on Facebook: https://www.facebook.com/NowThisNews..."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"youtube.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://youtube.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://i.ytimg.com/vi/o9ulb26biqI/maxresdefault.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delta_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight plaintext"><code>
+`GET /v1/region/{region}/{category}/{time_period}`
+
+This endpoint retrieves all articles published in `{region}` and `{category}` within the `{time_period}`.
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+region | Filters articles published in `{region}`. See above for available countries. i.e. `U.S.`, `France`, `Ireland`. Note: the region should be passed in English.
+category | Filters articles by `{category}`. See above for available categories. i.e. `All`, `News`, `Pre-Viral`. Note: the category should be passed in English.
+time_period | Filters articles published within the last `{time_period}` hours. Valid `time_periods` range from 1 up to 168 hours
+
+## GET /v1/publisher
+
+&gt; Get the top trending content published in the last 24 hours by the New York Times.
+
+``` shell
+curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<p><code class="prettyprint">POST /v1/articles</code></p>
+
+<p>This endpoint retrieves all articles matching the filters provided.</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<ul>
+<li>Stories are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires country_ids. These are found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td>Any</td>
+<td>Two letter ISO 639-1 language code</td>
+<td>See available languages <a href="#supported-languages">here</a></td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td><code class="prettyprint">default</code></td>
+<td>String</td>
+<td>Sorts one of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
+</tr>
+<tr>
+<td>sort_by (Youtube)</td>
+<td><code class="prettyprint">created_at</code></td>
+<td>String</td>
+<td>When searching by the content_type <code class="prettyprint">youtube</code>, sort in descending order by <code class="prettyprint">yt_likes</code>, <code class="prettyprint">yt_views</code>, <code class="prettyprint">yt_comments</code>, <code class="prettyprint">yt_dislikes</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">created_at</code></td>
+</tr>
+<tr>
+<td>video_only</td>
+<td>false</td>
+<td>Boolean</td>
+<td>Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
+</tr>
+<tr>
+<td>default_field</td>
+<td>Relevant field</td>
+<td>String</td>
+<td>Field to be used when filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to <code class="prettyprint">default_fields</code> by then</td>
+</tr>
+<tr>
+<td>default_fields</td>
+<td>[<code style="white-space:nowrap">&quot;headline&quot;</code>, <code style="white-space:nowrap">&quot;summary&quot;</code>, <code style="white-space:nowrap">&quot;authors&quot;</code>]</td>
+<td>Array[String]</td>
+<td>Up to 3 available fields to be used filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String</td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>Integer</td>
+<td>Max number of articles to be returned (includes relatedStories)</td>
+</tr>
+<tr>
+<td>find_related</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Related stories will be collapsed when set. Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
+</tr>
+<tr>
+<td>content_type</td>
+<td>stories</td>
+<td>String</td>
+<td>Filters by <code class="prettyprint">stories</code> or <code class="prettyprint">youtube</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-fields-for-filtering-articles-stats-trendingentities-request">Available fields for filtering Articles/Stats/TrendingEntities request</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>headline</td>
+<td>String</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>String</td>
+</tr>
+<tr>
+<td>authors</td>
+<td>String</td>
+</tr>
+<tr>
+<td><del>country</del></td>
+<td>Number. Deprecated: use country_code instead</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>Two letter (lower case) ISO 3166 country code</td>
+</tr>
+<tr>
+<td>region_code</td>
+<td>Available regions (lower case): <code class="prettyprint">na</code>, <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>, <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td><a href="#supported-languages">Two letter ISO 639-1 language code</a></td>
+</tr>
+<tr>
+<td>categories</td>
+<td>Number</td>
+</tr>
+<tr>
+<td>publisher</td>
+<td>TLD such as newswhip.com</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>Exact domain where the article was published. i.e. blog.newswhip.com</td>
+</tr>
+<tr>
+<td>href</td>
+<td>Search by the full url of the article eg. &ldquo;href:\&quot;https://www.coldwellbankerhomes.com/az/concho/669-county-road-8235-stanford/pid_18337473/\&rdquo;&ldquo;</td>
+</tr>
+<tr>
+<td>siteStructure</td>
+<td>Handy for articles that follows a particular path on a site, e.g: to look for all articles with url follows &quot;http://www.complex.com/tag/politics&rdquo;, use filter with <code class="prettyprint">publisher:complex.com AND siteStructure:\\/tags\\/politics</code> or <code class="prettyprint">publisher:complex.com AND siteStructure:&quot;/tags/politics&quot;</code> will be sufficient(check the note down below regarding reserved characters)</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as &quot;f-150&rdquo;, however please note that &ldquo;&rdquo; will replace the special characters inside with empty space, so f\\-150 will be counted as 1 term while “f-150” is counted as 2 terms </aside>
+
+<aside class="notice">Due to historical reasons, the queryable fields `headline` and `summary` differ in naming from their `Article` counterparts `link` and `excerpt`.</aside>
+
+<h2 id="post-v1-fbposts">POST /v1/fbPosts</h2>
+
+<blockquote>
+<p>Get all Facebook posts from Donald J. Trump&rsquo;s fb page that of content-type status and sort by the number of likes</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url <span class="s1">'https://api.newswhip.com/v1/fbPosts?key=YOUR_API_KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  --data <span class="s1">'{"filters": ["country_code:us"],  "sort_by":"fb_likes", "content_type":"Status"}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/fbPosts?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "page_id:153080620724"
+        ],
+        "sort_by": "fb_likes",
+        "content_type": "status"
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"fbPosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"153080620724"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"page_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DonaldTrump"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"post_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Status"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_live_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_story"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fb_sponsor_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"fb_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"total_engagement_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">26781</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count_delta"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delta_period_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reactions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">2777</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">21030</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">854</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"loves"</span><span class="p">:</span><span class="w"> </span><span class="mi">1575</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"wows"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"hahas"</span><span class="p">:</span><span class="w"> </span><span class="mi">407</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"sads"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"angrys"</span><span class="p">:</span><span class="w"> </span><span class="mi">71</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"91d47480-12e5-11e7-9384-d37f0d6d833b"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"publication_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1490616000000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/153080620724/posts/10158861256115725"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"excerpt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"President Donald J. Trump's tentative schedule for Monday, March 27th:\nReceives daily intelligence briefing\nParticipates in a roundtable with women small business owners\nSigns bills"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"image_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"has_video"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.6609456724297877</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max_nw_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">4590.83356759275</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"News"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Politics"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">751</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US Election 2016"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/fbPosts</code></p>
+
+<p>This endpoint retrieves articles from Facebook matching your filters.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Facebook posts are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters to be applied to the fbPosts. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&quot;. See available fields for filtering down below</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td>Any</td>
+<td>Two letter ISO 639-1 language code</td>
+<td>See available languages <a href="#supported-languages">here</a></td>
+</tr>
+<tr>
+<td>default_fields</td>
+<td>[ <code style="white-space:nowrap"><code class="prettyprint">page_name</code></code>, <code style="white-space:nowrap"><code class="prettyprint">external_link</code></code>]</td>
+<td>Array[String]</td>
+<td>Up to 3 available fields to be used when filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String</td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>Integer</td>
+<td>Max number of articles to be returned (includes relatedStories.)</td>
+</tr>
+<tr>
+<td>content_type</td>
+<td></td>
+<td>String</td>
+<td><code class="prettyprint">video</code>, <code class="prettyprint">live_video</code>, <code class="prettyprint">link</code>, <code class="prettyprint">photo</code>, <code class="prettyprint">status</code>, <code class="prettyprint">branded_content</code>, <code class="prettyprint">event</code></td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td><code class="prettyprint">default</code></td>
+<td>String</td>
+<td>Sorts by the following in descending order<code class="prettyprint">default</code>,<code class="prettyprint">nw_max_score</code>,<code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">created_at</code> <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_loves</code>, <code class="prettyprint">fb_wows</code>, <code class="prettyprint">fb_hahas</code>, <code class="prettyprint">fb_sads</code>, <code class="prettyprint">fb_angrys</code>.(The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_overperforming</code>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="available-fields-for-filtering-facebook-posts">Available fields for filtering Facebook Posts</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>language</td>
+<td>String</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>Two letter (lower case) ISO 3166 country code</td>
+</tr>
+<tr>
+<td>region_code</td>
+<td>Available regions (lower case): <code class="prettyprint">na</code>, <code class="prettyprint">eu</code>, <code class="prettyprint">oc</code>, <code class="prettyprint">sea</code>, <code class="prettyprint">sa</code>, <code class="prettyprint">as</code>, <code class="prettyprint">me</code>, <code class="prettyprint">af</code></td>
+</tr>
+<tr>
+<td>authors</td>
+<td>String</td>
+</tr>
+<tr>
+<td>page_id</td>
+<td>Facebook page id</td>
+</tr>
+<tr>
+<td>page_name</td>
+<td>Facebook page username, usually the one come after ‘@’</td>
+</tr>
+<tr>
+<td>external_link</td>
+<td>The href shared inside facebook post</td>
+</tr>
+<tr>
+<td>fb_story</td>
+<td>String</td>
+</tr>
+<tr>
+<td>fb_sponsor_tags.id</td>
+<td>String</td>
+</tr>
+<tr>
+<td>fb_sponsor_tags.name</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Special characters (+ - && || ! ( ) { } [ ] ^ &ldquo; ~ * ? : \ /)  are reserved for lucene query string, you’ll need to escape them with \\ before the character, i.e: f-150 should be wrapped up as f\\-150, or wrapped inside double quotes as “f-150”, however please note that &rdquo;&ldquo; will replace the special characters inside with empty space, so f\\-150 will be counted as 1 term while “f-150” is counted as 2 terms</aside>
+
+<h2 id="post-v1-stats">POST /v1/stats</h2>
+
+<blockquote>
+<p>Get the top English language publishers that create the best performing content on Facebook about <code class="prettyprint">&quot;3d printing&quot;</code> since a week ago</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{
+    "filters": [
+        "3d printing"
+    ],
+    "language" : "en",
+    "sort_by" : "fb_total.sum",
+    "aggregate_by" : "domain"
+}'</span> <span class="s2">"https://api.newswhip.com/v1/stats?key=YOUR_API_KEY"</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/stats?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">],</span>
+    <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'{
+        "filters": [
+            "3d printing"
+        ],
+        "language" : "en",
+        "sort_by" : "fb_total.sum",
+        "aggregate_by" : "domain"
+    }'</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geek.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fb_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">3839</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">1609.3333333333333</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">4828</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">15611546</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2613894.888888889</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1616.7544306074715</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"twitter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">133.33333333333334</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">60200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2288.8888888888882</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">47.84233364802441</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"pinterest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.4142135623730951</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"linkedin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sum_of_squares"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variance"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.666666666666666</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"std_deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.943920288775949</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5237</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/stats</code></p>
+
+<p>This endpoint retrieves stats for articles matching your filters.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Article stats are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Up to 20 <a href="https://lucene.apache.org/core/5_5_2/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description">Lucene QueryString</a> filters are allowed to be applied to the articles. Each filter allows up to 150 terms where calculation is based on lucene query string semantics, e.g: <code class="prettyprint">country_code:us</code> counts as 1 Term, <code class="prettyprint">country_code:(us AND uk)</code> counts as 2 Terms, <code class="prettyprint">headline: “The Right Way”</code> counts as 3 terms&rdquo;. See available fields for filtering <a href="#available-fields-for-filtering-articles-stats-request">here</a>.</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td>Any</td>
+<td>Two letter ISO 639-1 language code</td>
+<td>See available languages <a href="#supported-languages">here</a></td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td><code class="prettyprint">default</code></td>
+<td>String</td>
+<td>One of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
+</tr>
+<tr>
+<td>sort_by (Youtube)</td>
+<td><code class="prettyprint">created_at</code></td>
+<td>String</td>
+<td>When searching by the content_type <code class="prettyprint">youtube</code>, sort by <code class="prettyprint">yt_likes</code>, <code class="prettyprint">yt_views</code>, <code class="prettyprint">yt_comments</code>, <code class="prettyprint">yt_dislikes</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">created_at</code></td>
+</tr>
+<tr>
+<td>video_only</td>
+<td>false</td>
+<td>Boolean</td>
+<td>Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
+</tr>
+<tr>
+<td>default_field</td>
+<td>Relevant field</td>
+<td>String</td>
+<td>Field to be used when filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to <code class="prettyprint">default_fields</code> by then</td>
+</tr>
+<tr>
+<td>default_fields</td>
+<td>[<code style="white-space:nowrap">&quot;headline&quot;</code>, <code style="white-space:nowrap">&quot;summary&quot;</code>, <code style="white-space:nowrap">&quot;authors&quot;</code>]</td>
+<td>Array[String]</td>
+<td>Up to 3 available fields to be used filtering by keywords (like <code class="prettyprint">&quot;Barack Obama&quot;</code>) and no fields are used in the Query String</td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>Integer</td>
+<td>Max number of articles to be returned (includes relatedStories)</td>
+</tr>
+<tr>
+<td>find_related</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Related stories will be collapsed when set. Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
+</tr>
+<tr>
+<td>content_type</td>
+<td>stories</td>
+<td>String</td>
+<td>Filters by <code class="prettyprint">stories</code> or <code class="prettyprint">youtube</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="post-v1-trendingentities">POST /v1/trendingEntities</h2>
+
+<blockquote>
+<p>Get the top entities that have become trending in the last x hours</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/trendingEntities?key=YOUR_API_KEY'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+   "filters": [],
+ "from":1481932800000,
+ "to":1494975600000
+}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://st:9000/api/v1/trendingEntities'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'YOUR_API_KEY'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'{
+   "filters": [],
+ "from":1481932800000,
+ "to":1494975600000
+}'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"trendingEntities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Donald Trump"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Barack Obama"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"U.S"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Republican"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FBI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"James Comey"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Democrats"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Manchester United"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Premier League"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"IPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Sean Spicer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"House"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CNN"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/trendingEntities</code></p>
+
+<p>This endpoint gets the trending entity over a certain {time in hours}. A trending entity is a an entity that has become popular that wasn&rsquo;t popular before.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Article stats are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>As the trendingEntities is aggregating a large about of data it can take up to 5 seconds to return.</li>
+<li>The max number of trending entities returned is 15 but it can be less if you search is more specific</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>publisher, categories, headline, countryCode</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="post-v1-twitterinfluencers">POST /v1/twitterInfluencers</h2>
+
+<blockquote>
+<p>Get the top Influencers on twitter for a particular query</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+"filters":["countryCode:us"],
+"size":250
+}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://api.newswhip.com/v1/twitterInfluencers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'TESTKEY123'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'cache-control'</span> <span class="o">=&gt;</span> <span class="s1">'no-cache'</span><span class="p">,</span>
+  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'{
+"filters":["countryCode:us"],
+"size":250
+}'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"twitterInfluencers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"twitter_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">19394188</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"twitter_handle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SenJohnMcCain"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2439704</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">378</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"statuses_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">13287</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_retweet_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">37562</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"207d6140-7fb7-11e7-b89c-b3951ad1b925"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"twitter_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://twitter.com/any/status/896515795114766337"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"favourite_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">102465</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"rt_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">37562</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502580996000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington, D.C. – U.S. Senator John McCain (R-AZ) released the following statement today on the white supremacist attack in Charlottesville, Virginia:"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.mccain.senate.gov/public/index.cfm?p=press-releases&amp;id=64ED6753-345F-4F64-9B64-2D8BDAE952B5"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"twitter_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">592730371</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"twitter_handle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JackPosobiec"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">42372</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">184577</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">716</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"statuses_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100483</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_retweet_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">26625</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c12fb330-80ee-11e7-b89c-b3951ad1b925"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"twitter_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://twitter.com/any/status/897107711434915842"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"favourite_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">51500</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"rt_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">26625</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502722120000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nine people were killed and at least 30 others were wounded in shootings across Chicago between Friday night and Monday morning."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://abc7chicago.com/2305976/"</span><span class="w">
+                </span><span class="p">}</span><span class="w">        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/twitterInfluencers</code></p>
+
+<p>This endpoint show the twitter uses that have the most influence on stories related to your search.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Twitter Influencer are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>As the twitterInfluencers is aggregating a large about of data it can take up to 5 seconds to return.</li>
+<li>If a query String is passed into the filter it will search on headline, authors and summary.</li>
+<li>The results are sorted number of retweets</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Can use the following filters publisher, categories, countryCode, headline, summary, region_code, language, domain</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td></td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>number</td>
+<td>Number of influencer to return (max 500)</td>
+</tr>
+</tbody></table>
+
+<h2 id="post-v1-fbinfluencers">POST /v1/fbInfluencers</h2>
+
+<blockquote>
+<p>Get the top Facebook influencer for a particular query.</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+"filters":[]
+}'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://api.newswhip.com/v1/fbInfluencers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'TESTKEY123'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'cache-control'</span> <span class="o">=&gt;</span> <span class="s1">'no-cache'</span><span class="p">,</span>
+  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'{
+"filters":[]
+}'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"fbInfluencers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"fb_page_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15704546335</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"fb_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FoxNews"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"about"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Welcome to the official Fox News facebook page.  Get breaking news, must see videos and exclusive interviews from the #1 name in news."</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15634977</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15634977</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"profile_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/417751_10150581617531336_1949382366_n.jpg?oh=be1fa613ac8f3c553749f213e5c2351a&amp;oe=5A197086"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_fb_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">587652</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27aeb210-8170-11e7-9a30-c9dd3e4cb15e"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_post_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15704546335_10155823554046336"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Iowa State Fair cow and boy taking nap wins the internet after photo goes viral"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This here is a little story about a boy and his cow."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">587652</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502816913000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"876a2d60-82ba-11e7-8b54-9f4c7b0f94de"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_post_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15704546335_10155831874366336"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gettysburg Stands Firm: Battlefield Says All Monuments Staying Put"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Officials at the Gettysburg National Military Park said Wednesday that the monuments at the expansive Pennsylvania battlefield will stay despite unrest over Confederate memorials."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">97525</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502931295000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://insider.foxnews.com/2017/08/16/gettysburg-confederate-monuments-not-moving-battlefield-says-pennsylvania-union"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"fb_page_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9124187907</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"fb_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"senatorsanders"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"about"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sen. Bernie Sanders of Vermont is the longest serving independent in U.S. congressional history."</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7371777</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7371777</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"profile_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scontent.xx.fbcdn.net/v/t1.0-1/c20.0.50.50/p50x50/400832_10151148541197908_1621512611_n.jpg?oh=1d45b3c211e83e5925b08bde7b25ca68&amp;oe=59F0258C"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"max_fb_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">311430</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"social_referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2cff040-7fa3-11e7-927a-ebb7ea9adb61"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_post_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9124187907_10156228952697908"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"headline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trump blames 'many sides' after violent white supremacist rally in Virginia"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"President Donald Trump on Saturday blamed \"many sides\" for the violent clashes between protesters and white supremacists in Charlottesville, Virginia."</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">311430</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502573718000</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.chicagotribune.com/news/nationworld/politics/ct-trump-charlottesville-violence-20170812-story.html"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /v1/fbInfluencers</code></p>
+
+<p>This endpoint show the Facebook users that have the most influence on stories related to your search.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+<li>Facebook Influencer are filtered and sorted using the following <code class="prettyprint">JSON</code> encoded parameters</li>
+<li>Required fields are denoted *</li>
+<li>Filtering by category or country requires ids which can be found here: <a href="https://www.newswhip.com/coverage/">NewsWhip API Coverage</a></li>
+<li>As the fbInfluencers is aggregating a large about of data it can take up to 5 seconds to return.</li>
+<li>If a query String is passed into the filter it will search on headline, authors and summary.</li>
+<li>The results are sorted total number of Facebook interactions</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filters*</td>
+<td></td>
+<td>Array[String]</td>
+<td>Can use the following filters publisher, categories, countryCode, headline, summary, region_code, language, domain</td>
+</tr>
+<tr>
+<td>from</td>
+<td>A week ago</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published after <code class="prettyprint">{from}</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>Now</td>
+<td>Unix timestamp in milliseconds</td>
+<td>Filters articles published before <code class="prettyprint">{to}</code></td>
+</tr>
+<tr>
+<td>language</td>
+<td></td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>200</td>
+<td>number</td>
+<td>Number of influencer to return (max 500)</td>
+</tr>
+</tbody></table>
+
+<h1 id="entities">Entities</h1>
+
+<h3 id="supported-languages">Supported languages</h3>
+
+<table><thead>
+<tr>
+<th>Language</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>English</td>
+<td>en</td>
+</tr>
+<tr>
+<td>Spanish</td>
+<td>es</td>
+</tr>
+<tr>
+<td>French</td>
+<td>fr</td>
+</tr>
+<tr>
+<td>German</td>
+<td>de</td>
+</tr>
+<tr>
+<td>Dutch</td>
+<td>nl</td>
+</tr>
+<tr>
+<td>Italian</td>
+<td>it</td>
+</tr>
+<tr>
+<td>Portuguese</td>
+<td>pt</td>
+</tr>
+<tr>
+<td>Swedish</td>
+<td>sv</td>
+</tr>
+<tr>
+<td>Finnish</td>
+<td>fi</td>
+</tr>
+<tr>
+<td>Norwegian</td>
+<td>nb</td>
+</tr>
+<tr>
+<td>Japanese</td>
+<td>ja</td>
+</tr>
+<tr>
+<td>Turkish</td>
+<td>tr</td>
+</tr>
+<tr>
+<td>Arabic</td>
+<td>ar</td>
+</tr>
+<tr>
+<td>Armenian</td>
+<td>hy</td>
+</tr>
+<tr>
+<td>Basque</td>
+<td>eu</td>
+</tr>
+<tr>
+<td>Bulgarian</td>
+<td>bg</td>
+</tr>
+<tr>
+<td>Catalan</td>
+<td>ca</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>zh</td>
+</tr>
+<tr>
+<td>Korean</td>
+<td>ko</td>
+</tr>
+<tr>
+<td>Czech</td>
+<td>cs</td>
+</tr>
+<tr>
+<td>Galician</td>
+<td>gl</td>
+</tr>
+<tr>
+<td>Greek</td>
+<td>el</td>
+</tr>
+<tr>
+<td>Hindi</td>
+<td>hi</td>
+</tr>
+<tr>
+<td>Hungarian</td>
+<td>hu</td>
+</tr>
+<tr>
+<td>Indonesian</td>
+<td>id</td>
+</tr>
+<tr>
+<td>Irish</td>
+<td>ga</td>
+</tr>
+<tr>
+<td>Persian</td>
+<td>fa</td>
+</tr>
+<tr>
+<td>Romanian</td>
+<td>ro</td>
+</tr>
+<tr>
+<td>Russian</td>
+<td>ru</td>
+</tr>
+<tr>
+<td>Sorani</td>
+<td>ku</td>
+</tr>
+<tr>
+<td>Thai</td>
+<td>th</td>
+</tr>
+</tbody></table>
+
+<h2 id="article">Article</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>link</td>
+<td></td>
+</tr>
+<tr>
+<td>headline</td>
+<td></td>
+</tr>
+<tr>
+<td>excerpt</td>
+<td>summary for the story</td>
+</tr>
+<tr>
+<td>source.publisher</td>
+<td>domain of source publication</td>
+</tr>
+<tr>
+<td>source.link</td>
+<td>website of source publication</td>
+</tr>
+<tr>
+<td><del>source.country</del></td>
+<td>deprecated</td>
+</tr>
+<tr>
+<td>source.country_code</td>
+<td>country of source publication</td>
+</tr>
+<tr>
+<td>nw_score</td>
+<td>NewsWhip&rsquo;s current social speed for the story</td>
+</tr>
+<tr>
+<td>fb_data</td>
+<td>Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)</td>
+</tr>
+<tr>
+<td>tw_data</td>
+<td>Twitter Interactions (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)</td>
+</tr>
+<tr>
+<td>li_data</td>
+<td>LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)</td>
+</tr>
+<tr>
+<td>predicted_interactions</td>
+<td>How many interactions are expected on the article based on current velocity</td>
+</tr>
+<tr>
+<td>tw_creator</td>
+<td>Nullable. Where available, the creator&rsquo;s Twitter handle as supplied through Twitter Cards</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>NewsWhip&rsquo;s unique story identifier</td>
+</tr>
+<tr>
+<td>publication_timestamp</td>
+<td>Timestamp representing when the article was published</td>
+</tr>
+<tr>
+<td>image_link</td>
+<td>Where available, link to the source&rsquo;s featured image</td>
+</tr>
+<tr>
+<td>relatedStories</td>
+<td>List of <code class="prettyprint">Article</code> related to this story</td>
+</tr>
+<tr>
+<td>topics</td>
+<td>List of <code class="prettyprint">Topic</code></td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>comma separated string of keywords attributed to this story</td>
+</tr>
+<tr>
+<td>has_video</td>
+<td>set to <code class="prettyprint">true</code> when the story has an embedded video</td>
+</tr>
+</tbody></table>
+
+<h2 id="facebookpost">FacebookPost</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page_id</td>
+<td>Id of Facebook Page</td>
+</tr>
+<tr>
+<td>page_name</td>
+<td>Name of Facebook Page</td>
+</tr>
+<tr>
+<td>post_type</td>
+<td>Type of Post eg. Status</td>
+</tr>
+<tr>
+<td>is_live_video</td>
+<td>Is content live video</td>
+</tr>
+<tr>
+<td>fb_story</td>
+<td>is a description generated by Facebook about an event eg. when two people become friends</td>
+</tr>
+<tr>
+<td>fb_sponsor_tags</td>
+<td>Facebook sponsors if available</td>
+</tr>
+<tr>
+<td>fb_data</td>
+<td>Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)</td>
+</tr>
+<tr>
+<td>reactions</td>
+<td>An object describing the Facebook reactions (comments, likes , shares , loves, wows, hahas, sads, angrys)</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>Newswhip&rsquo;s unique story identifier</td>
+</tr>
+<tr>
+<td>publication_timestamp</td>
+<td>Timestamp representing when the article was published</td>
+</tr>
+<tr>
+<td>link</td>
+<td>Link of the post</td>
+</tr>
+<tr>
+<td>headline</td>
+<td>Headline of post</td>
+</tr>
+<tr>
+<td>excerpt</td>
+<td>Excerpt from post</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>Keywords in Article</td>
+</tr>
+<tr>
+<td>source.publisher</td>
+<td>Publisher of the original article</td>
+</tr>
+<tr>
+<td>source.link</td>
+<td>Link to article</td>
+</tr>
+<tr>
+<td>source.country_code</td>
+<td>Country code of country</td>
+</tr>
+<tr>
+<td>image_link</td>
+<td>Where available, link to the source&rsquo;s featured image</td>
+</tr>
+<tr>
+<td>has_video</td>
+<td>set to <code class="prettyprint">true</code> when the story has an embedded video</td>
+</tr>
+<tr>
+<td>nw_score</td>
+<td>NewsWhip&rsquo;s current social speed for the story</td>
+</tr>
+<tr>
+<td>max_nw_score</td>
+<td>Max Newswhip score all time</td>
+</tr>
+<tr>
+<td>topics.id</td>
+<td>id of topic</td>
+</tr>
+<tr>
+<td>topics.name</td>
+<td>Name of topic</td>
+</tr>
+</tbody></table>
+
+<h2 id="topic">Topic</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>NewsWhip&rsquo;s unique id for this Topic</td>
+</tr>
+<tr>
+<td>name</td>
+<td>English name for this topic</td>
+</tr>
+</tbody></table>
+
+<h2 id="twitterinfluencer">TwitterInfluencer</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>twitter_id</td>
+<td>twitter id of the influencer</td>
+</tr>
+<tr>
+<td>twitter_handle</td>
+<td>The twitter handle of the influencer</td>
+</tr>
+<tr>
+<td>likes_count</td>
+<td>Number of likes this user has</td>
+</tr>
+<tr>
+<td>followers_count</td>
+<td>Number of followers this user has</td>
+</tr>
+<tr>
+<td>following_count</td>
+<td>Number of accounts this user is following</td>
+</tr>
+<tr>
+<td>statuses_count</td>
+<td>Number of statuses this user has posted</td>
+</tr>
+<tr>
+<td>max_retweet_value</td>
+<td>The number of retweets on this uses most influenced article</td>
+</tr>
+<tr>
+<td>social_referrals</td>
+<td>List of the social referrals of a user</td>
+</tr>
+</tbody></table>
+
+<h2 id="social-referral-twitter">Social Referral (Twitter)</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>article_id</td>
+<td>id of the article</td>
+</tr>
+<tr>
+<td>twitter_url</td>
+<td>URl of the Twitter post</td>
+</tr>
+<tr>
+<td>favourite_count</td>
+<td>The number of favorites this user has</td>
+</tr>
+<tr>
+<td>rt_count</td>
+<td>The number of times the user has retweeted</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>The date the article was created at</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the article</td>
+</tr>
+<tr>
+<td>article_url</td>
+<td>The original URL of the article</td>
+</tr>
+</tbody></table>
+
+<h2 id="facebookinfluencer">FacebookInfluencer</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fb_page_id</td>
+<td>The Facebook page id of the influencer</td>
+</tr>
+<tr>
+<td>fb_username</td>
+<td>The Facebook username of the influencer</td>
+</tr>
+<tr>
+<td>about</td>
+<td>The description on the Facebook page of the influencer</td>
+</tr>
+<tr>
+<td>followers_count</td>
+<td>The number of users following this user on Facebook</td>
+</tr>
+<tr>
+<td>likes_count</td>
+<td>The number of likes this user has on Facebook</td>
+</tr>
+<tr>
+<td>profile_image</td>
+<td>The URL of the users profile picture</td>
+</tr>
+<tr>
+<td>max_fb_interactions</td>
+<td>The number of interaction on the users most influenced stories</td>
+</tr>
+<tr>
+<td>social_referrals</td>
+<td>The list of articles that this user has influenced</td>
+</tr>
+</tbody></table>
+
+<h2 id="social-referral-facebook">Social Referral (Facebook)</h2>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>article_id</td>
+<td>id of the article</td>
+</tr>
+<tr>
+<td>fb_post_id</td>
+<td>Facebook Post Id</td>
+</tr>
+<tr>
+<td>headline</td>
+<td>The headline of the article</td>
+</tr>
+<tr>
+<td>description</td>
+<td>A description of the article</td>
+</tr>
+<tr>
+<td>fb_total_interactions</td>
+<td>The total number of interactions on the Facebook post</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Unix timestamp for the time the article was posted</td>
+</tr>
+<tr>
+<td>article_url</td>
+<td>The URL of the article influenced by the influencer</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<p>The NewsWhip API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request could not be parsed.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; Your API key is not allowed to access this resource. Your API key is expired or invalid.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; Enhance your calm! or contact us for higher limits!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Please try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+<h1 id="more-information">More Information</h1>
+
+<h2 id="server-side-caching">Server-side Caching</h2>
+
+<ul>
+<li><code class="prettyprint">GET</code> queries are cached (per API Key) for a small amount of time. Usually about 3 minutes. Check the HTTP headers sent by our servers for an exact value.</li>
+<li><code class="prettyprint">POST</code> queries are never cached.</li>
+</ul>
+
+<h2 id="cross-origin-resource-sharing">Cross-Origin Resource Sharing</h2>
+
+<ul>
+<li><code class="prettyprint">GET</code> endpoints support 1 <code class="prettyprint">Cross-origin resource sharing</code> per API key. Contact api@newswhip.com to set this up.</li>
+<li><code class="prettyprint">POST</code> endpoints are server-side only.</li>
+</ul>
+
+<h2 id="jsonp">JSONP</h2>
+
+<p>We don&rsquo;t currently support JSONP.</p>
+
+<h1 id="changelog">Changelog</h1>
+
+<h3 id="version-1-0-9-2017-08-15">Version 1.0.9 (2017-08-15)</h3>
+
+<ul>
+<li>Added twitterInfluencer endpoint</li>
+<li>Added facebookInflunecer endpoint</li>
+</ul>
+
+<h3 id="version-1-0-8-2017-06-12">Version 1.0.8 (2017-06-12)</h3>
+
+<ul>
+<li>Added predicted interactions to the articles endpoint</li>
+</ul>
+
+<h3 id="version-1-0-8-2017-04-21">Version 1.0.8 (2017-04-21)</h3>
+
+<ul>
+<li>Added /v1/fbPost endpoint</li>
+<li>Added default_fields to all POST requests</li>
+<li>Other minor related updates</li>
+</ul>
+
+<h3 id="version-1-0-7-2016-11-22">Version 1.0.7 (2016-11-22)</h3>
+
+<ul>
+<li>Updated examples of POST /v1/articles</li>
+</ul>
+
+<h3 id="version-1-0-6-2016-08-04">Version 1.0.6 (2016-08-04)</h3>
+
+<ul>
+<li>Added option to sort by <code class="prettyprint">fb_total_engagement</code> in POST /v1/articles</li>
+<li>Restricted option to sort by <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code>, <code class="prettyprint">fb_loves</code>, <code class="prettyprint">fb_wows</code>, <code class="prettyprint">fb_hahas</code>, <code class="prettyprint">fb_sads</code>, <code class="prettyprint">fb_angrys</code> only for <code class="prettyprint">content_type</code> <code class="prettyprint">fb_posts</code>  in POST /v1/articles</li>
+<li>Removed <code class="prettyprint">fb_likes</code>, <code class="prettyprint">fb_shares</code>, <code class="prettyprint">fb_comments</code> from <code class="prettyprint">sort_by</code> in POST /v1/stats</li>
+</ul>
+
+<h3 id="version-1-0-5-2016-06-20">Version 1.0.5 (2016-06-20)</h3>
+
+<ul>
+<li>Added <code class="prettyprint">content_type</code> field in POST /v1/articles</li>
+<li>Updated examples of POST /v1/articles</li>
+</ul>
+
+<h3 id="version-1-0-4-2015-12-03">Version 1.0.4 (2015-12-03)</h3>
+
+<ul>
+<li>Fixed typo in GET /v1/search example</li>
+</ul>
+
+<h3 id="version-1-0-3-2015-07-09">Version 1.0.3 (2015-07-09)</h3>
+
+<ul>
+<li>Added <code class="prettyprint">region_code</code> and <code class="prettyprint">domain</code> to available fields for filtering</li>
+<li>Added <code class="prettyprint">keywords</code> field to Article entity</li>
+</ul>
+
+<h3 id="version-1-0-2-2015-03-03">Version 1.0.2 (2015-03-03)</h3>
+
+<ul>
+<li>Added <code class="prettyprint">has_video</code> field to Article entity</li>
+</ul>
+
+<h3 id="version-1-0-1-2015-02-11">Version 1.0.1 (2015-02-11)</h3>
+
+<ul>
+<li>Added a new <code class="prettyprint">sort_by</code> method: <code class="prettyprint">created_at</code> to sort by most recent</li>
+<li>The filtering field <code class="prettyprint">country</code> is deprecated, use <code class="prettyprint">country_code</code> instead</li>
+<li>In Entities, Article. The field <code class="prettyprint">country_code</code> replaces <code class="prettyprint">country</code>. The contents of <code class="prettyprint">country</code> will be set to &lsquo;World&rsquo;</li>
+</ul>
+
+<h3 id="version-1-0-0-2014-11-21">Version 1.0.0 (2014-11-21)</h3>
+
+<ul>
+<li>First public version</li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="php">php</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
