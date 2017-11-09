@@ -566,39 +566,6 @@ echo $response->getBody();
 }
 ```
 
-```
-
-`GET /v1/region/{region}/{category}/{time_period}`
-
-This endpoint retrieves all articles published in `{region}` and `{category}` within the `{time_period}`.
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-region | Filters articles published in `{region}`. See above for available countries. i.e. `U.S.`, `France`, `Ireland`. Note: the region should be passed in English.
-category | Filters articles by `{category}`. See above for available categories. i.e. `All`, `News`, `Pre-Viral`. Note: the category should be passed in English.
-time_period | Filters articles published within the last `{time_period}` hours. Valid `time_periods` range from 1 up to 168 hours
-
-## GET /v1/publisher
-
-> Get the top trending content published in the last 24 hours by the New York Times.
-
-``` shell
-curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
-```
-
-``` php
-<?php
-require 'vendor/autoload.php';
-use GuzzleHttp\Client;
-
-$client = new Client();
-$response = $client->get('https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY', []);
-echo $response->getBody();
-?>
-```
-
 
 `POST /v1/articles`
 
