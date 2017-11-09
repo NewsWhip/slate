@@ -798,7 +798,7 @@ try {
         "ig_link": "https://www.instagram.com/p/BZTTC3DhkdD/",
         "ig_user_name": "zara__streetstyle",
         "ig_full_user_name": "Zara Streetstyle",
-        "ig_profile_image": "https://scontent.cdninstagram.com/t51.2885-19/,
+        "ig_profile_image": "https://scontent.cdninstagram.com/t51.2885-19/",
         "ig_post_text": "@fashion.resort  #fashion ",
         "ig_filter": "Normal",
         "ig_tags": [
