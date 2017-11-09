@@ -753,35 +753,6 @@ $(document).ready(function() {
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight plaintext"><code>
-`GET /v1/region/{region}/{category}/{time_period}`
-
-This endpoint retrieves all articles published in `{region}` and `{category}` within the `{time_period}`.
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-region | Filters articles published in `{region}`. See above for available countries. i.e. `U.S.`, `France`, `Ireland`. Note: the region should be passed in English.
-category | Filters articles by `{category}`. See above for available categories. i.e. `All`, `News`, `Pre-Viral`. Note: the category should be passed in English.
-time_period | Filters articles published within the last `{time_period}` hours. Valid `time_periods` range from 1 up to 168 hours
-
-## GET /v1/publisher
-
-&gt; Get the top trending content published in the last 24 hours by the New York Times.
-
-``` shell
-curl "https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY"
-</code></pre>
-<pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
-
-<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
-<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/publisher/nytimes.com/24?key=YOUR_API_KEY'</span><span class="p">,</span> <span class="p">[]);</span>
-<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
-<span class="cp">?&gt;</span>
-</code></pre>
 
 <p><code class="prettyprint">POST /v1/articles</code></p>
 
