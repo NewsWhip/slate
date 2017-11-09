@@ -788,7 +788,7 @@ try {
 }
 ```
 
-```json]
+```json
 [
     {
         "id": "a3a04ab0-9ec0-11e7-a21a-d37f0d6d833b",
