@@ -798,8 +798,8 @@ try {
         "ig_link": "https://www.instagram.com/p/BZTTC3DhkdD/",
         "ig_user_name": "zara__streetstyle",
         "ig_full_user_name": "Zara Streetstyle",
-        "ig_profile_image": "https://scontent.cdninstagram.com/t51.2885-19/s150x150/21224307_233892890468876_7697219811255779328_a.jpg",
-        "ig_post_text": "@fashion.resort  #fashion #fashionblogger #girl #travelphotography #instagood #instagram #instadaily #ootd #photooftheday #photography #photographer #photoshoot #picoftheday #pic #bff #snapchat #lifestyle\n📷 @symphonyofsilk",
+        "ig_profile_image": "https://scontent.cdninstagram.com/t51.2885-19/,
+        "ig_post_text": "@fashion.resort  #fashion ",
         "ig_filter": "Normal",
         "ig_tags": [
             "picoftheday",
