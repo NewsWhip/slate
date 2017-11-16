@@ -1060,7 +1060,7 @@ to | Now | Unix timestamp in milliseconds | Filters articles published before `{
 
 ``` shell
 curl -X POST \
-  'http://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123' \
+  'https://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{
@@ -1073,7 +1073,7 @@ curl -X POST \
 <?php
 
 $request = new HttpRequest();
-$request->setUrl('http://api.newswhip.com/v1/twitterInfluencers');
+$request->setUrl('https://api.newswhip.com/v1/twitterInfluencers');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setQueryData(array(
@@ -1174,7 +1174,7 @@ size | 200 | number | Number of influencer to return (max 500)
 
 ``` shell
 curl -X POST \
-  'http://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123' \
+  'https://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{
@@ -1231,7 +1231,7 @@ try {
                     "description": "This here is a little story about a boy and his cow.",
                     "fb_total_interactions": 587652,
                     "created_at": 1502816913000,
-                    "article_url": "http://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"
+                    "article_url": "https://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"
                 },
                 {
                     "article_id": "876a2d60-82ba-11e7-8b54-9f4c7b0f94de",
