@@ -1571,7 +1571,7 @@ $(document).ready(function() {
 <p>Get the top Influencers on twitter for a particular query</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
-  <span class="s1">'http://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
+  <span class="s1">'https://api.newswhip.com/v1/twitterInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
   -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -1582,7 +1582,7 @@ $(document).ready(function() {
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://api.newswhip.com/v1/twitterInfluencers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'https://api.newswhip.com/v1/twitterInfluencers'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -1713,7 +1713,7 @@ $(document).ready(function() {
 <p>Get the top Facebook influencer for a particular query.</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
-  <span class="s1">'http://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
+  <span class="s1">'https://api.newswhip.com/v1/fbInfluencers?key=TESTKEY123'</span> <span class="se">\</span>
   -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -1766,7 +1766,7 @@ $(document).ready(function() {
                     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This here is a little story about a boy and his cow."</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"fb_total_interactions"</span><span class="p">:</span><span class="w"> </span><span class="mi">587652</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502816913000</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"</span><span class="w">
+                    </span><span class="nt">"article_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.foxnews.com/us/2017/08/14/iowa-state-fair-cow-and-boy-taking-nap-wins-internet-after-photo-goes-viral.html"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"876a2d60-82ba-11e7-8b54-9f4c7b0f94de"</span><span class="p">,</span><span class="w">
