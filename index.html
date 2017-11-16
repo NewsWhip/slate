@@ -1421,21 +1421,9 @@ $(document).ready(function() {
 </tr>
 <tr>
 <td>sort_by</td>
-<td><code class="prettyprint">default</code></td>
+<td>None</td>
 <td>String</td>
-<td>One of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_overperforming</code>)</td>
-</tr>
-<tr>
-<td>sort_by (Youtube)</td>
-<td><code class="prettyprint">created_at</code></td>
-<td>String</td>
-<td>When searching by the content_type <code class="prettyprint">youtube</code>, sort by <code class="prettyprint">yt_likes</code>, <code class="prettyprint">yt_views</code>, <code class="prettyprint">yt_comments</code>, <code class="prettyprint">yt_dislikes</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">created_at</code></td>
-</tr>
-<tr>
-<td>video_only</td>
-<td>false</td>
-<td>Boolean</td>
-<td>Ignored when searching by the content_type <code class="prettyprint">youtube</code></td>
+<td>Can sort using the following fields (fb_total, twitter, pinterest, linkedin) using the following values (count, min, max, avg, sum, sum_of_squares, variance, std_deviation). eg fb_total.sum or pinterest.max</td>
 </tr>
 <tr>
 <td>default_field</td>
@@ -1466,6 +1454,12 @@ $(document).ready(function() {
 <td>stories</td>
 <td>String</td>
 <td>Filters by <code class="prettyprint">stories</code> or <code class="prettyprint">youtube</code></td>
+</tr>
+<tr>
+<td>aggregate_by</td>
+<td>None</td>
+<td>String</td>
+<td>One of (&ldquo;publisher&rdquo;, &ldquo;domains&rdquo;, &ldquo;domain&rdquo;, &ldquo;language&rdquo;, &ldquo;authors&rdquo;, &ldquo;categories&rdquo;, &ldquo;country_code&rdquo;)</td>
 </tr>
 </tbody></table>
 
