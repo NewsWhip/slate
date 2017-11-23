@@ -1340,7 +1340,7 @@ source.link |  website of source publication
 source.country_code | country of source publication
 nw_score | NewsWhip's current social speed for the story
 fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
-tw_data | Twitter Interactions (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)
+tw_data | The twitter data shows how many interactions occur on influencers accounts (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)
 li_data |LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
 predicted_interactions | How many interactions are expected on the article based on current velocity
 tw_creator |  Nullable. Where available, the creator's Twitter handle as supplied through Twitter Cards
