@@ -384,7 +384,7 @@ time-in-hours | Searches for trending entities over the given number of hours (d
 
 # POST Requests
 
-The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip's database, including all content published within the last 6 months from any publisher in any supported language. Filtered, sorted and aggregated by any field you want.
+The POST API endpoints are designed for increased flexibility and are much more powerful. With these server-side only endpoints, your application gets full access to NewsWhip's database, including all content from any publisher in any supported language. Filtered, sorted and aggregated by any field you want. The max time range for a query is 6 months but you can search all all our data from January 1, 2014.
 
 There are 2 different endpoints:
 
