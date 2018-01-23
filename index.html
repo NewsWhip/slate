@@ -223,7 +223,7 @@ $(document).ready(function() {
 <tr>
 <td>sort_by</td>
 <td>default</td>
-<td>Sorts articles in descending order. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">predicted_interactions</code></td>
+<td>Sorts articles in descending order. Accepts one of the following: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>,<code class="prettyprint">fb_tw_li_and_pi</code> <code class="prettyprint">nw_score</code>, <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">predicted_interactions</code></td>
 </tr>
 <tr>
 <td>size</td>
@@ -802,7 +802,7 @@ $(document).ready(function() {
 <td>sort_by</td>
 <td><code class="prettyprint">default</code></td>
 <td>String</td>
-<td>Sorts one of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_and_li</code>)</td>
+<td>Sorts one of the following in descending order: <code class="prettyprint">default</code>, <code class="prettyprint">fb_total_engagement</code>, <code class="prettyprint">fb_tw_overperforming</code>, <code class="prettyprint">fb_overperforming</code>, <code class="prettyprint">tw_overperforming</code>,<code class="prettyprint">pinterest</code>, <code class="prettyprint">predicted_interactions</code>, <code class="prettyprint">twitter</code>, <code class="prettyprint">linkedin</code>, <code class="prettyprint">fb_tw_and_li</code> <code class="prettyprint">fb_tw_li_and_pi</code>, <code class="prettyprint">nw_score</code>(deprecated on the 01-06-2017), <code class="prettyprint">nw_max_score</code>, <code class="prettyprint">created_at</code>. (The <code class="prettyprint">default</code> sort_by is <code class="prettyprint">nw_max_score</code> when the selected time-range is &lt;= 25h, otherwise it will be <code class="prettyprint">fb_tw_and_li</code>)</td>
 </tr>
 <tr>
 <td>sort_by (Youtube)</td>
@@ -1124,7 +1124,7 @@ $(document).ready(function() {
 <p>Get all instagram post that mention &quot;fashion&rdquo; sorted by the number of likes on instagram</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
-  <span class="s1">'http://localhost:9000/api/v1/igPosts?key={{YourKey}}'</span> <span class="se">\</span>
+  <span class="s1">'http://api.newswhip.com/v1/igPosts?key={{YourKey}}'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
 "filters": ["fashion"],
@@ -1134,7 +1134,7 @@ $(document).ready(function() {
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://localhost:9000/api/v1/igPosts'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'http://api.newswhip.com/v1/igPosts'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -2046,6 +2046,10 @@ $(document).ready(function() {
 <tr>
 <td>li_data</td>
 <td>LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)</td>
+</tr>
+<tr>
+<td>pi_data</td>
+<td>Pinterest interactions (pi_count, delta_period, delta_period_unit)</td>
 </tr>
 <tr>
 <td>predicted_interactions</td>
