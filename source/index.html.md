@@ -78,7 +78,7 @@ All region, publisher, local and search endpoints support the following Query Pa
 Parameter | Default | Description
 --------- | ------- | -----------
 video_only | false | If set to true, the result will ONLY include content with embedded video.
-sort_by | default | Sorts articles in descending order. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`, `nw_max_score`, `predicted_interactions`
+sort_by | default | Sorts articles in descending order. Accepts one of the following: `default`, `fb_total_engagement`, `twitter`, `linkedin`, `fb_tw_and_li`,`fb_tw_li_and_pi` `nw_score`, `nw_max_score`, `predicted_interactions`
 size |  | Number of articles to be returned (including related articles).
 
 To retrieve a full list of the available fields for each filter (regions, categories, publishers), access:
@@ -583,7 +583,7 @@ filters* |  | Array[String] | Up to 20 [Lucene QueryString](https://lucene.apach
 from | A week ago | Unix timestamp in milliseconds | Filters articles published after `{from}`
 to | Now | Unix timestamp in milliseconds | Filters articles published before `{to}`
 language | Any | Two letter ISO 639-1 language code | See available languages <a href="#supported-languages">here</a>
-sort_by |`default` | String | Sorts one of the following in descending order: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_and_li`)
+sort_by |`default` | String | Sorts one of the following in descending order: `default`, `fb_total_engagement`, `fb_tw_overperforming`, `fb_overperforming`, `tw_overperforming`,`pinterest`, `predicted_interactions`, `twitter`, `linkedin`, `fb_tw_and_li` `fb_tw_li_and_pi`, `nw_score`(deprecated on the 01-06-2017), `nw_max_score`, `created_at`. (The `default` sort_by is `nw_max_score` when the selected time-range is <= 25h, otherwise it will be `fb_tw_and_li`)
 sort_by (Youtube) | `created_at` | String |  When searching by the content_type `youtube`, sort in descending order by `yt_likes`, `yt_views`, `yt_comments`, `yt_dislikes`, `fb_total_engagement`, `twitter`, `created_at`
 video_only | false | Boolean | Ignored when searching by the content_type `youtube`
 default_field | Relevant field | String |  Field to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String. Note: This will be deprecated on the 01-06-2017, please switch to `default_fields` by then
@@ -1341,7 +1341,8 @@ source.country_code | country of source publication
 nw_score | NewsWhip's current social speed for the story
 fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
 tw_data | The twitter data shows how many interactions occur on influencers accounts (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)
-li_data |LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
+li_data | LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
+pi_data | Pinterest interactions (pi_count, delta_period, delta_period_unit)
 predicted_interactions | How many interactions are expected on the article based on current velocity
 tw_creator |  Nullable. Where available, the creator's Twitter handle as supplied through Twitter Cards
 uuid |  NewsWhip's unique story identifier
