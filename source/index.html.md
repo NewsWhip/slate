@@ -7,7 +7,7 @@ language_tabs:
 
 toc_footers:
   - <a href='#getting-api-access'>Sign Up for a Developer Key</a>
-  - <p>© 2016 NewsWhip Media Ltd.</p>
+  - <p>© 2018 NewsWhip Media Ltd.</p>
 
 includes:
   - errors
@@ -476,7 +476,15 @@ echo $response->getBody();
           "name": "Entertainment"
         }
       ],
-      "has_video": true
+      "has_video": true,
+	  "entities": [
+		"PARTYNEXTDOOR",
+		"Jeremih",
+		"Rihanna",
+		"Drake",
+		"North Carolina",
+		"Power 98"
+	  ]
     }
   ]
 }
@@ -560,7 +568,8 @@ echo $response->getBody();
       "delta_time": 0,
       "nw_score": 0,
       "max_nw_score": 0,
-      "topics": []
+      "topics": [],
+	  "entities": []
     }
   ]
 }
