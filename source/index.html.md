@@ -477,14 +477,14 @@ echo $response->getBody();
         }
       ],
       "has_video": true,
-	  "entities": [
-		"PARTYNEXTDOOR",
-		"Jeremih",
-		"Rihanna",
-		"Drake",
-		"North Carolina",
-		"Power 98"
-	  ]
+      "entities": [
+        "PARTYNEXTDOOR",
+        "Jeremih",
+        "Rihanna",
+        "Drake",
+        "North Carolina",
+        "Power 98"
+      ]
     }
   ]
 }
@@ -569,7 +569,7 @@ echo $response->getBody();
       "nw_score": 0,
       "max_nw_score": 0,
       "topics": [],
-	  "entities": []
+      "entities": []
     }
   ]
 }
@@ -846,7 +846,7 @@ to | Now | Unix timestamp in milliseconds | Filters posts published before `{to}
 language | Any | Two letter ISO 639-1 language code | See available languages <a href="#supported-languages">here</a>
 default_fields | [ <code style="white-space:nowrap">`ig_tags`</code>, <code style="white-space:nowrap">`ig_post_text`</code>] | Array[String] |Up to 3 available fields to be used when filtering by keywords (like `"Barack Obama"`) and no fields are used in the Query String
 size | 200 | Integer | Max number of posts to be returned
-content_type |String | `video`, `images`, `carousel`
+content_type | | String | `video`, `images`, `carousel`
 sort_by | `created_at` | String | Sorts by the following in descending order `created_at`,`ig_likes`, `ig_comments`
 
 ### Available fields for filtering Instagram Posts
@@ -856,6 +856,7 @@ Field | Type
 language | String
 country_code | Two letter (lower case) ISO 3166 country code
 region_code | Available regions (lower case): `na`, `eu`, `oc`, `sea`, `sa`, `as`, `me`, `af`
+ig_user_name | String
 ig_user_name | String
 ig_tags | String
 
