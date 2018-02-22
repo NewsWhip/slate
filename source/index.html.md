@@ -23,6 +23,12 @@ The NewsWhip API is language agnostic. Any HTTP client or library can be used wi
 
 This documentation is open source. If you've found any errors, typos or would like to improve this document, feel free to send us a pull request: [GitHub](http://github.com/NewsWhip/slate).
 
+On 16th February 2018 LinkedIn removed share metrics from their API. This means that:
+
+  - No LinkedIn share data is available for posts tracked by NewsWhip from that date onwards.
+
+  - LinkedIn share data is incomplete for posts between the 9th February and the 16th February, as we will have been unable to refresh it as usual.
+
 # Authentication
 
 All NewsWhip API endpoints require an API key. Your API key should be passed with each `GET` or `POST` request as a Query String.
@@ -1340,7 +1346,7 @@ source.country_code | country of source publication
 nw_score | NewsWhip's current social speed for the story
 fb_data | Facebook interactions data (total_engagement_count, total_count_delta, delta_period, delta_period_unit, fb_overperforming,reactions)
 tw_data | The twitter data shows how many interactions occur on influencers accounts (tw_count, total_count_delta, delta_period, delta_period_unit, tw_overperforming)
-li_data | LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
+li_data | * LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)
 pi_data | Pinterest interactions (pi_count, delta_period, delta_period_unit)
 predicted_interactions | How many interactions are expected on the article based on current velocity
 tw_creator |  Nullable. Where available, the creator's Twitter handle as supplied through Twitter Cards
