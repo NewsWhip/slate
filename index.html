@@ -143,6 +143,13 @@ $(document).ready(function() {
 
 <p>This documentation is open source. If you&rsquo;ve found any errors, typos or would like to improve this document, feel free to send us a pull request: <a href="http://github.com/NewsWhip/slate">GitHub</a>.</p>
 
+<p>On 16th February 2018 LinkedIn removed share metrics from their API. This means that:</p>
+
+<ul>
+<li><p>No LinkedIn share data is available for posts tracked by NewsWhip from that date onwards.</p></li>
+<li><p>LinkedIn share data is incomplete for posts between the 9th February and the 16th February, as we will have been unable to refresh it as usual.</p></li>
+</ul>
+
 <h1 id="authentication">Authentication</h1>
 
 <p>All NewsWhip API endpoints require an API key. Your API key should be passed with each <code class="prettyprint">GET</code> or <code class="prettyprint">POST</code> request as a Query String.</p>
@@ -2054,7 +2061,7 @@ $(document).ready(function() {
 </tr>
 <tr>
 <td>li_data</td>
-<td>LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)</td>
+<td>* LinkedIn interactions (li_count, total_count_delta, delta_period, delta_period_unit)</td>
 </tr>
 <tr>
 <td>pi_data</td>
