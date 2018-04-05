@@ -23,6 +23,14 @@ The NewsWhip API is language agnostic. Any HTTP client or library can be used wi
 
 This documentation is open source. If you've found any errors, typos or would like to improve this document, feel free to send us a pull request: [GitHub](http://github.com/NewsWhip/slate).
 
+As a result of unplanned changes to the Instagram API we are experiencing the following issues:
+
+  - For dates between 2018-03-30 and 2018-04-04 there are a reduced number of posts available via the igPosts endpoint. Instagram engagement metrics were refreshed less frequently than usual.
+
+  - For dates on or after 2018-04-04 no Instagram posts or engagement metrics are available.
+
+  - As Instagram partners, we are working closely with them to restore access to the service
+
 On 16th February 2018 LinkedIn removed share metrics from their API. This means that:
 
   - No LinkedIn share data is available for posts tracked by NewsWhip from that date onwards.
