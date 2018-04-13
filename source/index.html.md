@@ -1,4 +1,4 @@
----
+|---
 title: API Reference | NewsWhip
 
 language_tabs:
@@ -25,11 +25,9 @@ This documentation is open source. If you've found any errors, typos or would li
 
 As a result of unplanned changes to the Instagram API we are experiencing the following issues:
 
-  - For dates between 2018-03-30 and 2018-04-04 there are a reduced number of posts available via the igPosts endpoint. Instagram engagement metrics were refreshed less frequently than usual.
-
-  - For dates on or after 2018-04-04 no Instagram posts or engagement metrics are available.
-
-  - As Instagram partners, we are working closely with them to restore access to the service
+  - For dates between 2018-03-30 and 2018-04-04 there are a reduced number of posts available via the igPosts endpoint. Instagram engagement metrics were also refreshed less frequently than usual.
+    
+  - For dates between 2018-04-04 and 2018-04-09 no Instagram posts or engagement metrics are available.
 
 On 16th February 2018 LinkedIn removed share metrics from their API. This means that:
 
